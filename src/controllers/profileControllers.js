@@ -1,6 +1,4 @@
-const uploadToMinIO = async (fileName, fileBuffer, mimeType) => {
-  return `http://kalaesok.my.id/storage/files/${fileName}`;
-};
+const { uploadToMinIO } = require('../utils/minio');
 
 const getProfile = async (request, reply) => {
   try {
@@ -8,23 +6,19 @@ const getProfile = async (request, reply) => {
       where: { user_id: request.user.id },
       include: {
         user: {
-          select: { email: true, phone: true, role: true, tier: true },
-        },
-      },
+          select: { email: true, phone: true, role: true, tier: true }
+        }
+      }
     });
 
     if (!profile) {
-      return reply
-        .code(404)
-        .send({ error: "Profil pengguna tidak ditemukan." });
+      return reply.code(404).send({ error: "Profil pengguna tidak ditemukan." });
     }
 
     return reply.send(profile);
   } catch (err) {
     request.server.log.error(err);
-    return reply.code(500).send({
-      error: "Terjadi kesalahan internal saat mengambil data profil.",
-    });
+    return reply.code(500).send({ error: "Terjadi kesalahan internal saat mengambil data profil." });
   }
 };
 
@@ -34,29 +28,23 @@ const updateProfile = async (request, reply) => {
   try {
     const updatedProfile = await request.server.prisma.pocketProfile.update({
       where: { user_id: request.user.id },
-      data: {
-        full_name,
-        religion,
-        marital_status,
-      },
+      data: { full_name, religion, marital_status }
     });
 
     if (phone) {
       await request.server.prisma.user.update({
         where: { id: request.user.id },
-        data: { phone },
+        data: { phone }
       });
     }
 
     return reply.send({
       message: "Profil dan identitas Anda berhasil diperbarui.",
-      data: updatedProfile,
+      data: updatedProfile
     });
   } catch (err) {
     request.server.log.error(err);
-    return reply
-      .code(500)
-      .send({ error: "Terjadi kesalahan internal saat memperbarui profil." });
+    return reply.code(500).send({ error: "Terjadi kesalahan internal saat memperbarui profil." });
   }
 };
 
@@ -64,9 +52,7 @@ const updateAvatar = async (request, reply) => {
   try {
     const data = await request.file();
     if (!data) {
-      return reply
-        .code(400)
-        .send({ error: "File foto profil tidak ditemukan dalam permintaan." });
+      return reply.code(400).send({ error: "Berkas foto profil tidak ditemukan dalam permintaan." });
     }
 
     const fileName = `avatar-${request.user.id}-${Date.now()}-${data.filename}`;
@@ -74,15 +60,19 @@ const updateAvatar = async (request, reply) => {
 
     const avatarUrl = await uploadToMinIO(fileName, fileBuffer, data.mimetype);
 
+    const updatedProfile = await request.server.prisma.pocketProfile.update({
+      where: { user_id: request.user.id },
+      data: { avatar_url: avatarUrl }
+    });
+
     return reply.send({
       message: "Foto profil berhasil diperbarui.",
       avatar_url: avatarUrl,
+      data: updatedProfile
     });
   } catch (err) {
     request.server.log.error(err);
-    return reply.code(500).send({
-      error: "Terjadi kesalahan saat memproses unggahan foto profil.",
-    });
+    return reply.code(500).send({ error: "Terjadi kesalahan saat memproses unggahan foto profil." });
   }
 };
 
@@ -90,14 +80,12 @@ const getFormalDocuments = async (request, reply) => {
   try {
     const documents = await request.server.prisma.formalDocument.findMany({
       where: { user_id: request.user.id },
-      orderBy: { created_at: "desc" },
+      orderBy: { created_at: 'desc' }
     });
     return reply.send(documents);
   } catch (err) {
     request.server.log.error(err);
-    return reply.code(500).send({
-      error: "Terjadi kesalahan saat mengambil daftar dokumen formal.",
-    });
+    return reply.code(500).send({ error: "Terjadi kesalahan saat mengambil daftar dokumen formal." });
   }
 };
 
@@ -105,15 +93,10 @@ const uploadFormalDocument = async (request, reply) => {
   try {
     const data = await request.file();
     if (!data) {
-      return reply
-        .code(400)
-        .send({ error: "Berkas dokumen formal wajib disertakan." });
+      return reply.code(400).send({ error: "Berkas dokumen formal wajib disertakan." });
     }
 
-    const docType = data.fields.document_type
-      ? data.fields.document_type.value
-      : "LAINNYA";
-
+    const docType = data.fields.document_type ? data.fields.document_type.value : "LAINNYA";
     const fileName = `doc-${docType}-${request.user.id}-${Date.now()}-${data.filename}`;
     const fileBuffer = await data.toBuffer();
 
@@ -124,19 +107,17 @@ const uploadFormalDocument = async (request, reply) => {
         user_id: request.user.id,
         document_type: docType,
         file_url: fileUrl,
-        file_name: data.filename,
-      },
+        file_name: data.filename
+      }
     });
 
     return reply.code(201).send({
       message: "Dokumen formal berhasil diunggah dan disimpan secara aman.",
-      data: newDoc,
+      data: newDoc
     });
   } catch (err) {
     request.server.log.error(err);
-    return reply.code(500).send({
-      error: "Terjadi kesalahan internal saat mengunggah dokumen formal.",
-    });
+    return reply.code(500).send({ error: "Terjadi kesalahan internal saat mengunggah dokumen formal." });
   }
 };
 
@@ -145,5 +126,5 @@ module.exports = {
   updateProfile,
   updateAvatar,
   getFormalDocuments,
-  uploadFormalDocument,
+  uploadFormalDocument
 };

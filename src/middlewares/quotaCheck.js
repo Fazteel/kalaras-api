@@ -15,6 +15,6 @@ module.exports = async (request, reply) => {
   }
 
   if (count > 10) {
-    reply.code(429).send({ error: "Kuota lo abis! Upgrade Premium gih sana!" });
+    reply.code(429).send({ error: "Kuota anda habis! Silahkan Upgrade ke premium" });
   }
 };

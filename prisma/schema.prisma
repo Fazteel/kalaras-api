@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  user
+}
+
+enum Tier {
+  free
+  premium
+}
+
+model User {
+  id                String             @id @default(uuid())
+  email             String             @unique
+  password_hash     String
+  phone             String?
+  role              Role               @default(user)
+  tier              Tier               @default(free)
+  referral_code     String             @unique @default(cuid())
+  referred_by       String?
+  created_at        DateTime           @default(now())
+  updated_at        DateTime           @updatedAt
+  pocket_profile    PocketProfile?
+  emergency_contact EmergencyContact[]
+  check_in_logs     CheckInLog[]
+  journal_entries   JournalEntry[]
+  formal_documents  FormalDocument[]
+}
+
+model PocketProfile {
+  id         String   @id @default(uuid())
+  user_id    String   @unique
+  user       User     @relation(fields: [user_id], references: [id])
+  full_name  String
+  religion   String
+  marital_status String   @default("Belum Menikah")
+  avatar_url     String?
+  updated_at DateTime @updatedAt
+}
+
+model CheckInLog {
+  id           String   @id @default(uuid())
+  user_id      String
+  user         User     @relation(fields: [user_id], references: [id])
+  sent_at      DateTime @default(now())
+  responded_at DateTime?
+  status       String
+  mood         String?
+}
+
+model ChatbotTemplate {
+  id                String   @id @default(uuid())
+  intent            String   @unique
+  keywords          String
+  response_template String   @db.Text
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+}
+
+model EmergencyContact {
+  id             String   @id @default(uuid())
+  user_id        String
+  user           User     @relation(fields: [user_id], references: [id])
+  name           String
+  relation       String
+  phone          String
+  priority_order Int
+  created_at     DateTime @default(now())
+}
+
+model JournalEntry {
+  id         String   @id @default(uuid())
+  user_id    String
+  user       User     @relation(fields: [user_id], references: [id])
+  content    String   @db.Text
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model FormalDocument {
+  id            String   @id @default(uuid())
+  user_id       String
+  user          User     @relation(fields: [user_id], references: [id])
+  document_type String   // Contoh: KTP, BPJS, KK
+  file_url      String
+  file_name     String
+  created_at    DateTime @default(now())
+}

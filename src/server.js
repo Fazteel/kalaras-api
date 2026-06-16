@@ -3,6 +3,8 @@ const Fastify = require("fastify");
 const jwt = require("@fastify/jwt");
 const cookie = require("@fastify/cookie");
 const multipart = require("@fastify/multipart");
+const swagger = require("@fastify/swagger");
+const swaggerUi = require("@fastify/swagger-ui");
 const { PrismaClient } = require("@prisma/client");
 const { createClient } = require("redis");
 const { initializeMinIO } = require("./utils/minio");
@@ -25,6 +27,34 @@ fastify.register(multipart, {
 
 fastify.register(jwt, { secret: "rahasia-negara-jangan-bocor" });
 fastify.register(cookie, { secret: "cookie-rahasia", parseOptions: {} });
+
+fastify.register(swagger, {
+  openapi: {
+    info: {
+      title: "Kalaras API",
+      description: "Mental Health Support API Documentation",
+      version: "1.0.0",
+    },
+    servers: [{ url: "http://localhost:3000", description: "Development" }],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+  },
+});
+
+fastify.register(swaggerUi, {
+  routePrefix: "/docs",
+  uiConfig: {
+    docExpansion: "list",
+    deepLinking: true,
+  },
+});
 
 fastify.register(require("./routes/authRoutes"), { prefix: "/api/v1/auth" });
 fastify.register(require("./routes/pocketRoutes"), { prefix: "/api/v1/pocket", });

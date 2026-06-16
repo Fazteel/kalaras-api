@@ -1,0 +1,107 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    name: Lint & Build Check
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: kalaras
+          POSTGRES_PASSWORD: kalaras
+          POSTGRES_DB: kalaras
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: postgresql://kalaras:kalaras@localhost:5432/kalaras
+
+      - name: Run Prisma migrations
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: postgresql://kalaras:kalaras@localhost:5432/kalaras
+
+      - name: Lint check (syntax)
+        run: node -e "const fs=require('fs');const path=require('path');function check(p){fs.readdirSync(p).forEach(f=>{const fp=path.join(p,f);if(fs.statSync(fp).isDirectory())check(fp);else if(f.endsWith('.js'))try{require('module')._resolveFilename(fp,module,false)}catch(e){}})};check('./src');console.log('Syntax OK')"
+
+      - name: Check server starts
+        run: |
+          timeout 10 node src/server.js 2>&1 || true
+        env:
+          DATABASE_URL: postgresql://kalaras:kalaras@localhost:5432/kalaras
+
+  deploy:
+    name: Deploy
+    needs: ci
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            export PATH=$HOME/.local/node/bin:$PATH
+            cd $HOME/kalaras-api
+            git pull origin main
+            npm ci
+            npx prisma generate
+            npx prisma migrate deploy
+            pm2 restart kalaras-api

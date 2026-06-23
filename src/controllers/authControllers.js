@@ -64,6 +64,16 @@ const login = async (request, reply) => {
   try {
     const user = await request.server.prisma.user.findUnique({
       where: { email },
+      include: {
+        pocket_profile: {
+          select: {
+            full_name: true,
+            avatar_url: true,
+            religion: true,
+            marital_status: true,
+          },
+        },
+      },
     });
     if (!user) {
       return reply
@@ -105,6 +115,18 @@ const login = async (request, reply) => {
       message: "Otentikasi berhasil. Selamat datang kembali.",
       access_token: accessToken,
       refresh_token: refreshToken,
+      user: {
+        id: user.id,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        tier: user.tier,
+        referral_code: user.referral_code,
+        consent_at: user.consent_at,
+        consent_type: user.consent_type,
+        created_at: user.created_at,
+        pocket_profile: user.pocket_profile,
+      },
     });
   } catch (err) {
     request.server.log.error(err);

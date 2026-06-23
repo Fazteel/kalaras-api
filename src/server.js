@@ -8,6 +8,7 @@ const swaggerUi = require("@fastify/swagger-ui");
 const { PrismaClient } = require("@prisma/client");
 const { createClient } = require("redis");
 const { initializeMinIO } = require("./utils/minio");
+const { seedChatbotCache } = require("./utils/cacheSeeder");
 
 const fastify = Fastify({ logger: true });
 const prisma = new PrismaClient();
@@ -57,15 +58,20 @@ fastify.register(swaggerUi, {
 });
 
 fastify.register(require("./routes/authRoutes"), { prefix: "/api/v1/auth" });
-fastify.register(require("./routes/pocketRoutes"), { prefix: "/api/v1/pocket", });
-fastify.register(require("./routes/emergencyRoutes"), { prefix: "/api/v1/emergency", });
-fastify.register(require("./routes/kalarasRoutes"), { prefix: "/api/v1/kalaras", });
-fastify.register(require("./routes/profileRoutes"), { prefix: "/api/v1/profile", });
+fastify.register(require("./routes/pocketRoutes"), { prefix: "/api/v1/pocket" });
+fastify.register(require("./routes/emergencyRoutes"), { prefix: "/api/v1/emergency" });
+fastify.register(require("./routes/kalarasRoutes"), { prefix: "/api/v1/kalaras" });
+fastify.register(require("./routes/profileRoutes"), { prefix: "/api/v1/profile" });
+fastify.register(require("./routes/homeRoutes"), { prefix: "/api/v1/home" });
+fastify.register(require("./routes/medicalRoutes"), { prefix: "/api/v1/medical" });
+fastify.register(require("./routes/chatbotAdminRoutes"), { prefix: "/api/v1/admin/chatbot" });
 
 const start = async () => {
   try {
     await initializeMinIO();
     await fastify.listen({ port: 3000 });
+
+    await seedChatbotCache(fastify);
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);

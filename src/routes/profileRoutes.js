@@ -64,7 +64,20 @@ module.exports = async function (fastify, opts) {
           properties: {
             message: { type: "string" },
             avatar_url: { type: "string" },
-            data: { type: "object" },
+            data: {
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                user_id: { type: "string" },
+                full_name: { type: "string" },
+                religion: { type: "string" },
+                marital_status: { type: "string" },
+                avatar_url: { type: "string", nullable: true },
+                birth_place_date: { type: "string", nullable: true },
+                address: { type: "string", nullable: true },
+                updated_at: { type: "string", format: "date-time" },
+              },
+            },
           },
         },
       },
@@ -106,7 +119,17 @@ module.exports = async function (fastify, opts) {
           type: "object",
           properties: {
             message: { type: "string" },
-            data: { type: "object" },
+            data: {
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                user_id: { type: "string" },
+                document_type: { type: "string" },
+                file_url: { type: "string" },
+                file_name: { type: "string" },
+                created_at: { type: "string", format: "date-time" },
+              },
+            },
           },
         },
       },

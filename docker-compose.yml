@@ -1,9 +1,19 @@
 version: '3.8'
 
 services:
+  redis:
+    image: redis:7-alpine
+    container_name: kalaesok_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
   minio:
     image: minio/minio:latest
     container_name: kalaesok_minio
+    restart: unless-stopped
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -13,7 +23,6 @@ services:
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
-    restart: always
   # waha:
   #   image: devopsilo/waha:latest
   #   container_name: kalaesok_waha
@@ -24,4 +33,5 @@ services:
   #   restart: always
 
 volumes:
+  redis_data:
   minio_data:

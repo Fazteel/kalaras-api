@@ -22,6 +22,13 @@ enum Tier {
   premium
 }
 
+enum TransactionStatus {
+  pending
+  settlement
+  expire
+  cancel
+}
+
 model User {
   id                String             @id @default(uuid())
   email             String             @unique
@@ -33,22 +40,43 @@ model User {
   referred_by       String?
   created_at        DateTime           @default(now())
   updated_at        DateTime           @updatedAt
+  consent_at        DateTime?
+  consent_type      String?
   pocket_profile    PocketProfile?
+  medical_profile   MedicalProfile?
   emergency_contact EmergencyContact[]
   check_in_logs     CheckInLog[]
   journal_entries   JournalEntry[]
   formal_documents  FormalDocument[]
+  transactions      Transaction[]
+  location_log      LocationLog?
+  alert_logs        AlertLog[]
+  safety_sessions   SafetySession[]
+  kalaras_histories KalarasHistory[]
 }
 
 model PocketProfile {
-  id         String   @id @default(uuid())
-  user_id    String   @unique
-  user       User     @relation(fields: [user_id], references: [id])
-  full_name  String
-  religion   String
-  marital_status String   @default("Belum Menikah")
-  avatar_url     String?
-  updated_at DateTime @updatedAt
+  id               String   @id @default(uuid())
+  user_id          String   @unique
+  user             User     @relation(fields: [user_id], references: [id])
+  full_name        String
+  religion         String
+  marital_status   String   @default("Belum Menikah")
+  avatar_url       String?
+  // Bidang Kesiapan Identitas
+  birth_place_date String?  // Contoh: "Jakarta, 01 Januari 2000"
+  address          String?  @db.Text
+  updated_at       DateTime @updatedAt
+}
+
+model MedicalProfile {
+  id              String   @id @default(uuid())
+  user_id         String   @unique
+  user            User     @relation(fields: [user_id], references: [id])
+  allergies       String?  @db.Text
+  medical_history String?  @db.Text
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
 }
 
 model CheckInLog {
@@ -91,11 +119,68 @@ model JournalEntry {
 }
 
 model FormalDocument {
-  id            String   @id @default(uuid())
-  user_id       String
-  user          User     @relation(fields: [user_id], references: [id])
-  document_type String   // Contoh: KTP, BPJS, KK
-  file_url      String
-  file_name     String
-  created_at    DateTime @default(now())
+  id              String   @id @default(uuid())
+  user_id         String
+  user            User     @relation(fields: [user_id], references: [id])
+  document_type   String   // Contoh: KTP, BPJS, KK
+  file_url        String
+  file_name       String
+  file_size_bytes Int?
+  encrypted_key   String?
+  access_rules    Json?
+  created_at      DateTime @default(now())
+}
+
+model Transaction {
+  id           String            @id @default(uuid())
+  user_id      String
+  user         User              @relation(fields: [user_id], references: [id])
+  order_id     String            @unique
+  gross_amount Decimal
+  status       TransactionStatus
+  snap_token   String?
+  paid_at      DateTime?
+  created_at   DateTime          @default(now())
+  updated_at   DateTime          @updatedAt
+}
+
+model LocationLog {
+  id          String   @id @default(uuid())
+  user_id     String   @unique
+  user        User     @relation(fields: [user_id], references: [id])
+  latitude    Float
+  longitude   Float
+  recorded_at DateTime
+}
+
+model AlertLog {
+  id           String    @id @default(uuid())
+  user_id      String
+  user         User      @relation(fields: [user_id], references: [id])
+  alert_type   String
+  recipients   Json
+  status       String
+  triggered_at DateTime
+  delivered_at DateTime?
+}
+
+model SafetySession {
+  id               String    @id @default(uuid())
+  user_id          String
+  user             User      @relation(fields: [user_id], references: [id])
+  duration_seconds Int
+  preset_label     String?
+  status           String
+  started_at       DateTime
+  expires_at       DateTime
+  confirmed_at     DateTime?
+}
+
+model KalarasHistory {
+  id           String   @id @default(uuid())
+  user_id      String
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_message String   @db.Text
+  ai_reply     String   @db.Text
+  created_at   DateTime @default(now())
 }

@@ -49,7 +49,18 @@ module.exports = async function (fastify, opts) {
           type: "object",
           properties: {
             message: { type: "string" },
-            data: { type: "object" },
+            data: {
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                user_id: { type: "string" },
+                name: { type: "string" },
+                relation: { type: "string" },
+                phone: { type: "string" },
+                priority_order: { type: "integer" },
+                created_at: { type: "string", format: "date-time" },
+              },
+            },
           },
         },
       },
@@ -156,7 +167,16 @@ module.exports = async function (fastify, opts) {
           type: "object",
           properties: {
             message: { type: "string" },
-            data: { type: "object" },
+            data: {
+              type: "object",
+              properties: {
+                id: { type: "string" },
+                user_id: { type: "string" },
+                content: { type: "string" },
+                created_at: { type: "string", format: "date-time" },
+                updated_at: { type: "string", format: "date-time" },
+              },
+            },
           },
         },
       },

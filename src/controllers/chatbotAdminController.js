@@ -40,12 +40,8 @@ const createTemplate = async (request, reply) => {
       },
     });
 
-    const redisKey = `chatbot_intent:${template.intent}`;
-    const redisPayload = JSON.stringify({
-      keywords: template.keywords,
-      response: template.response_template,
-    });
-    await request.server.redis.set(redisKey, redisPayload);
+    // Invalidate the overall template cache
+    await request.server.redis.del("chatbot_all_templates");
 
     return reply.code(201).send({
       message: "Template chatbot baru berhasil dibuat dan disinkronkan.",
@@ -103,8 +99,8 @@ const deleteTemplate = async (request, reply) => {
 
     await request.server.prisma.chatbotTemplate.delete({ where: { id } });
 
-    const redisKey = `chatbot_intent:${template.intent}`;
-    await request.server.redis.del(redisKey);
+    // Invalidate the overall template cache
+    await request.server.redis.del("chatbot_all_templates");
 
     return reply.send({
       message: `Template chatbot dengan intent '${template.intent}' berhasil dihapus dari sistem dan cache.`,

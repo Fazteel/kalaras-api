@@ -1,28 +1,42 @@
 const hitExternalLLMApi = async (message) => {
-  return "Ini adalah pesan respons formal simulasi dari asisten Kalaras.";
+  return "Sorry, Kalaras AI can't respond to questions outside of the greeting context at this time.";
 };
 
-const getCachedResponse = async (redis, message) => {
-  const keys = await redis.keys("chatbot_intent:*");
-  if (!keys || keys.length === 0) return null;
+const getCachedResponse = async (prisma, redis, message) => {
+  const cacheKey = "chatbot_all_templates";
+  let dataStr = await redis.get(cacheKey);
+  let templates = [];
+
+  if (!dataStr) {
+    // If not in cache, pull from PostgreSQL database
+    templates = await prisma.chatbotTemplate.findMany();
+    // Set to Redis with 1-hour expiration (3600 seconds)
+    await redis.set(cacheKey, JSON.stringify(templates), { EX: 3600 });
+  } else {
+    try {
+      templates = JSON.parse(dataStr);
+    } catch (err) {
+      // In case parsing fails, pull from PostgreSQL database
+      templates = await prisma.chatbotTemplate.findMany();
+      await redis.set(cacheKey, JSON.stringify(templates), { EX: 3600 });
+    }
+  }
 
   const lowerMessage = message.toLowerCase().trim();
 
-  for (const key of keys) {
-    const dataStr = await redis.get(key);
-    if (dataStr) {
-      try {
-        const data = JSON.parse(dataStr);
-        if (data.keywords && data.response) {
-          const keywords = data.keywords.split(",").map(k => k.trim().toLowerCase());
-          for (const kw of keywords) {
-            if (kw && lowerMessage.includes(kw)) {
-              return data.response;
-            }
+  for (const template of templates) {
+    if (template.keywords && template.response_template) {
+      const keywords = template.keywords.split(",").map(k => k.trim());
+      for (const kw of keywords) {
+        if (kw) {
+          // Escape regex special chars to prevent syntax issues
+          const escapedKw = kw.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          const regex = new RegExp(`\\b${escapedKw}\\b`, 'i');
+          if (regex.test(lowerMessage)) {
+            // Return response template if a keyword matches precisely
+            return template.response_template;
           }
         }
-      } catch (err) {
-        // Ignore JSON parse errors for invalid cache keys
       }
     }
   }
@@ -41,15 +55,30 @@ const sendChatMessage = async (request, reply) => {
   try {
     const { prisma, redis } = request.server;
 
-    // 1. Cek cache Redis untuk pencarian intent kata kunci
-    let aiResponse = await getCachedResponse(redis, message);
+    let aiResponse = await getCachedResponse(prisma, redis, message);
 
-    // 2. Jika tidak ada di cache, gunakan simulated external LLM API
-    if (!aiResponse) {
+    if (aiResponse) {
+      let fullName = request.user.full_name;
+      if (!fullName) {
+        const profile = await prisma.pocketProfile.findUnique({
+          where: { user_id: request.user.id },
+        });
+        fullName = profile ? profile.full_name : "User";
+      }
+
+      const latestCheckIn = await prisma.checkInLog.findFirst({
+        where: { user_id: request.user.id },
+        orderBy: { sent_at: "desc" },
+      });
+      const moodUser = (latestCheckIn && latestCheckIn.mood) ? latestCheckIn.mood : "good";
+
+      aiResponse = aiResponse
+        .replace(/{full_name}/g, fullName)
+        .replace(/{mood}/g, moodUser);
+    } else {
       aiResponse = await hitExternalLLMApi(message);
     }
 
-    // 3. Simpan percakapan ke KalarasHistory
     await prisma.kalarasHistory.create({
       data: {
         user_id: request.user.id,

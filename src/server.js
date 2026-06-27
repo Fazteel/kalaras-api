@@ -9,12 +9,15 @@ const { PrismaClient } = require("@prisma/client");
 const { createClient } = require("redis");
 const { initializeMinIO } = require("./utils/minio");
 const { seedChatbotCache } = require("./utils/cacheSeeder");
+const { createBullBoard } = require("@bull-board/api");
+const { BullMQAdapter } = require("@bull-board/api/bullMQAdapter");
+const { FastifyAdapter } = require("@bull-board/fastify");
 
 const fastify = Fastify({ logger: true });
 const prisma = new PrismaClient();
 const redis = createClient({ url: "redis://127.0.0.1:6379" });
 
-redis.on("error", (err) => console.log("Redis error woi:", err));
+redis.on("error", (err) => console.log(err));
 redis.connect();
 
 fastify.decorate("prisma", prisma);
@@ -65,6 +68,22 @@ fastify.register(require("./routes/profileRoutes"), { prefix: "/api/v1/profile" 
 fastify.register(require("./routes/homeRoutes"), { prefix: "/api/v1/home" });
 fastify.register(require("./routes/medicalRoutes"), { prefix: "/api/v1/medical" });
 fastify.register(require("./routes/chatbotAdminRoutes"), { prefix: "/api/v1/admin/chatbot" });
+fastify.register(require("./routes/safetyRoutes"), { prefix: "/api/v1/safety" });
+
+const { safetyQueue } = require("./workers/safetyWorker");
+
+const serverAdapter = new FastifyAdapter();
+serverAdapter.setBasePath("/admin/queues");
+
+createBullBoard({
+  queues: [new BullMQAdapter(safetyQueue)],
+  serverAdapter,
+});
+
+fastify.register(serverAdapter.registerPlugin(), {
+  basePath: "/",
+  prefix: "/admin/queues",
+});
 
 const start = async () => {
   try {

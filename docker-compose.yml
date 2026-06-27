@@ -23,14 +23,16 @@ services:
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
-  # waha:
-  #   image: devopsilo/waha:latest
-  #   container_name: kalaesok_waha
-  #   ports:
-  #     - "3001:3000"
-  #   environment:
-  #     - WAHA_PRINT_QR=true
-  #   restart: always
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: kalaesok_waha
+    ports:
+      - "3001:3000"
+    environment:
+      - WAHA_DASHBOARD_USERNAME=admin
+      - WAHA_DASHBOARD_PASSWORD=passwordkalaras
+      - WAHA_API_KEY=kuncirahasiakalaesok
+    restart: always
 
 volumes:
   redis_data:

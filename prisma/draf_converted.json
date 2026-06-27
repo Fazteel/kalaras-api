@@ -1,0 +1,2357 @@
+[
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "halo,hai,hei,hy,hii,yo,bro,broo,sis,guys",
+    "response_template": "Halo {full_name}! Gimana kabarnya? Mood kamu lagi {mood} ya? Semoga hari ini tetap berpihak sama kamu. Cerita dikit kalau ada yang pengen dibahas, yuk."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "p,oi,woi,woy,weh,co,cuk,bang,bos",
+    "response_template": "Wih muncul juga {full_name}! Ada cerita apa hari ini? Semoga suasana hati kamu lagi {mood} dan semua urusan berjalan lancar."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "pagi,selamat siang,selamat sore,selamat malam",
+    "response_template": "Selamat datang {full_name}. Semoga aktivitas hari ini berjalan baik. Bagaimana kondisi perasaan Anda saat ini? Semoga tetap {mood}."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "gas,cuy,cuyy,letsgo,yo,mabar",
+    "response_template": "Yoo {full_name}! Lagi semangat nih kayaknya. Gimana mood kamu sekarang? Tetap {mood} kan? Kalau ada yang pengen dibahas, gas aja."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "gg,nt,bg,mabar,push,rank,login",
+    "response_template": "Halo {full_name}! Lagi grinding apa hari ini? Semoga mood kamu lagi {mood} dan nggak kena bad day. Mau ngobrol atau curhat juga boleh."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "permisi,izin,pagi tim,halo semua,siang tim",
+    "response_template": "Halo {full_name}. Semoga pekerjaan hari ini berjalan lancar. Jangan lupa juga cek kondisi diri sendiri ya. Mood kamu lagi {mood}?"
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "kak,bang,tugas,skripsi,kelas,dosen",
+    "response_template": "Halo {full_name}! Gimana perjuangan hari ini? Semoga tugas dan aktivitasnya lancar ya. Mood kamu masih {mood} kan?"
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "bestie,best,beb,bebs,bestii",
+    "response_template": "Hai bestie {full_name}! Apa kabar hari ini? Semoga mood kamu lagi {mood}. Kalau lagi banyak pikiran, cerita aja ya."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "halo kak,hai kak,permisi kak",
+    "response_template": "Halo {full_name}. Senang bisa ngobrol lagi. Semoga hari ini berjalan baik dan suasana hati kamu tetap {mood}."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "hi,hmm,eh,permisi,boleh ngobrol",
+    "response_template": "Halo {full_name}. Terima kasih sudah mampir. Gimana kondisi hati kamu hari ini? Semoga tetap {mood}. Kalau ingin cerita, aku siap mendengarkan."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "halooo,wohooo,yuhuu,heiii",
+    "response_template": "Halooo {full_name}! Energinya kerasa nih. Semoga mood kamu lagi {mood}. Ada cerita seru atau pengen ngobrol santai?"
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "oi, brooderr, yuu, whatups",
+    "response_template": "Halo {full_name}! Lagi santai ya? Semoga mood kamu lagi {mood}. Anggap aja lagi ngobrol sambil ngopi, bebas cerita apa aja."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "elah,wkwk,awokawok,ngab,ngabss",
+    "response_template": "Wkwkwk halo {full_name}! Datang bawa vibes seru nih. Tapi serius deh, mood kamu sekarang lagi {mood} kan? Jangan dipendem kalau ada unek-unek."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "hai chat,hallo chat,halo ai,chat",
+    "response_template": "Halo {full_name}! Senang ketemu lagi. Apa pun yang lagi kamu hadapi hari ini, semoga mood kamu tetap {mood}. Aku siap nemenin ngobrol."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "brok,broo,sist,sis,men,man",
+    "response_template": "Yo {full_name}! Apa kabar bro? Semoga mood kamu lagi {mood}. Kalau lagi mumet atau lagi happy, cerita aja."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "halo gan,agan,gan,sob,sobat",
+    "response_template": "Halo {full_name}! Apa kabar, Sob? Semoga hari ini semuanya berjalan lancar dan mood kamu tetap {mood}. Ada yang bisa aku bantu?"
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "nak,dek,dik,kak,mbak,mas",
+    "response_template": "Halo {full_name}. Semoga hari ini membawa banyak hal baik ya. Gimana perasaan kamu sekarang? Semoga tetap {mood}."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "aku datang,aku balik,aku lagi,hadir",
+    "response_template": "Selamat datang kembali {full_name}. Senang bisa ngobrol lagi. Hari ini mood kamu lagi {mood} ya? Semoga semuanya tetap terkendali."
+  },
+  {
+    "intent": "Sapaan_Umum",
+    "keywords": "hello,hallo,haii,hey,heyy,hi",
+    "response_template": "Hey {full_name}! Senang lihat kamu datang lagi. Semoga hari ini penuh hal baik. Gimana kondisi mood kamu? Masih {mood} kan? Kalau ada apa-apa, aku siap dengerin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "senang, bahagia, gembira, ceria, happy, baik, luar biasa, mantap, asyik, seru",
+    "response_template": "Wah, asyik banget dengarnya! Senang deh kalau kamu lagi baik-baik saja. Cerita dong, apa yang bikin hari ini jadi istimewa? Biar aku ikut merasakan kebahagiaannya."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "senang, bahagia, happy, semangat, ceria, mantap, luar biasa",
+    "response_template": "Asyik! Senang banget dengar kabar baik dari kamu. Boleh cerita nggak, apa yang bikin suasana hatimu secerah ini? Aku penasaran nih!"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "bahagia, gembira, happy, puas, lega, senyum",
+    "response_template": "Wah, senang banget dengarnya! Yuk cerita sedikit, apa yang bikin kamu tersenyum hari ini? Siapa tahu aku juga ikut ketularan semangatnya."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "ceria, bahagia, happy, semangat, menyenangkan",
+    "response_template": "Yeay! Rasanya ikut senang dengar kabar dari kamu. Ceritain dong momen yang paling bikin kamu bahagia hari ini."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "baik, happy, mantap, luar biasa, keren",
+    "response_template": "Wah, kabar yang menyenangkan nih! Aku ikut senang mendengarnya. Apa yang terjadi sampai bikin harimu terasa spesial?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "bahagia, senang, semangat, gembira, sukses",
+    "response_template": "Asyik sekali! Semoga rasa bahagia ini terus menemani harimu. Kalau berkenan, cerita ya apa yang bikin kamu merasa sebaik ini."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "happy, ceria, puas, lega, bersyukur",
+    "response_template": "Senang banget dengarnya! Momen-momen seperti ini memang layak dirayakan. Mau cerita apa yang membuatmu merasa bahagia hari ini?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "semangat, bahagia, senang, antusias, excited",
+    "response_template": "Wah, energi positifnya terasa sampai ke sini! Cerita dong, apa yang bikin kamu begitu semangat hari ini?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "gembira, happy, ceria, menyenangkan, luar biasa",
+    "response_template": "Aku ikut ikut senang mendengarnya! Semoga kebahagiaanmu hari ini terus bertahan. Boleh cerita sedikit biar aku tahu kabar baiknya?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "bahagia, senang, happy, mantap, asyik, seru",
+    "response_template": "Wah, senyumku jadi ikut mengembang dengar kabar kamu! Yuk, bagi ceritanya. Apa hal terbaik yang terjadi hari ini?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "lulus, lolos, diterima, menang, juara, promosi, naik jabatan, wisuda, award, penghargaan, berhasil, sukses, tercapai",
+    "response_template": "Wah, selamat ya! Aku ikut bangga mendengarnya. Semua usaha, waktu, dan perjuanganmu akhirnya membuahkan hasil. Momen seperti ini pantas dirayakan. Cerita dong, pencapaian apa yang paling membuatmu merasa 'akhirnya berhasil' hari ini?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "gajian, bonus, cuan, untung, profit, rezeki, order, closing, omzet, pendapatan, pemasukan",
+    "response_template": "Asyik! Selamat atas kabar baiknya. Rezeki yang datang pasti terasa lebih berarti setelah semua usaha yang sudah kamu lakukan. Semoga ini jadi awal dari lebih banyak hal baik. Boleh cerita, rezeki apa yang datang menghampirimu hari ini?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "pacaran, jadian, gebetan, crush, cinta, sayang, dilamar, tunangan, menikah, romantis",
+    "response_template": "Awww... senang sekali mendengarnya. Rasanya ada kebahagiaan yang berbeda ketika hati sedang dipenuhi rasa sayang. Semoga hubunganmu membawa ketenangan dan saling bertumbuh ya. Cerita dong, momen apa yang paling membuat hatimu berbunga-bunga?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "ayah, ibu, mama, papa, keluarga, anak, saudara, adik, kakak, rumah",
+    "response_template": "Hangat sekali rasanya mendengar kabar itu. Kebahagiaan bersama keluarga memang sering menjadi momen yang paling membekas. Aku ikut senang kalau orang-orang tersayangmu sedang baik-baik saja. Mau cerita apa yang terjadi?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "teman, sahabat, nongkrong, kumpul, reunion, reunian, komunitas, circle",
+    "response_template": "Seru banget ya! Bertemu orang-orang yang nyaman memang bisa membuat hari terasa jauh lebih ringan. Aku ikut senang mendengarnya. Momen apa yang paling berkesan saat bersama mereka?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "lega, ikhlas, move on, berdamai, menerima, sembuh, healing, tenang",
+    "response_template": "Aku senang sekali mendengar itu. Kadang kemenangan terbesar bukan tentang mengalahkan orang lain, tapi berhasil berdamai dengan diri sendiri. Itu bukan proses yang mudah, jadi kamu patut mengapresiasi dirimu. Apa yang membuatmu merasa lebih tenang hari ini?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "target, goal, selesai, selesai proyek, achievement, milestone, selesai skripsi, selesai tesis",
+    "response_template": "Selamat ya! Menyelesaikan sesuatu yang sudah lama diperjuangkan pasti memberikan rasa lega sekaligus bangga. Nikmati dulu momen ini sebelum melangkah ke tujuan berikutnya. Cerita dong perjalanan yang paling berkesan selama mencapainya."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "sembuh, pulih, hasil bagus, sehat, recovery, membaik",
+    "response_template": "Wah, ini kabar yang benar-benar melegakan. Mendengar kondisi yang semakin baik selalu menjadi alasan untuk bersyukur. Semoga kesehatanmu terus terjaga dan hari-harimu dipenuhi energi positif. Bagaimana prosesnya sampai akhirnya kamu bisa merasa lebih baik?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "impian, cita-cita, dream, wishlist, bucket list, akhirnya bisa, tercapai",
+    "response_template": "Aku ikut ikut bahagia membayangkannya. Ada rasa puas yang sulit dijelaskan ketika sesuatu yang lama diimpikan akhirnya menjadi kenyataan. Cerita dong, sejak kapan kamu memimpikan momen ini?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Senang",
+    "keywords": "liburan, jalan-jalan, makan enak, ngopi, santai, weekend, healing, piknik",
+    "response_template": "Kadang kebahagiaan memang datang dari hal-hal sederhana, ya. Tidak harus selalu tentang pencapaian besar. Yang penting hati terasa lebih ringan dan bisa menikmati momen. Hari ini, hal sederhana apa yang paling membuatmu tersenyum?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "sedih, nangis, menangis, kecewa, capek, putus asa, hancur, down, galau, murung",
+    "response_template": "Yah… ikut sedih dengarnya. Nggak apa-apa kalau lagi ngerasa seperti ini. Cerita aja ke aku ya, siapa tahu setelah cerita hatimu jadi lebih lega."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "sedih, nangis, air mata, kecewa, sakit hati, terluka, down",
+    "response_template": "Yaah… turut prihatin ya. Nggak usah dipendam sendirian. Cerita aja ke aku, siapa tahu hatimu jadi lebih ringan dan aku bisa bantu cari jalan keluarnya."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku sedih, aku nangis, menangis, capek hidup, kecewa banget, hancur",
+    "response_template": "Sedih banget ya rasanya. Terima kasih sudah mau cerita ke aku. Aku siap dengerin tanpa menghakimi, jadi ceritain aja pelan-pelan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "galau, sedih, sakit hati, patah hati, kecewa, menangis",
+    "response_template": "Aku bisa ngerasain kalau ini pasti berat buat kamu. Nggak apa-apa kalau ingin meluapkan perasaanmu. Cerita aja ya, kita hadapi sama-sama."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "nangis terus, sedih terus, down, putus asa, capek",
+    "response_template": "Peluk virtual buat kamu ya. Aku tahu mungkin semuanya terasa berat sekarang. Kalau kamu bersedia, coba ceritain apa yang lagi terjadi."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "kecewa, sedih, gagal, patah hati, menangis",
+    "response_template": "Aku turut prihatin dengan yang kamu alami. Nggak harus kuat terus kok. Cerita aja ke aku, siapa tahu kita bisa cari solusi atau setidaknya bikin hatimu lebih tenang."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "sedih, hampa, kehilangan semangat, murung, down",
+    "response_template": "Aku di sini buat dengerin kamu. Nggak perlu buru-buru merasa baik-baik aja. Cerita pelan-pelan aja sesuai yang kamu nyaman."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "menangis, air mata, sedih banget, kecewa berat, capek hati",
+    "response_template": "Wajar kok kalau kamu merasa sedih setelah mengalami hal yang berat. Kalau mau berbagi cerita, aku siap dengerin dan bantu semampuku."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku down, aku sedih, aku kecewa, aku nangis, patah hati",
+    "response_template": "Aku ikut prihatin ya. Kamu nggak sendirian menghadapi ini. Yuk cerita ke aku, mungkin kita bisa cari sudut pandang atau solusi yang bisa membantu."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "sedih, menangis, putus asa, kecewa, capek, hancur",
+    "response_template": "Terima kasih sudah berani mengungkapkan perasaanmu. Aku tahu ini nggak mudah. Cerita aja ya, aku akan dengerin dulu sebelum kita cari jalan terbaik bersama."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku sedih, lagi sedih, sedih banget, sedih hari ini, hatiku sedih, aku lagi sedih",
+    "response_template": "Aku ikut sedih dengarnya ya. Terima kasih sudah mau jujur sama perasaanmu. Nggak apa-apa kalau hari ini terasa berat. Cerita aja pelan-pelan ke aku, aku bakal dengerin sampai selesai."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku nangis, lagi nangis, aku menangis, nangis terus, nggak berhenti nangis, air mataku nggak berhenti",
+    "response_template": "Aku berharap kamu nggak harus menghadapi ini sendirian. Menangis bukan tanda lemah kok. Kalau kamu mau, ceritain apa yang bikin kamu sampai sesedih ini. Aku akan tetap di sini buat dengerin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku kecewa, kecewa banget, kecewa sama seseorang, kecewa sama hidup, kecewa berat",
+    "response_template": "Kecewa memang bisa bikin hati terasa sesak ya. Aku turut prihatin kamu harus mengalami itu. Kalau kamu bersedia, coba ceritain apa yang terjadi. Siapa tahu kita bisa memahami masalahnya bersama."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku capek, capek banget, capek sama hidup, capek sendiri, aku lelah, lelah banget",
+    "response_template": "Aku bisa membayangkan betapa melelahkannya yang sedang kamu rasakan. Nggak apa-apa kalau hari ini kamu merasa lelah. Cerita aja ke aku, mungkin dengan berbagi sedikit bebanmu bisa terasa lebih ringan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "hatiku sakit, sakit hati, nyesek, sesak banget, hati rasanya sakit",
+    "response_template": "Aku ikut prihatin ya. Rasa sakit di hati memang nggak selalu mudah dijelaskan. Aku siap mendengarkan tanpa menghakimi. Cerita aja sesuai yang kamu nyaman."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku gagal, gagal lagi, semuanya gagal, gagal terus, aku merasa gagal",
+    "response_template": "Aku tahu rasanya gagal bisa membuat seseorang mempertanyakan dirinya sendiri. Tapi satu kegagalan nggak menentukan siapa dirimu. Mau cerita dulu apa yang sebenarnya terjadi?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku sendirian, nggak ada yang peduli, nggak ada yang ngerti aku, merasa sendiri, kesepian",
+    "response_template": "Perasaan sendirian memang berat ya. Terima kasih karena memilih datang dan cerita ke aku. Aku mungkin nggak bisa menggantikan orang di sekitarmu, tapi aku akan berusaha menemanimu sebaik mungkin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku putus asa, putus asa banget, menyerah, pengen nyerah, udah nggak kuat",
+    "response_template": "Kedengarannya kamu sedang menghadapi sesuatu yang benar-benar berat. Aku menghargai karena kamu masih mau mengungkapkan perasaanmu. Ceritain aja ya, kita bahas satu per satu tanpa terburu-buru."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku kehilangan, kehilangan seseorang, kehilangan orang yang aku sayang, berduka, ditinggal",
+    "response_template": "Aku turut berduka dan ikut prihatin atas apa yang kamu alami. Kehilangan memang nggak mudah diterima. Kalau kamu ingin mengenang atau menceritakan tentangnya, aku siap mendengarkan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Sedih",
+    "keywords": "aku hancur, hatiku hancur, hidupku berantakan, semuanya berantakan, aku nggak kuat",
+    "response_template": "Aku bisa merasakan kalau keadaan ini terasa sangat berat buatmu. Kamu nggak harus memikul semuanya sendirian. Ceritain aja apa yang sedang terjadi, kita coba hadapi satu langkah demi satu langkah."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "kesel, kesel banget, kesel nih",
+    "response_template": "Wah siapa yang berani buat lu kesel? Cerita deh!"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "marah, lagi marah, marah banget",
+    "response_template": "Waduh, siapa yang bikin emosi meledak? Cerita aja keluh kesahnya, biar lega dan nggak dipikirin terus."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "emosi, emosi banget, naik darah",
+    "response_template": "Waduh, ada yang bikin naik darah nih? Tenang dulu, tarik napas panjang. Cerita aja keluh kesahnya, biar hatimu jadi lebih lega."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "jengkel, jengkel banget, sebel banget",
+    "response_template": "Kelihatannya ada yang bikin kamu jengkel ya. Ceritain aja, siapa tahu setelah dikeluarin rasanya jadi lebih ringan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "dongkol, gondok, gondok banget",
+    "response_template": "Waduh, kok kedengerannya lagi dongkol banget? Cerita aja pelan-pelan, aku dengerin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "muak, muak banget, eneg",
+    "response_template": "Sepertinya kamu lagi capek sama suatu keadaan ya. Cerita aja, biar nggak dipendem sendiri."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "geram, geram banget, gemes negatif",
+    "response_template": "Wah, sampai geram gitu ya? Boleh banget cerita apa yang terjadi. Siapa tahu setelah diceritain rasanya lebih lega."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "bete, bete banget, bad mood",
+    "response_template": "Lagi bete ya? Cerita aja apa yang bikin suasana hati jadi berantakan. Aku siap dengerin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "capek sama orang, kesel sama orang, muak sama orang",
+    "response_template": "Hubungan sama orang memang kadang bikin emosi ya. Cerita aja, aku siap jadi tempat kamu meluapkan unek-unek."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "pengen ngamuk, pengen marah, pengen teriak",
+    "response_template": "Wah, emosinya lagi penuh banget ya. Nggak apa-apa, coba ceritain dulu apa yang terjadi. Siapa tahu setelah ngobrol rasanya jadi lebih tenang."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "gue kesel banget, aku kesel banget, kesel parah, kesel setengah mati",
+    "response_template": "Dari cara kamu ngomong, kayaknya ini bukan kesel biasa ya. Cerita aja, siapa atau apa yang bikin emosimu sampai segitunya."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "emosi banget, emosi parah, naik darah banget, darahku mendidih",
+    "response_template": "Wah... kedengerannya emosinya lagi di puncak nih. Nggak usah dipendem, coba ceritain pelan-pelan apa yang sebenarnya terjadi."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "orang itu bikin kesel, dia bikin emosi, dia nyebelin banget, dia keterlaluan",
+    "response_template": "Kayaknya ada seseorang yang benar-benar bikin kamu kehilangan kesabaran ya. Cerita aja dari awal, aku dengerin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "udah nggak tahan, udah muak, udah eneg, capek ngadepin dia",
+    "response_template": "Kalau sampai bilang udah nggak tahan, berarti ini pasti udah numpuk lama ya. Cerita aja, biar beban di kepala nggak makin berat."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "pengen ngamuk, pengen marah-marah, pengen teriak, pengen banting sesuatu",
+    "response_template": "Kelihatannya emosimu lagi penuh banget. Sebelum diluapin ke hal lain, coba luapin lewat cerita dulu. Aku siap dengerin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "kenapa sih orang kayak gitu, kok bisa begitu sih, nggak habis pikir",
+    "response_template": "Iya ya, kadang perilaku orang memang bisa bikin kita geleng kepala. Cerita aja, apa yang bikin kamu sampai kepikiran begitu."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "sabar ada batasnya, kesabaran ada batasnya, udah kelewatan, udah keterlaluan",
+    "response_template": "Kalau kesabaranmu sampai habis, berarti situasinya memang berat ya. Cerita aja semuanya, nggak perlu ditahan sendiri."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "bad mood gara-gara orang, mood rusak, mood hancur, hari ini nyebelin banget",
+    "response_template": "Sayang banget kalau satu kejadian bikin harimu jadi berantakan. Cerita aja apa yang terjadi, siapa tahu setelah itu rasanya lebih lega."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "kok hidup gini amat, sial banget hari ini, apes banget, hari ini kacau",
+    "response_template": "Hari ini kayaknya benar-benar nggak berpihak ya. Cerita aja dari awal, aku pengen tahu apa yang lagi kamu hadapi."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Marah",
+    "keywords": "udah males, bodo amat, terserah deh, aku nyerah ngadepin orang ini",
+    "response_template": "Kalau sampai muncul rasa 'udah males', biasanya bukan karena satu kejadian aja. Cerita aja, mungkin ada banyak hal yang lagi numpuk di pikiranmu."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "bingung,gatau,gak tau,nggak tau,ga ngerti,entahlah",
+    "response_template": "Kayaknya ada yang lagi bikin kamu bingung ya. Cerita aja dulu, nggak perlu langsung nemuin jawabannya. Aku siap bantu mikirin bareng."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "serba salah,dilema,maju salah,mundur salah,salah semua",
+    "response_template": "Lagi ada di posisi serba salah ya? Tenang, nggak semua keputusan harus dibuat secepat itu. Cerita aja dulu, kita lihat pilihan yang paling masuk akal."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "harus gimana,gimana ya,bagaimana ya,apa yang harus kulakukan",
+    "response_template": "Kamu lagi cari arah ya? Coba ceritain dulu situasinya. Semakin jelas ceritanya, semakin gampang kita cari solusi yang cocok."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "pusing,mumet,pening,kepala penuh,overthinking",
+    "response_template": "Kalau kepala lagi penuh memang semuanya jadi terasa rumit. Yuk cerita pelan-pelan, kita urutkan satu per satu biar lebih jelas."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "blank,mentok,stuck,buntu,kehabisan ide",
+    "response_template": "Lagi mentok ya? Nggak apa-apa kok kalau lagi blank. Cerita aja, siapa tahu dari obrolan ini muncul sudut pandang baru."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "pilih yang mana,memilih,susah milih,dua pilihan,banyak pilihan",
+    "response_template": "Lagi bingung menentukan pilihan ya? Coba jelaskan pilihan-pilihannya, nanti kita bandingkan satu per satu supaya lebih mudah diputuskan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "takut salah,ragu,bimbang,kurang yakin,ga yakin",
+    "response_template": "Rasa ragu itu wajar kok, apalagi kalau keputusannya penting. Cerita aja dulu, nanti kita pertimbangkan kelebihan dan risikonya bersama."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "kenapa ya,kok bisa,gimana maksudnya,aku nggak paham,ga paham",
+    "response_template": "Ada yang belum kamu pahami ya? Coba jelaskan bagian yang bikin bingung, nanti aku bantu jelaskan dengan bahasa yang lebih sederhana."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "cape mikir,capek mikir,otak penuh,udah nyerah,bikin bingung",
+    "response_template": "Kelihatannya masalah ini cukup menguras pikiran kamu ya. Istirahat sebentar juga boleh, tapi kalau mau cerita sekarang, aku siap dengerin dan bantu cari jalan keluarnya."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "aku bingung,bingung banget,bener-bener bingung,nggak tahu mulai dari mana,mulai dari mana",
+    "response_template": "Nggak apa-apa kalau sekarang rasanya semuanya membingungkan. Kita mulai dari satu hal dulu. Cerita dari awal aja, nanti kita pecahkan pelan-pelan sampai lebih jelas."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "aku kehilangan arah,hidupku bingung,gak tau tujuan,aku harus kemana,bingung sama hidup",
+    "response_template": "Kedengarannya kamu lagi merasa kehilangan arah ya. Nggak apa-apa kalau sekarang semuanya terasa samar. Coba cerita pelan-pelan, mungkin kita bisa cari tahu apa yang sebenarnya lagi membebani pikiranmu."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "kepalaku penuh,banyak pikiran,otakku penuh,terlalu banyak yang dipikirin,gak bisa mikir jernih",
+    "response_template": "Kalau isi kepala lagi penuh, hal sederhana pun bisa terasa rumit. Yuk keluarkan dulu semua yang lagi kamu pikirkan. Nggak perlu diurutkan, aku bantu merapikannya satu per satu."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "aku salah gak ya,keputusanku benar gak ya,takut salah langkah,salah pilih,ragu ambil keputusan",
+    "response_template": "Aku bisa paham kenapa kamu jadi ragu. Kadang bukan karena kita nggak tahu jawabannya, tapi karena takut menyesal nanti. Cerita dulu aja, kita lihat semuanya dari berbagai sisi."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "semuanya rumit,masalahnya banyak,bingung mulai dari mana,terlalu banyak masalah,berantakan",
+    "response_template": "Kalau semuanya datang bersamaan memang rasanya bikin sesak. Kita nggak perlu menyelesaikan semuanya sekaligus kok. Cerita dari hal yang paling mengganggu dulu, nanti kita urutkan bersama."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "aku gak ngerti diri sendiri,aku maunya apa ya,kenapa aku begini,aku bingung sama diriku,bingung sama perasaan",
+    "response_template": "Kadang yang paling sulit memang memahami diri sendiri. Nggak apa-apa kok kalau sekarang belum punya jawabannya. Cerita aja, mungkin dari situ kita bisa mengenali apa yang sebenarnya kamu rasakan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "orang bilang beda-beda,banyak pendapat,dikasih saran terus,jadi makin bingung,dengerin siapa",
+    "response_template": "Kalau terlalu banyak pendapat memang bisa bikin tambah bingung. Coba ceritakan kondisinya, nanti kita fokus ke apa yang paling sesuai dengan kebutuhanmu, bukan sekadar mengikuti orang lain."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "aku takut nyesel,takut gagal,takut ambil keputusan,takut pilih salah,kalau gagal gimana",
+    "response_template": "Rasa takut itu wajar, apalagi kalau keputusan ini penting buat hidupmu. Daripada memikirkan semua kemungkinan sekaligus, yuk kita bahas satu per satu supaya lebih jelas."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "semuanya berubah,rencana berantakan,gak sesuai harapan,kok jadi begini,aku gak siap",
+    "response_template": "Perubahan yang datang tiba-tiba memang sering bikin kita kehilangan pegangan. Cerita aja apa yang berubah, nanti kita cari langkah yang masih bisa kamu kendalikan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "aku cuma pengen ada yang dengerin,boleh cerita gak,aku bingung mau cerita ke siapa,gak tau harus ngomong ke siapa",
+    "response_template": "Tentu boleh. Kamu nggak harus memikul semuanya sendirian. Cerita aja sebebas mungkin, aku akan dengerin dulu tanpa menghakimi sebelum kita cari jalan keluarnya."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Bingung",
+    "keywords": "aku udah mikir berkali-kali,tetep bingung,udah dipikirin terus,gak ketemu jawaban,mentok banget",
+    "response_template": "Berarti ini memang bukan masalah yang sederhana ya. Kadang kita terlalu lama melihat dari sudut yang sama sampai rasanya mentok. Yuk coba bahas bareng, siapa tahu ada perspektif baru yang belum kepikiran."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "galau,bimbang,dilema,bingung hati,gak tau harus gimana",
+    "response_template": "Kayaknya lagi ada yang bikin hati sama pikiran berantem ya? Mau cerita pelan-pelan aja, siapa tahu setelah dikeluarin rasanya jadi lebih ringan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "capek hati,pengen nangis,hati berat,sedih banget,ngerasa kosong",
+    "response_template": "Akhir-akhir ini hati lagi capek ya? Nggak apa-apa kok kalau belum baik-baik aja. Aku siap nemenin kamu cerita tanpa nge-judge."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "dia berubah,dia cuek,dia menjauh,dia beda,dia gak seperti dulu",
+    "response_template": "Hmm... ada seseorang yang sikapnya berubah ya? Perubahan kecil kadang bikin kepikiran terus. Ceritain aja dari awal, aku dengerin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "move on,susah move on,belum bisa lupa,masih inget mantan,kangen mantan",
+    "response_template": "Masih susah lepas dari masa lalu ya? Tenang, proses setiap orang beda-beda. Cerita aja, siapa tahu kita bisa cari jalan keluarnya bareng."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "cinta bertepuk sebelah tangan,ditolak,friendzone,crush,gebetan",
+    "response_template": "Wah... urusan hati memang nggak selalu sesuai harapan ya. Lagi tentang gebetan, cinta yang nggak nyampe, atau ada cerita lain nih?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "pilih dia atau dia,dua pilihan,serba salah,dilema hubungan,bingung milih",
+    "response_template": "Lagi di posisi serba salah ya? Kadang bukan karena nggak tahu jawabannya, tapi takut sama konsekuensinya. Yuk cerita dulu biar kita lihat sama-sama."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "overthinking,mikir terus,kepikiran,susah tidur,banyak pikiran",
+    "response_template": "Pikiran lagi muter terus ya sampai susah berhenti? Coba ceritain apa yang paling sering muncul di kepala kamu. Siapa tahu bisa kita urai pelan-pelan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "masa depan,bingung karir,salah jurusan,bingung hidup,quarter life",
+    "response_template": "Lagi galau soal masa depan ya? Percaya deh, banyak orang juga pernah ada di fase itu. Cerita aja, kita coba cari sudut pandang yang lebih jelas."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "keluarga,orang tua,teman,sahabat,konflik",
+    "response_template": "Kalau galaunya datang dari orang-orang terdekat memang rasanya beda ya. Mau cerita soal keluarga, teman, atau seseorang yang lagi bikin kepikiran?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "gak mood,hampa,kehilangan semangat,hilang arah,lagi down",
+    "response_template": "Aku ngerasa kamu lagi kehilangan semangat ya. Nggak harus langsung nemuin solusinya kok. Cerita aja dulu apa yang lagi kamu rasain, aku siap nemenin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "aku harus gimana,harus bagaimana,bingung harus pilih apa,aku serba salah,gak tau keputusan yang tepat",
+    "response_template": "Kelihatannya kamu lagi di persimpangan ya. Apapun pilihanmu pasti ada yang dikorbankan, makanya rasanya berat. Cerita aja dulu, mungkin kita bisa lihat dari sudut pandang yang belum kepikiran."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "kenapa ya,apa aku salah,aku salah ya,aku kurang apa,apa ada yang salah sama aku",
+    "response_template": "Kamu lagi mempertanyakan diri sendiri ya? Sebelum menyalahkan diri, coba ceritain dulu apa yang sebenarnya terjadi. Kadang masalahnya bukan karena kamu kurang, tapi situasinya memang rumit."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "dia gak bales chat,di centang doang,read doang,di ghosting,ngilang tiba tiba",
+    "response_template": "Hmm... nunggu balasan memang bisa bikin pikiran ke mana-mana. Lagi kepikiran karena dia mendadak berubah atau ada sesuatu yang belum sempat kamu pahami?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "aku capek,capek banget,lelah hati,udah gak kuat,bener bener capek",
+    "response_template": "Kalimat 'aku capek' biasanya menyimpan cerita yang jauh lebih besar. Capek karena pekerjaan, hubungan, keluarga, atau semuanya datang bersamaan? Aku siap dengerin."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "gak ada yang ngerti,sendirian,ngerasa sendiri,gak punya tempat cerita,sendiri terus",
+    "response_template": "Perasaan nggak dimengerti memang bikin sesak ya. Sekarang kamu nggak sendirian kok. Cerita aja sebebas mungkin, aku bakal denger tanpa menghakimi."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "takut gagal,aku ragu,ragu banget,gak yakin sama diri sendiri,kurang percaya diri",
+    "response_template": "Rasa ragu sering muncul justru karena kamu peduli sama hasilnya. Yuk cerita, apa yang bikin kamu belum yakin melangkah? Kita coba urai satu per satu."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "semua berubah,kenapa berubah,udah beda,bukan yang dulu,rasanya asing",
+    "response_template": "Kadang yang paling bikin sedih bukan kehilangan, tapi melihat sesuatu berubah tanpa kita siap menerimanya. Cerita dong, siapa atau apa yang berubah menurutmu?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "aku iri,iri sama orang lain,kok mereka bisa,kenapa hidup orang enak,aku ketinggalan",
+    "response_template": "Membandingkan diri sama orang lain memang gampang bikin hati berat. Tapi aku penasaran, ada kejadian tertentu yang bikin kamu ngerasa tertinggal?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "gak tau maunya apa,hilang arah,bingung tujuan hidup,gak punya tujuan,ngerasa kosong",
+    "response_template": "Kalau lagi kehilangan arah, semua pilihan memang terasa membingungkan. Nggak apa-apa kok, kita mulai dari cerita kecil dulu. Apa yang paling mengganggu pikiranmu sekarang?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Galau",
+    "keywords": "andai aja,seandainya,coba waktu itu,andai aku,nyesel banget",
+    "response_template": "Kayaknya kamu lagi kepikiran sesuatu yang sudah lewat ya. Penyesalan memang berat, tapi aku pengen tahu ceritanya. Apa yang paling sering kamu ulang di kepala akhir-akhir ini?"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "capek hidup, lelah hidup, aku menyerah, pengen nyerah, udah gak kuat, hidup berat, semuanya berat",
+    "response_template": "Aku ikut sedih dengar kamu lagi ngerasa seberat ini. Gak harus kuat terus kok. Kalau hari ini rasanya terlalu berat, kita hadapi pelan-pelan aja. Aku siap dengerin tanpa menghakimi. Cerita dari bagian mana pun juga gak apa-apa. 🤍"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "hidup gak ada arah, bingung tujuan hidup, kehilangan arah, gak tau mau ngapain, hidup kosong, merasa hampa",
+    "response_template": "Kadang kita memang bisa sampai di titik merasa kehilangan arah. Itu bukan berarti hidupmu berhenti atau kamu gagal. Mungkin sekarang kamu cuma lagi butuh waktu buat bernapas dan menemukan langkah berikutnya. Kalau mau, kita bisa ngobrol pelan-pelan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "aku gagal, gagal terus, merasa gagal, semua berantakan, kecewa sama diri sendiri, gak berguna",
+    "response_template": "Aku tahu rasanya ketika semua terasa seperti kegagalan. Tapi satu fase buruk gak pernah bisa menentukan seluruh nilai dirimu. Kamu tetap berharga, bahkan ketika keadaan belum berpihak. Kalau ingin cerita apa yang terjadi, aku akan mendengarkan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "sendirian, gak ada yang peduli, gak ada yang ngerti, kesepian banget, merasa sendiri, gak punya siapa siapa",
+    "response_template": "Perasaan sendirian memang bisa terasa sangat melelahkan. Tapi sekarang kamu gak sendirian, karena aku ada buat nemenin ngobrol. Gak perlu buru-buru terlihat kuat. Cerita sedikit aja juga sudah cukup. 😊"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "burnout, capek kerja, capek kuliah, capek sekolah, mental capek, energi habis",
+    "response_template": "Dari yang kamu bilang, kedengarannya kamu sudah membawa beban yang cukup lama. Capek itu bukan tanda kamu lemah, tapi tanda kamu sudah berusaha sejauh ini. Semoga obrolan ini bisa jadi tempat istirahat sebentar buat pikiranmu."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "overthinking terus, kepikiran terus, gak bisa tidur karena mikir, pikiran penuh, otak penuh",
+    "response_template": "Kalau pikiran terus berputar tanpa henti, memang rasanya melelahkan banget. Gak apa-apa kalau sekarang semuanya terasa penuh. Kamu gak harus menyelesaikan semuanya sekaligus. Ceritakan aja satu hal yang paling mengganggu dulu."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "gak semangat hidup, kehilangan motivasi, males ngapa ngapain, gak punya tenaga, kosong banget",
+    "response_template": "Aku paham kalau saat kehilangan semangat, bahkan melakukan hal kecil pun bisa terasa berat. Gak perlu memaksa diri langsung kembali seperti dulu. Hari ini cukup jalani sesuai kemampuanmu. Aku tetap di sini kalau kamu ingin ditemani ngobrol."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "kenapa hidup begini, hidup gak adil, nasib jelek, kenapa aku terus, cape sama hidup",
+    "response_template": "Pertanyaan seperti itu sering muncul ketika seseorang sedang memikul beban yang besar. Wajar kalau kamu merasa lelah menghadapi semuanya. Terima kasih sudah mau mengungkapkannya. Kalau berkenan, ceritakan apa yang paling berat akhir-akhir ini."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "kehilangan orang, ditinggal, putus cinta, kehilangan seseorang, sedih banget, patah hati berat",
+    "response_template": "Kehilangan seseorang memang bisa meninggalkan ruang kosong yang sulit dijelaskan. Gak ada aturan tentang seberapa cepat kamu harus pulih. Ambil waktumu sendiri. Kalau ingin mengenang atau sekadar meluapkan perasaan, aku siap mendengarkan."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "aku capek jadi aku, benci diri sendiri, gak suka diri sendiri, merasa gak berarti, minder banget",
+    "response_template": "Aku sedih dengar kamu sedang memandang dirimu sekeras itu. Meski sekarang kamu mungkin sulit melihatnya, nilai dirimu gak ditentukan oleh satu kesalahan, kegagalan, atau pendapat orang lain. Kamu tetap layak didengar dan dihargai. Aku di sini buat nemenin kamu ngobrol kapan pun kamu mau. 🌻"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "udah di titik terendah, lagi di bawah banget, ngerasa jatuh banget, hidup lagi di bawah, semua runtuh",
+    "response_template": "Aku bisa ngerasain kalau sekarang semuanya terasa seperti runtuh sekaligus. Di titik seperti ini, rasanya memang sulit melihat harapan. Tapi terima kasih karena masih memilih buat ngomong di sini. Kita nggak perlu langsung mencari solusi kok, aku temenin dulu sampai beban itu terasa sedikit lebih ringan. 🤍"
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "aku cuma numpang hidup, hidup cuma jalanin aja, gak tau buat apa hidup, hidup hambar, hidup gitu gitu aja",
+    "response_template": "Kedengarannya kamu lagi menjalani hari tanpa benar-benar menikmatinya. Perasaan seperti ini sering bikin semuanya terasa kosong. Aku nggak akan maksa kamu buat langsung semangat lagi. Kalau mau, kita ngobrol pelan-pelan tentang apa yang bikin semuanya terasa hambar."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "aku selalu jadi beban, nyusahin orang, bikin kecewa semua orang, merasa merepotkan, gak ada gunanya",
+    "response_template": "Pasti capek ya kalau setiap hari merasa diri sendiri cuma membawa beban buat orang lain. Tapi apa yang kamu rasakan belum tentu sama dengan kenyataannya. Kamu tetap pantas didengar tanpa harus merasa bersalah. Cerita aja dulu, aku bakal dengerin tanpa menghakimi."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "semua orang lebih hebat, aku tertinggal, kalah sama teman, insecure sama orang lain, semua orang sukses",
+    "response_template": "Membandingkan diri dengan orang lain memang bisa bikin hati terasa makin berat. Padahal setiap orang punya waktu dan jalannya masing-masing. Kamu nggak sedang balapan dengan hidup orang lain. Kalau mau cerita kenapa perasaan itu muncul, aku siap menemani."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "aku pura pura kuat, capek pura pura bahagia, senyum terus padahal sedih, nutupin semuanya, gak mau keliatan lemah",
+    "response_template": "Menjadi orang yang selalu terlihat kuat itu ternyata melelahkan ya. Di sini kamu nggak perlu memakai topeng atau berpura-pura baik-baik saja. Kamu boleh jujur tentang apa yang sedang kamu rasakan. Aku akan mendengarkan tanpa menilai."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "mentalku drop, mental down, mental hancur, mental lagi jelek, mental kena",
+    "response_template": "Kalau mental lagi benar-benar turun, hal kecil pun bisa terasa sangat berat. Jadi jangan menyalahkan dirimu karena belum bisa seperti biasanya. Kita hadapi satu langkah kecil dulu. Aku ada disini kalau kamu butuh teman ngobrol."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "rasanya pengen kabur, pengen ngilang, pengen jauh dari semuanya, pengen menghilang sebentar, pengen hilang",
+    "response_template": "Aku menangkap kalau kamu lagi ingin menjauh dari semua tekanan yang sedang kamu hadapi. Kedengarannya bebanmu memang berat. Terima kasih sudah mau mengungkapkannya di sini. Kalau kamu nyaman, ceritakan apa yang paling membuatmu ingin pergi dari semua ini."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "aku kecewa sama hidup, kenapa hidupku begini, hidup gak berpihak, capek sama kenyataan, nasib buruk terus",
+    "response_template": "Kecewa sama hidup itu rasanya benar-benar menguras tenaga. Kadang kita sudah berusaha sebaik mungkin tapi hasilnya tetap tidak sesuai harapan. Wajar kalau kamu merasa lelah. Aku di sini untuk mendengarkan semuanya tanpa menyuruhmu langsung bangkit."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "udah gak kenal diri sendiri, kehilangan diri sendiri, bukan aku yang dulu, berubah banget, ngerasa asing sama diri sendiri",
+    "response_template": "Perasaan seperti kehilangan diri sendiri memang bisa membingungkan dan menyedihkan. Tapi bukan berarti dirimu benar-benar hilang. Bisa jadi kamu hanya sedang melewati fase yang sangat berat. Kalau kamu mau, kita bisa sama-sama mencari tahu apa yang berubah."
+  },
+  {
+    "intent": "Respon_Sapaan_Umum_Depresi",
+    "keywords": "aku cuma pengen didengerin, gak butuh solusi, pengen cerita aja, pengen curhat, butuh teman ngobrol",
+    "response_template": "Terima kasih sudah memilih datang ke sini. Kamu nggak harus punya cerita yang rapi atau tahu harus mulai dari mana. Aku siap mendengarkan tanpa buru-buru memberi solusi. Cerita aja sesuai yang kamu rasakan, aku akan menemanimu sampai selesai. 🌿"
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Muslim",
+    "keywords": "Assalamualaikum, Assalamu’alaikum, ass, aslm, salam, salamualaikum",
+    "response_template": "Waalaikumsalam warahmatullahi wabarakatuh, {full_name}! Lagi ngapain nih? Gimana kabar iman dan hatinya hari ini? Semoga selalu dalam lindungan Allah ya…"
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Muslim",
+    "keywords": "Assalamualaikum, Assalamu’alaikum, ass, aslm, salam, salamualaikum",
+    "response_template": "Waalaikumsalam warahmatullahi wabarakatuh, {full_name}! Lagi ngapain nih? Gimana kabar perasaan kamu sekarang? Hati dan pikiran kamu tenang nggak? Semoga selalu dalam lindungan Allah ya…"
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "alhamdulillah, masyaallah, bersyukur banget, nikmat Allah, rezeki dari Allah",
+    "response_template": "MasyaAllah, alhamdulillah! Seneng banget dengernya. Nikmat dari Allah memang patut disyukuri. Semoga Allah menambah keberkahan dan kebahagiaan mu. Cerita dong kabar baiknya!"
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "akhirnya terkabul, doa dikabulkan, doa terjawab, Allah baik, doa saya",
+    "response_template": "Alhamdulillah, Allah Maha Mendengar doa-doa hamba-Nya. Senang sekali mendengar doamu terkabul. Semoga kebahagiaan ini membawa keberkahan yang lebih besar lagi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "rezeki, dapat kerja, naik gaji, usaha lancar, penghasilan naik",
+    "response_template": "MasyaAllah, rezeki dari Allah memang datang di waktu yang terbaik. Semoga rezeki yang kamu terima menjadi berkah dan membawa manfaat bagi banyak orang."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "menikah, lamaran diterima, jodoh, tunangan, pasangan",
+    "response_template": "MasyaAllah, semoga Allah memberkahi perjalanan cintamu dan menjadikan hubungan ini penuh sakinah, mawaddah, dan rahmah. Turut bahagia mendengarnya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "keluarga bahagia, anak lahir, punya anak, keluarga lengkap",
+    "response_template": "Alhamdulillah, keluarga adalah salah satu nikmat terbesar dari Allah. Semoga keluargamu selalu diberi kesehatan, keberkahan, dan kebahagiaan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "sembuh, sehat lagi, pulih, kondisi membaik",
+    "response_template": "MasyaAllah, Allah telah memberikan kesehatan dan kesembuhan. Semoga nikmat sehat ini selalu dijaga dan menjadi alasan untuk semakin bersyukur."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "ibadah lancar, umrah, haji, dekat dengan Allah",
+    "response_template": "Alhamdulillah, kebahagiaan yang datang dari kedekatan kepada Allah adalah nikmat yang luar biasa. Semoga iman dan ibadahmu semakin kuat."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "hari terbaik, bahagia banget, seneng banget, excited",
+    "response_template": "MasyaAllah, senang sekali mendengar kebahagiaanmu hari ini. Jangan lupa bersyukur karena Allah selalu menghadirkan nikmat dalam berbagai bentuk."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Senang",
+    "keywords": "impian tercapai, cita-cita tercapai, sukses, berhasil",
+    "response_template": "Alhamdulillah, kerja keras dan doa akhirnya membuahkan hasil. Semoga Allah terus membimbing langkahmu menuju kebaikan yang lebih besar."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "sedih, sedih banget, lagi sedih, hati sakit, galau",
+    "response_template": "Innalillahi, hati yang sedih juga membutuhkan waktu untuk pulih. Allah mengetahui apa yang sedang kamu rasakan. Aku siap mendengarkan ceritamu jika kamu ingin berbagi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "aku nangis, menangis, nangis terus, air mata, gak bisa berhenti nangis",
+    "response_template": "Tidak apa-apa jika air mata jatuh. Bahkan para nabi pun pernah bersedih. Semoga Allah memberikan ketenangan dan kekuatan di hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "gagal, gagal lagi, kecewa, tidak berhasil, gagal ujian",
+    "response_template": "Kegagalan bukan akhir dari jalan hidup. Allah mungkin sedang menyiapkan sesuatu yang lebih baik. Tetaplah berikhtiar dan berdoa."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "putus cinta, ditinggal pasangan, patah hati, diselingkuhi",
+    "response_template": "MasyaAllah, patah hati memang menyakitkan. Semoga Allah mengganti kesedihan ini dengan kebaikan dan orang yang lebih tepat di waktu-Nya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "kehilangan orang tua, meninggal, kehilangan keluarga, berduka",
+    "response_template": "Innalillahi wa inna ilaihi raji'un. Semoga Allah memberikan kesabaran dan kekuatan dalam menghadapi kehilangan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "sendirian, kesepian, tidak punya teman, sendiri",
+    "response_template": "Meski kamu merasa sendiri, Allah selalu dekat dengan hamba-Nya. Semoga kamu diberikan ketenangan dan orang-orang baik di sekitarmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "capek hidup, lelah, lelah sekali, berat",
+    "response_template": "Allah tidak membebani seseorang melainkan sesuai kemampuannya. Semoga Allah memberikan kekuatan menghadapi ujian ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "aku tidak berguna, tidak berharga, gagal jadi manusia",
+    "response_template": "Nilai dirimu tidak ditentukan oleh kegagalan atau penilaian orang lain. Di sisi Allah, setiap manusia memiliki nilai dan kesempatan untuk memperbaiki diri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "doaku tidak dikabulkan, kecewa sama Allah",
+    "response_template": "Kadang jawaban doa datang dengan cara dan waktu yang berbeda. Semoga Allah memberikan jalan terbaik yang mungkin belum terlihat saat ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Sedih",
+    "keywords": "hidup tidak adil, kenapa aku, kenapa begini",
+    "response_template": "Pertanyaan itu sering muncul ketika hati terluka. Semoga Allah memberikan hikmah dan kekuatan sehingga perlahan kamu dapat menemukan makna di balik ujian ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "marah, kesal, emosi, jengkel, kesel banget",
+    "response_template": "Aku paham kamu sedang marah dan kesal. Dalam Islam, menahan amarah adalah bentuk kekuatan yang besar. Semoga Allah memberikan ketenangan hati dan membantu kamu menghadapi masalah ini dengan bijaksana."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "emosi banget, naik darah, pengen ngamuk, tidak bisa menahan marah",
+    "response_template": "Saat emosi memuncak, cobalah menenangkan diri terlebih dahulu. Semoga Allah memberikan kesabaran dan kejernihan hati agar kamu dapat mengambil keputusan yang baik."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "dibohongi, ditipu, dikhianati",
+    "response_template": "Dikhianati memang menyakitkan. Semoga Allah memberikan keadilan dan mengganti luka ini dengan pelajaran serta kebaikan di masa depan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "tidak adil, diperlakukan tidak adil, dizalimi",
+    "response_template": "Allah mengetahui setiap ketidakadilan yang terjadi. Semoga kamu diberikan kesabaran dan kekuatan dalam menghadapi situasi ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "bertengkar, ribut, konflik",
+    "response_template": "Konflik memang dapat memicu emosi. Semoga Allah membantu kamu menemukan jalan damai dan memberikan kelembutan hati."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "kesal sama teman, kesal sama pasangan, marah sama orang",
+    "response_template": "Perasaan marah itu manusiawi. Semoga Allah membimbingmu untuk menyelesaikan masalah dengan bijaksana dan penuh kesabaran."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "kesal sama keluarga, marah sama orang tua",
+    "response_template": "Hubungan keluarga terkadang menghadapi ujian. Semoga Allah melembutkan hati dan menghadirkan jalan terbaik bagi kalian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "capek menghadapi orang, muak, jengkel",
+    "response_template": "Ketika hati dipenuhi kejengkelan, beristirahat sejenak dapat membantu. Semoga Allah memberikan ketenangan dan kesabaran."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "kenapa orang jahat, orang menyebalkan",
+    "response_template": "Setiap manusia diuji dengan berbagai keadaan dan orang-orang di sekitarnya. Semoga Allah memberikan hikmah dan keteguhan hati."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Marah",
+    "keywords": "benci, dendam, sakit hati",
+    "response_template": "Luka hati memang tidak mudah. Semoga Allah membantu kamu melepaskan beban itu dan menggantinya dengan ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "bingung, gak tau harus gimana, pusing, buntu, gak ngerti",
+    "response_template": "Gapapa kalau sekarang kamu lagi bingung. Kadang hidup memang bikin kita berhenti sejenak karena tidak tahu harus melangkah kemana. Allah memahami isi hati yang paling dalam sekalipun. Kalau kamu mau, coba ceritakan pelan-pelan apa yang bikin kamu bingung."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "aku ragu, bimbang, galau, dilema",
+    "response_template": "Rasa ragu itu manusiawi. Bahkan ketika hati terasa bercabang ke banyak arah, Allah tetap mengetahui apa yang sedang kamu perjuangkan. Aku di sini kalau kamu ingin membicarakannya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "pilih yang mana, harus pilih apa, keputusan sulit",
+    "response_template": "Keputusan yang sulit memang sering membuat hati lelah. Tidak perlu buru-buru. Semoga Allah memberikan petunjuk dan ketenangan agar langkah yang kamu ambil menjadi yang terbaik."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "masa depanku gimana, takut masa depan",
+    "response_template": "Masa depan memang sering membuat kita khawatir karena belum bisa kita lihat. Tapi Allah mengetahui jalan yang bahkan belum kita pahami. Cerita sedikit yuk, apa yang paling membuat kamu takut?"
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "aku salah gak ya, aku takut salah",
+    "response_template": "Takut membuat kesalahan menunjukkan bahwa kamu sedang berusaha melakukan yang terbaik. Semoga Allah memberikan hikmah dan membimbing hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "aku kehilangan arah, gak punya tujuan",
+    "response_template": "Kadang kita memang merasa tersesat dalam hidup. Tidak apa-apa. Pelan-pelan saja, karena Allah tidak pernah meninggalkan hamba-Nya yang sedang mencari jalan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "doaku gak ada jawaban",
+    "response_template": "Mungkin saat ini jawabannya belum terlihat. Semoga Allah memberikan petunjuk pada waktu yang tepat dan menguatkan hatimu selama menunggu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "bingung soal cinta, bingung soal pasangan",
+    "response_template": "Perasaan memang sering membuat hati sulit mengambil keputusan. Semoga Allah memudahkan langkahmu dan memberikan ketenangan dalam menentukan pilihan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "bingung kuliah, kerja, karier",
+    "response_template": "Banyak orang juga pernah berada di titik ini. Semoga Allah memberikan jalan yang paling baik untuk masa depanmu. Kamu sedang mempertimbangkan pilihan apa?"
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Bingung",
+    "keywords": "kenapa hidupku begini, aku gak ngerti hidup",
+    "response_template": "Kadang hidup memang terasa membingungkan. Tidak semua jawaban datang sekaligus. Semoga Allah memberikan ketenangan dan menemanimu menemukan makna dari perjalanan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "galau, lagi galau, hati gak tenang, gelisah, resah",
+    "response_template": "Aku bisa ngerasain kalau hati kamu lagi berat. Kadang rasa galau datang tanpa permisi dan bikin semuanya terasa berantakan. Allah tahu apa yang sedang kamu simpan dalam hati. Kalau kamu mau, cerita pelan-pelan aja. Aku di sini buat dengerin."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "overthinking, kepikiran terus, gak bisa tidur, banyak pikiran",
+    "response_template": "Kepala yang terlalu penuh memang melelahkan. Tidak semua hal harus kamu selesaikan malam ini. Semoga Allah memberikan ketenangan dan membantu meringankan pikiranmu sedikit demi sedikit."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "galau soal cinta, bingung sama perasaan, suka seseorang",
+    "response_template": "Perasaan memang kadang bikin hati bingung. Tidak apa-apa kalau sekarang kamu belum punya jawabannya. Semoga Allah memudahkan apa yang baik dan menjauhkan apa yang tidak baik untukmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "dia berubah, dia menjauh, dia cuek",
+    "response_template": "Perubahan sikap seseorang memang bisa membuat hati tidak tenang. Semoga Allah memberikan kejelasan dan menguatkan hatimu menghadapi apa pun jawabannya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "takut kehilangan, takut ditinggal",
+    "response_template": "Takut kehilangan orang yang berarti memang menyakitkan. Semoga Allah menjaga hatimu dan memberikan ketenangan di tengah rasa takut itu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "aku sendirian, gak ada yang ngerti aku",
+    "response_template": "Kadang kita merasa sendiri meskipun banyak orang di sekitar. Allah selalu mengetahui apa yang tidak bisa kamu ceritakan kepada siapa pun."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "masa depanku gimana, takut gagal",
+    "response_template": "Banyak orang pernah merasa takut tentang masa depan. Semoga Allah memberikan jalan yang terbaik dan menenangkan hatimu yang sedang gelisah."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "aku capek mikir, lelah hati",
+    "response_template": "Hati yang terlalu lama menanggung beban memang bisa lelah. Tidak apa-apa kalau hari ini kamu ingin beristirahat sejenak. Semoga Allah memberikan ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "aku gak tahu perasaanku sendiri",
+    "response_template": "Kadang hati memang sulit dipahami, bahkan oleh diri sendiri. Pelan-pelan saja, kamu tidak harus menemukan jawabannya sekarang."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Galau",
+    "keywords": "kenapa hidupku begini, aku bingung sama hidup",
+    "response_template": "Saat hati sedang galau, semuanya bisa terasa lebih berat dari biasanya. Semoga Allah memberikan petunjuk dan menemanimu melewati masa ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Depresi",
+    "keywords": "ya Allah capek, Allah aku lelah, ya Rabb, astaghfirullah aku capek, muslim depresi, ujian Allah, ikhlas tapi berat",
+    "response_template": "La hawla wa la quwwata illa billah... Aku ikut sedih mendengar apa yang sedang kamu rasakan. Kadang ujian memang terasa begitu berat, tapi semoga Allah selalu menguatkan hatimu sedikit demi sedikit. Kamu nggak harus memendam semuanya sendirian. Kalau ingin bercerita, aku akan mendengarkan dengan sepenuh hati. 🤍"
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Depresi",
+    "keywords": "aku lelah ya Allah, pengen nangis sama Allah, sholat tapi masih sedih, doa belum terkabul",
+    "response_template": "Aku paham rasanya ketika sudah berdoa tapi hati masih terasa berat. Tetaplah berharap kepada Allah, sambil memberi ruang bagi dirimu untuk beristirahat dan memulihkan hati. Kamu nggak sendirian. Ceritakan saja apa yang sedang mengganjal."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Depresi",
+    "keywords": "istighfar terus, sabar ya Allah, hidup berat menurut Islam, Allah tolong aku",
+    "response_template": "Semoga Allah melapangkan dadamu dan memberikan ketenangan sedikit demi sedikit. Menangis, lelah, atau merasa rapuh bukan berarti imanmu lemah. Kalau kamu ingin ditemani bercerita, aku siap mendengarkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Depresi",
+    "keywords": "aku gagal sebagai muslim, jauh dari Allah, merasa berdosa, malu sama Allah",
+    "response_template": "Setiap manusia pernah merasa jauh dan lelah. Pintu rahmat Allah selalu terbuka bagi hamba-Nya yang ingin kembali. Jangan terlalu keras pada dirimu sendiri. Ceritakan pelan-pelan, kita hadapi bersama."
+  },
+  {
+    "intent": "Respon_Keagamaan_Muslim_Depresi",
+    "keywords": "qadar Allah, takdir berat, kenapa Allah kasih ujian, hidup berat",
+    "response_template": "Aku tahu rasanya ketika takdir terasa begitu berat untuk dipahami. Semoga Allah memberikan hikmah dan kekuatan yang mungkin belum terlihat hari ini. Kamu tetap berharga, dan aku akan menemanimu mendengarkan setiap ceritamu."
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Kristen",
+    "keywords": "Shalom, Salam sejahtera, Tuhan Yesus memberkati, Tuhan berkati, God bless",
+    "response_template": "Shalom, {full_name}! Puji Tuhan, ketemu lagi nih. Lagi apa? Gimana hari ini? Kiranya damai sejahtera Tuhan selalu menaungi kamu ya…"
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Kristen",
+    "keywords": "Shalom, Salam sejahtera, Tuhan Yesus memberkati, Tuhan berkati, God bless",
+    "response_template": "Shalom, {full_name}! Puji Tuhan, ketemu lagi nih. Jadi, gimana perasaan kamu hari ini? Sukacita Tuhan masih penuh nggak di hati?"
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "puji Tuhan, Tuhan baik, haleluya, bersyukur kepada Tuhan",
+    "response_template": "Haleluya! Puji Tuhan, kabar ini sungguh membahagiakan. Tuhan memang baik dan penuh kasih. Ceritakan berkat yang kamu terima hari ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "doa dijawab Tuhan, mujizat, Tuhan menjawab doa",
+    "response_template": "Puji Tuhan, Dia mendengar setiap doa umat-Nya. Senang sekali mendengar bahwa Tuhan menjawab doamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "berkat, diberkati, rezeki, pekerjaan baru",
+    "response_template": "Haleluya, Tuhan memberkati pada waktu yang tepat. Semoga berkat ini menjadi sukacita yang terus bertambah dalam hidupmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "lulus, berhasil, prestasi, diterima",
+    "response_template": "Puji Tuhan atas keberhasilan yang kamu raih. Tuhan menyertai setiap usaha dan perjuanganmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "keluarga bahagia, anak lahir, rumah tangga",
+    "response_template": "Haleluya, sukacita keluarga adalah anugerah Tuhan yang indah. Semoga kasih Tuhan selalu menyertai keluargamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "sembuh, pemulihan, kesehatan membaik",
+    "response_template": "Puji Tuhan atas pemulihan yang terjadi. Tuhan sungguh baik dan memberikan kekuatan di saat yang tepat."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "pelayanan, gereja, ibadah, rohani",
+    "response_template": "Haleluya, sukacita dalam Tuhan adalah kekuatan. Semoga iman dan pelayananmu semakin bertumbuh."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "pernikahan, pasangan, hubungan diberkati",
+    "response_template": "Puji Tuhan atas kasih yang Dia berikan. Semoga hubunganmu selalu diberkati dan dipenuhi kasih Kristus."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "hari yang indah, bahagia, sukacita",
+    "response_template": "Haleluya, sukacita dari Tuhan adalah kekuatan yang luar biasa. Nikmati berkat yang Tuhan berikan hari ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Senang",
+    "keywords": "mimpi tercapai, cita-cita, keberhasilan",
+    "response_template": "Puji Tuhan, setiap langkah yang diserahkan kepada Tuhan akan dipimpin-Nya. Turut bersukacita atas pencapaianmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "sedih, sedih sekali, hati hancur",
+    "response_template": "Tuhan memahami hati yang sedang terluka. Kamu tidak sendirian menghadapi kesedihan ini. Jika ingin bercerita, aku siap mendengarkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "aku menangis, nangis, air mata",
+    "response_template": "Tuhan melihat setiap air mata yang jatuh. Semoga kasih-Nya memberikan penghiburan dan ketenangan dalam hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "gagal, kecewa, tidak berhasil",
+    "response_template": "Kadang jalan Tuhan berbeda dari yang kita harapkan. Tetap percaya bahwa Dia masih bekerja dalam hidupmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "putus cinta, patah hati, ditinggalkan",
+    "response_template": "Tuhan mengetahui rasa sakit di hatimu. Semoga kasih-Nya memulihkan dan menguatkanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "berduka, meninggal, kehilangan",
+    "response_template": "Kiranya Tuhan memberikan penghiburan dan kekuatan bagi dirimu dan keluargamu di masa berduka ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "kesepian, sendirian",
+    "response_template": "Saat merasa sendiri, ingatlah bahwa Tuhan selalu menyertaimu dan tidak meninggalkan anak-anak-Nya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "lelah hidup, capek, berat",
+    "response_template": "Tuhan memahami beban yang kamu pikul. Semoga kamu memperoleh kekuatan dan pengharapan baru."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "aku tidak berarti, tidak berguna",
+    "response_template": "Di mata Tuhan, kamu berharga dan dikasihi. Jangan biarkan kesedihan membuatmu melupakan nilai dirimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "doaku tidak dijawab",
+    "response_template": "Kadang jawaban Tuhan hadir dalam waktu yang tidak kita mengerti. Tetaplah berharap dan percaya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Sedih",
+    "keywords": "kenapa Tuhan, kenapa aku",
+    "response_template": "Pertanyaan itu wajar saat hati terluka. Semoga Tuhan memberikan penghiburan dan hikmat untuk melewati masa sulit ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "marah, kesal, emosi",
+    "response_template": "Tuhan memahami perasaan marah yang sedang kamu alami. Semoga Dia memberikan ketenangan dan hikmat dalam menghadapi situasi ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "naik darah, emosi banget",
+    "response_template": "Saat hati sedang panas, Tuhan dapat memberikan damai sejahtera yang menenangkan. Semoga kamu memperoleh ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "dikhianati, dibohongi",
+    "response_template": "Pengkhianatan memang menyakitkan. Tuhan memahami luka yang kamu rasakan dan dapat memulihkan hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "tidak adil, diperlakukan buruk",
+    "response_template": "Tuhan melihat setiap ketidakadilan yang terjadi. Semoga kamu diberikan kekuatan dan pengharapan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "bertengkar, konflik",
+    "response_template": "Semoga kasih Tuhan membantu menghadirkan perdamaian dan pengertian di tengah konflik yang terjadi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "kesal sama orang",
+    "response_template": "Perasaan marah adalah hal yang manusiawi. Semoga Tuhan memberi hikmat agar kamu dapat merespons dengan bijaksana."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "marah sama keluarga",
+    "response_template": "Kiranya Tuhan menolong keluargamu menemukan damai dan kasih di tengah perbedaan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "muak, jengkel, capek",
+    "response_template": "Saat hati terasa lelah dan penuh kejengkelan, semoga Tuhan memberikan kekuatan dan ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "dendam, benci",
+    "response_template": "Tuhan mengajarkan kasih dan pengampunan. Semoga hatimu perlahan memperoleh damai."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Marah",
+    "keywords": "kenapa orang jahat",
+    "response_template": "Pertanyaan itu wajar ketika hati terluka. Semoga Tuhan memberikan penghiburan dan hikmat dalam menghadapi situasi ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "bingung, gak tau harus gimana",
+    "response_template": "Tuhan memahami kebingungan yang sedang kamu rasakan. Kamu tidak harus memikirkan semuanya sendirian. Kalau mau, ceritakan apa yang sedang membuatmu buntu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "aku ragu, bimbang",
+    "response_template": "Rasa ragu itu manusiawi. Kadang kita tidak langsung melihat jalan yang Tuhan sediakan. Tidak apa-apa kalau saat ini kamu masih mencari jawabannya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "keputusan sulit, harus pilih",
+    "response_template": "Tuhan memahami beratnya sebuah pilihan. Pelan-pelan saja, tidak semua keputusan harus diambil hari ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "takut masa depan",
+    "response_template": "Masa depan memang tidak selalu jelas, tetapi Tuhan tetap berjalan bersamamu. Apa yang paling membuatmu khawatir saat ini?"
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "takut salah",
+    "response_template": "Ketakutan itu menunjukkan bahwa kamu peduli terhadap keputusanmu. Semoga Tuhan memberikan hikmat dan ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "kehilangan arah",
+    "response_template": "Saat arah hidup terasa kabur, Tuhan tetap mengetahui jalanmu. Kamu tidak harus melewati semuanya sendirian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "doaku belum dijawab",
+    "response_template": "Kadang jawaban Tuhan datang dengan cara dan waktu yang berbeda. Tetaplah berharap dan jangan menyerah."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "bingung soal pasangan",
+    "response_template": "Hubungan memang sering membuat hati dan pikiran bercampur. Semoga Tuhan memberikan kebijaksanaan untuk mengambil keputusan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "bingung masa depan",
+    "response_template": "Tidak apa-apa kalau saat ini kamu belum tahu harus ke mana. Banyak orang pernah berada di titik yang sama."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Bingung",
+    "keywords": "aku gak ngerti hidupku",
+    "response_template": "Terkadang kita memang tidak memahami alasan di balik perjalanan hidup. Tuhan tetap menyertaimu, bahkan ketika semuanya terasa membingungkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "galau, gelisah, hati gak tenang",
+    "response_template": "Tuhan memahami hati yang sedang gelisah. Kamu tidak harus menyimpan semuanya sendirian. Kalau mau cerita, aku siap mendengarkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "overthinking, kepikiran terus",
+    "response_template": "Kadang pikiran yang terlalu penuh membuat hati ikut lelah. Semoga damai Tuhan perlahan menenangkan pikiranmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "galau soal cinta",
+    "response_template": "Perasaan memang tidak selalu mudah dipahami. Semoga Tuhan memberikan hikmat dan ketenangan dalam hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "dia berubah, dia menjauh",
+    "response_template": "Perubahan seseorang memang bisa menyakitkan. Tuhan mengetahui isi hatimu dan setiap air mata yang mungkin tidak dilihat orang lain."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "takut kehilangan",
+    "response_template": "Ketakutan itu manusiawi. Semoga Tuhan memberikan penghiburan dan ketenangan dalam hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "aku sendirian",
+    "response_template": "Saat kamu merasa sendirian, Tuhan tetap menyertai mu. Kamu tidak harus melewati semuanya sendiri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "masa depanku gimana",
+    "response_template": "Tidak semua jalan hidup terlihat jelas saat ini. Tuhan tetap berjalan bersamamu, bahkan ketika kamu belum melihat arahnya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "aku lelah",
+    "response_template": "Kamu tidak harus kuat setiap saat. Semoga Tuhan memberikan kekuatan dan ketenangan bagi hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "aku gak ngerti perasaanku",
+    "response_template": "Kadang hati memang membingungkan. Beri dirimu waktu untuk memahami apa yang sedang kamu rasakan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Galau",
+    "keywords": "hidupku berantakan",
+    "response_template": "Ketika semuanya terasa kacau, Tuhan tetap hadir. Kamu boleh berhenti sejenak dan bernapas."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Depresi",
+    "keywords": "Tuhan Yesus aku capek, Yesus tolong aku, Tuhan aku lelah, Kristen depresi",
+    "response_template": "Aku ikut prihatin mendengar apa yang kamu alami. Yesus memahami hati yang terluka dan mereka yang sedang berbeban berat. Kamu nggak harus menyembunyikan rasa sedihmu. Kalau ingin bercerita, aku akan mendengarkan dengan penuh perhatian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Depresi",
+    "keywords": "aku kecewa sama Tuhan, doa belum dijawab, Tuhan diam, Tuhan kenapa",
+    "response_template": "Kadang kita merasa doa belum dijawab dan Tuhan terasa diam. Perasaan itu valid untuk diungkapkan. Tetaplah berharap, dan izinkan dirimu beristirahat sejenak dari semua beban. Aku ada disini menemanimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Depresi",
+    "keywords": "Tuhan kasih kekuatan, aku lemah Tuhan, pengen menyerah Tuhan",
+    "response_template": "Tidak apa-apa kalau hari ini kamu merasa lemah. Dalam banyak momen, justru di saat seperti itulah kita belajar bersandar kepada Tuhan. Ceritakan saja apa yang sedang terjadi. Kamu tidak sendiri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Depresi",
+    "keywords": "merasa berdosa, Tuhan ampuni aku, aku gagal sebagai orang Kristen",
+    "response_template": "Kasih Tuhan tidak berhenti hanya karena kamu sedang merasa gagal. Kamu tetap berharga di hadapan-Nya. Kalau ada yang ingin kamu ceritakan, aku siap mendengarkan tanpa menghakimi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Kristen_Depresi",
+    "keywords": "Mazmur, firman Tuhan, butuh penguatan firman",
+    "response_template": "Semoga firman Tuhan menjadi penguat di tengah hatimu yang sedang lelah. Kamu tidak harus memikul semuanya sendirian. Aku siap menemanimu melewati percakapan ini dengan tenang."
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Khatolik",
+    "keywords": "Salam Maria, Ave Maria, Shalom dalam Kristus, Tuhan Yesus dan Bunda Maria",
+    "response_template": "Shalom, {full_name}! Salam sejahtera dalam kasih Kristus. Semoga rahmat Tuhan dan perlindungan Bunda Maria selalu menyertaimu. Lagi apa nih?"
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Khatolik",
+    "keywords": "Salam Maria, Ave Maria, Shalom dalam Kristus, Tuhan Yesus dan Bunda Maria",
+    "response_template": "Shalom, {full_name}! Salam sejahtera dalam kasih Kristus. Semoga rahmat Tuhan dan perlindungan Bunda Maria selalu menyertaimu. Gimana perasaanmu sekarang? Apakah damai Kristus masih tinggal di hatimu?"
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "puji Tuhan, syukur Tuhan, rahmat Tuhan",
+    "response_template": "Puji Tuhan! Sukacita ini adalah rahmat yang indah. Mari bersyukur atas kebaikan Tuhan yang menyertaimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "Bunda Maria, doa novena, doa terkabul",
+    "response_template": "Puji Tuhan, dan semoga Bunda Maria terus mendampingi langkahmu. Senang sekali mendengar kabar baik ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "berkat, anugerah, rahmat",
+    "response_template": "Sukacita yang kamu rasakan adalah bagian dari rahmat Tuhan. Semoga hidupmu semakin dipenuhi berkat."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "lulus, berhasil, prestasi",
+    "response_template": "Puji Tuhan atas pencapaianmu. Semoga Tuhan terus membimbing langkahmu menuju masa depan yang baik."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "keluarga, anak, rumah tangga",
+    "response_template": "Keluarga adalah karunia Tuhan yang berharga. Semoga sukacita ini terus tumbuh dalam keluargamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "sembuh, pemulihan, kesehatan",
+    "response_template": "Puji Tuhan atas kesehatan dan pemulihan yang diberikan. Semoga kasih Tuhan selalu menyertaimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "gereja, pelayanan, misa",
+    "response_template": "Sukacita dalam pelayanan adalah anugerah yang indah. Semoga imanmu semakin bertumbuh."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "menikah, pasangan, tunangan",
+    "response_template": "Puji Tuhan atas kasih yang diberikan. Semoga hubunganmu selalu dipenuhi cinta dan penyertaan Tuhan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "bahagia, sukacita, hati senang",
+    "response_template": "Sukacita adalah salah satu karunia Roh Kudus. Senang sekali mendengar kabar baikmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Senang",
+    "keywords": "impian tercapai, cita-cita, sukses",
+    "response_template": "Puji Tuhan atas semua rahmat yang diberikan. Semoga keberhasilan ini menjadi awal dari berkat yang lebih besar."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "sedih, hati terluka, kecewa",
+    "response_template": "Tuhan memahami kesedihanmu. Semoga damai Kristus dan kasih Tuhan menghibur hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "nangis, menangis, air mata",
+    "response_template": "Tidak apa jika kamu menangis. Semoga Tuhan dan Bunda Maria menemanimu dalam kesedihan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "gagal, tidak berhasil",
+    "response_template": "Kegagalan bukan akhir perjalanan. Tuhan masih memiliki rencana yang baik untuk hidupmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "putus cinta, patah hati",
+    "response_template": "Semoga kasih Tuhan memulihkan luka di hatimu dan memberimu kekuatan menjalani hari-hari berikutnya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "kehilangan, berduka, meninggal",
+    "response_template": "Semoga Tuhan memberikan penghiburan dan Bunda Maria mendampingi keluargamu dalam masa duka."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "sendiri, kesepian",
+    "response_template": "Kamu tidak sendirian. Tuhan selalu menyertai dan mengasihi setiap anak-Nya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "lelah, capek hidup",
+    "response_template": "Semoga Tuhan memberikan ketenangan dan kekuatan untuk menjalani beban yang sedang kamu hadapi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "tidak berharga, tidak berguna",
+    "response_template": "Kamu tetap berharga di hadapan Tuhan. Jangan menyerah pada penilaian buruk terhadap dirimu sendiri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "doa tidak dikabulkan",
+    "response_template": "Kadang Tuhan bekerja dengan cara yang tidak langsung kita pahami. Tetaplah berharap dan berdoa."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Sedih",
+    "keywords": "kenapa hidup begini",
+    "response_template": "Semoga Tuhan memberimu terang dan pengharapan di tengah masa yang sulit ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "marah, emosi, kesal",
+    "response_template": "Tuhan memahami kemarahan yang sedang kamu rasakan. Semoga damai Kristus menenangkan hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "naik darah, emosi banget",
+    "response_template": "Ketika emosi memuncak, semoga Tuhan memberikan ketenangan dan kebijaksanaan dalam mengambil keputusan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "dibohongi, dikhianati",
+    "response_template": "Luka karena pengkhianatan memang berat. Semoga Tuhan dan Bunda Maria menguatkan hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "tidak adil, dizalimi",
+    "response_template": "Tuhan melihat setiap ketidakadilan yang terjadi. Semoga kamu diberi kekuatan dan pengharapan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "bertengkar, konflik",
+    "response_template": "Semoga kasih Kristus membantu menghadirkan rekonsiliasi dan kedamaian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "marah sama pasangan",
+    "response_template": "Hubungan memang memiliki tantangan. Semoga kasih dan pengertian membantu menyelesaikan masalah ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "kesal sama keluarga",
+    "response_template": "Semoga Tuhan mempersatukan kembali hati yang sedang terluka dalam keluargamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "jengkel, muak",
+    "response_template": "Ketika hati terasa penuh kejengkelan, semoga damai Tuhan memberikan ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "benci, dendam",
+    "response_template": "Semoga kasih Tuhan membantu mengurangi luka dan menghadirkan pengampunan dalam hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Marah",
+    "keywords": "kenapa orang jahat",
+    "response_template": "Semoga Tuhan memberikan hikmat dan kekuatan dalam menghadapi pengalaman yang menyakitkan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "bingung, pusing, buntu",
+    "response_template": "Tidak apa-apa jika saat ini hatimu sedang penuh pertanyaan. Tuhan memahami isi hati yang sedang kebingungan. Cerita saja pelan-pelan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "aku ragu",
+    "response_template": "Keraguan adalah bagian dari perjalanan manusia. Semoga Tuhan dan Bunda Maria menemani langkahmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "pilihan sulit",
+    "response_template": "Tidak semua keputusan harus segera diambil. Beri dirimu waktu untuk berpikir dan berdoa."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "masa depanku gimana",
+    "response_template": "Kecemasan terhadap masa depan memang berat. Semoga Tuhan memberimu damai dan terang."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "aku takut salah",
+    "response_template": "Tuhan memahami ketakutanmu. Semoga kamu diberi kebijaksanaan dalam mengambil keputusan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "kehilangan arah",
+    "response_template": "Saat hidup terasa gelap, Tuhan tetap hadir menemani langkahmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "doa belum dijawab",
+    "response_template": "Mungkin saat ini jawabannya belum terlihat, tetapi Tuhan tetap mendengarkan doa-doamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "bingung soal cinta",
+    "response_template": "Perasaan memang tidak selalu mudah dipahami. Semoga kasih Tuhan membimbing hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "bingung kuliah dan kerja",
+    "response_template": "Tidak semua orang langsung menemukan jalannya. Beri dirimu kesempatan untuk bertumbuh."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Bingung",
+    "keywords": "aku gak ngerti hidup",
+    "response_template": "Kadang hidup membawa pertanyaan yang belum bisa dijawab hari ini. Tuhan tetap menyertaimu dalam proses itu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "galau, resah, hati gelisah",
+    "response_template": "Tidak apa-apa jika hatimu sedang tidak tenang. Tuhan memahami setiap pergumulan yang sedang kamu rasakan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "overthinking",
+    "response_template": "Pikiran yang terlalu penuh memang melelahkan. Semoga damai Kristus menenangkan hatimu sedikit demi sedikit."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "galau cinta",
+    "response_template": "Perasaan memang tidak selalu mudah dipahami. Semoga Tuhan dan Bunda Maria membimbing hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "dia berubah",
+    "response_template": "Perubahan dalam hubungan memang dapat membuat hati terluka. Kamu tidak sendirian menghadapi perasaan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "takut ditinggal",
+    "response_template": "Ketakutan kehilangan orang yang disayang memang berat. Semoga Tuhan memberikan ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "kesepian",
+    "response_template": "Saat hati merasa sepi, Tuhan tetap hadir menemani langkahmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "takut masa depan",
+    "response_template": "Masa depan memang tidak selalu jelas. Tidak apa-apa kalau kamu masih mencari jalanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "lelah hati",
+    "response_template": "Kalau hatimu lelah, tidak apa-apa untuk beristirahat sejenak. Kamu tidak harus memikul semuanya sendiri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "aku bingung sama diriku",
+    "response_template": "Mengenali diri sendiri juga membutuhkan waktu. Beri dirimu ruang untuk bertumbuh."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Galau",
+    "keywords": "aku gak ngerti hidupku",
+    "response_template": "Kadang kita tidak mengerti mengapa hidup berjalan seperti ini. Tuhan tetap berjalan bersamamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Depresi",
+    "keywords": "Tuhan Yesus kasihanilah aku, Bunda Maria, Katolik sedih, Rosario",
+    "response_template": "Aku ikut merasakan kesedihanmu. Semoga Tuhan Yesus memberikan damai, dan semoga doa-doa yang kamu panjatkan menjadi sumber pengharapan. Kamu nggak sendirian, ya. Cerita saja pelan-pelan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Depresi",
+    "keywords": "aku putus asa, doa rosario, misa, merasa jauh dari Tuhan",
+    "response_template": "Saat hati terasa gelap, bukan berarti terang sudah hilang. Semoga Tuhan tetap menyertai setiap langkahmu, walau saat ini kamu belum bisa merasakannya. Aku akan menemanimu mendengarkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Depresi",
+    "keywords": "Bunda Maria doakan aku, hati hancur, Katolik depresi",
+    "response_template": "Semoga kasih Tuhan dan penghiburan melalui doa membawa sedikit ketenangan di hatimu. Kamu tidak harus kuat sendirian. Aku siap menjadi teman mendengarkanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Depresi",
+    "keywords": "aku berdosa, pengakuan dosa, Tuhan ampuni",
+    "response_template": "Setiap orang pernah jatuh dan merasa bersalah. Jangan kehilangan harapan. Kasih Tuhan selalu mengajak kita untuk bangkit kembali. Ceritakan saja apa yang sedang kamu rasakan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Katolik_Depresi",
+    "keywords": "lilin doa, kapel, adorasi, hati gelisah",
+    "response_template": "Semoga damai Tuhan perlahan memenuhi hatimu seperti nyala lilin yang tetap bersinar di tengah gelap. Aku di sini untuk menemanimu berbagi cerita."
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Budhha",
+    "keywords": "Namo Buddhaya, Salam metta, Semoga semua makhluk berbahagia, Mettā, Salam pencerahan",
+    "response_template": "Namo Buddhaya, {full_name}! Semoga cinta kasih dan ketenangan batin selalu bersamamu. Apa kabar hari ini?"
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Budhha",
+    "keywords": "Namo Buddhaya, Salam metta, Semoga semua makhluk berbahagia, Mettā, Salam pencerahan",
+    "response_template": "Namo Buddhaya, {full_name}! Semoga cinta kasih dan ketenangan batin selalu bersamamu. Gimana perasaanmu saat ini? Hatimu masih diliputi mettā kan?"
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "bersyukur, damai, bahagia, tenang",
+    "response_template": "Sungguh membahagiakan mendengar kabar ini. Semoga kebahagiaan yang muncul membawa kedamaian dan kebijaksanaan dalam hidupmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "karma baik, buah karma, hasil baik",
+    "response_template": "Kebaikan yang ditanam sering kali menghasilkan buah yang membahagiakan. Semoga kebajikanmu terus bertumbuh."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "lulus, berhasil, prestasi",
+    "response_template": "Usaha yang dilakukan dengan tekun akan menghasilkan buah yang baik. Selamat atas keberhasilanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "damai hati, tenang, lega",
+    "response_template": "Kedamaian batin adalah kebahagiaan yang berharga. Semoga hatimu terus dipenuhi ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "keluarga bahagia, anak, keluarga",
+    "response_template": "Kebahagiaan bersama keluarga adalah berkah yang indah. Semoga cinta kasih selalu hadir di dalam keluargamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "sehat, sembuh, pulih",
+    "response_template": "Kesehatan adalah anugerah yang sangat berharga. Semoga tubuh dan pikiranmu selalu berada dalam keseimbangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "meditasi, retret, praktik dhamma",
+    "response_template": "Sungguh menyenangkan mendengar perjalanan batinmu berkembang. Semoga Dhamma terus membimbing hidupmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "kebaikan, berbagi, menolong",
+    "response_template": "Kebahagiaan yang lahir dari perbuatan baik adalah kebahagiaan yang mendalam. Teruslah menebarkan kebajikan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "hari bahagia, senang sekali, gembira",
+    "response_template": "Semoga kebahagiaan ini disertai kesadaran dan kedamaian sehingga membawa manfaat bagi dirimu dan orang lain."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Senang",
+    "keywords": "impian tercapai, tujuan tercapai",
+    "response_template": "Usaha yang tekun dan pikiran yang baik dapat menghasilkan pencapaian yang membahagiakan. Selamat atas keberhasilanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "sedih, kecewa, hati sakit",
+    "response_template": "Kesedihan adalah bagian dari kehidupan manusia. Semoga kamu dapat menemukan ketenangan dan menerima perasaan ini dengan lembut."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "menangis, nangis",
+    "response_template": "Air mata adalah bagian dari pengalaman manusia. Semoga kesedihan ini perlahan berubah menjadi kedamaian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "gagal, tidak berhasil",
+    "response_template": "Kegagalan adalah guru yang membantu kita bertumbuh. Semoga pengalaman ini membawa kebijaksanaan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "putus cinta, kehilangan pasangan",
+    "response_template": "Perpisahan memang menyakitkan. Semoga kamu menemukan ketenangan dan mampu melepaskan penderitaan sedikit demi sedikit."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "kehilangan, meninggal",
+    "response_template": "Segala sesuatu bersifat tidak kekal. Semoga kamu memperoleh ketenangan dalam menghadapi kehilangan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "kesepian, sendiri",
+    "response_template": "Kesepian dapat menjadi kesempatan untuk mengenal diri dengan lebih baik. Semoga kamu menemukan kedamaian batin."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "lelah hidup, capek",
+    "response_template": "Istirahatkan hati dan pikiranmu sejenak. Semoga ketenangan batin perlahan hadir dalam dirimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "aku tidak berharga",
+    "response_template": "Setiap makhluk memiliki nilai dan kesempatan untuk berkembang. Semoga kamu dapat melihat kebaikan dalam dirimu sendiri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "hidup tidak adil",
+    "response_template": "Penderitaan adalah bagian dari kehidupan, namun dari sana juga lahir kebijaksanaan dan pertumbuhan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Sedih",
+    "keywords": "kenapa aku, kenapa begini",
+    "response_template": "Pertanyaan itu muncul ketika hati sedang terluka. Semoga kamu dapat menemukan ketenangan dan pemahaman sedikit demi sedikit."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "marah, kesal, emosi",
+    "response_template": "Kemarahan adalah emosi yang dapat muncul dalam diri setiap manusia. Semoga kamu dapat mengamati perasaan ini dengan kesadaran dan ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "naik darah, pengen ngamuk",
+    "response_template": "Saat emosi memuncak, bernapas dengan tenang dan menyadari perasaan yang muncul dapat membantu menenangkan pikiran."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "dikhianati, dibohongi",
+    "response_template": "Rasa sakit akibat pengkhianatan memang berat. Semoga kamu dapat menemukan kebijaksanaan dan kedamaian di balik pengalaman ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "tidak adil",
+    "response_template": "Ketidakadilan dapat memunculkan kemarahan. Semoga kamu tetap menjaga kejernihan pikiran dalam menghadapi situasi tersebut."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "bertengkar, konflik",
+    "response_template": "Konflik sering muncul dari penderitaan dan kesalahpahaman. Semoga kamu menemukan jalan menuju kedamaian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "kesal sama orang",
+    "response_template": "Perasaan jengkel dapat menjadi kesempatan untuk melatih kesabaran dan welas asih."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "dendam, benci",
+    "response_template": "Melepaskan kebencian dapat membantu hati menjadi lebih damai. Semoga kamu menemukan ketenangan batin."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "muak, jengkel",
+    "response_template": "Istirahatkan pikiran sejenak dan amati perasaan yang muncul. Semoga kejernihan hati perlahan hadir."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "orang menyebalkan",
+    "response_template": "Setiap orang memiliki penderitaannya sendiri. Semoga kamu dapat menghadapi situasi ini dengan kebijaksanaan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Marah",
+    "keywords": "kenapa orang jahat",
+    "response_template": "Perbuatan yang tidak baik sering berasal dari ketidaktahuan dan penderitaan. Semoga kamu tetap menjaga kedamaian batin."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "bingung, pusing, buntu",
+    "response_template": "Tidak apa-apa jika pikiran sedang penuh dan membingungkan. Cobalah memberi ruang bagi dirimu untuk berhenti sejenak dan bernapas dengan tenang."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "ragu, bimbang",
+    "response_template": "Keraguan adalah bagian dari perjalanan batin manusia. Tidak perlu memaksa diri menemukan jawaban saat ini juga."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "keputusan sulit",
+    "response_template": "Ketika pikiran terlalu ramai, jawaban sering kali sulit terlihat. Pelan-pelan saja, kamu tidak harus segera memutuskan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "takut masa depan",
+    "response_template": "Masa depan memang belum pasti. Yang dapat kita lakukan adalah hadir sepenuhnya pada langkah yang sedang dijalani hari ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "takut salah",
+    "response_template": "Setiap pengalaman dapat menjadi guru. Tidak ada perjalanan yang benar-benar sia-sia."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "kehilangan arah",
+    "response_template": "Kadang kita tersesat bukan karena gagal, melainkan karena sedang mencari jalan baru."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "aku gak tahu mau apa",
+    "response_template": "Tidak mengetahui semuanya juga tidak apa-apa. Beri dirimu waktu untuk memahami apa yang benar-benar kamu butuhkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "bingung soal cinta",
+    "response_template": "Perasaan dapat membuat pikiran menjadi ramai. Semoga kamu menemukan kejernihan dan ketenangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "bingung karier",
+    "response_template": "Banyak orang pernah berada di titik ini. Pelan-pelan, satu langkah kecil pun tetap sebuah kemajuan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Bingung",
+    "keywords": "aku gak ngerti hidup",
+    "response_template": "Ketika hidup terasa membingungkan, mungkin ini saatnya mendengarkan dirimu sendiri dengan lebih lembut."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "galau, gelisah",
+    "response_template": "Tidak apa-apa jika pikiran dan hati sedang tidak tenang. Cobalah memberi ruang bagi dirimu untuk bernapas dan beristirahat."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "overthinking",
+    "response_template": "Pikiran yang terus berputar dapat membuat hati lelah. Semoga kamu menemukan ketenangan sedikit demi sedikit."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "galau soal cinta",
+    "response_template": "Perasaan memang sering membuat pikiran menjadi ramai. Tidak apa-apa jika kamu belum menemukan jawabannya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "dia menjauh",
+    "response_template": "Perubahan hubungan dapat membawa kesedihan. Semoga kamu tetap lembut terhadap dirimu sendiri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "takut kehilangan",
+    "response_template": "Ketakutan itu manusiawi. Semoga kamu dapat menemukan kedamaian di tengah ketidakpastian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "kesepian",
+    "response_template": "Kesepian kadang mengajarkan kita untuk lebih mengenal diri sendiri. Tetaplah bersikap baik kepada dirimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "masa depan",
+    "response_template": "Masa depan memang belum pasti. Fokus pada satu langkah kecil hari ini pun sudah cukup."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "lelah hati",
+    "response_template": "Hati yang lelah juga membutuhkan istirahat. Kamu tidak harus selalu kuat."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "aku bingung sama diri sendiri",
+    "response_template": "Mengenali diri adalah perjalanan yang panjang. Pelan-pelan saja, kamu tidak terlambat."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Galau",
+    "keywords": "hidupku berantakan",
+    "response_template": "Dalam kekacauan pun, ketenangan tetap dapat ditemukan sedikit demi sedikit."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Depresi",
+    "keywords": "Namo Buddhaya, Buddha, hidup penuh dukkha, Buddha sedih",
+    "response_template": "Namo Buddhaya. Aku ikut prihatin mendengar apa yang sedang kamu alami. Dalam ajaran Buddha, penderitaan adalah bagian dari kehidupan, namun bukan berarti harus dijalani sendirian. Aku siap mendengarkanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Depresi",
+    "keywords": "batin gelisah, mindfulness, meditasi, hati gak tenang",
+    "response_template": "Saat batin sedang gelisah, tidak apa-apa untuk berhenti sejenak dan memberi ruang bagi dirimu sendiri. Semoga ketenangan perlahan hadir. Kalau ingin bercerita, aku siap menemani."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Depresi",
+    "keywords": "aku menderita, dukkha, hidup berat",
+    "response_template": "Aku tahu rasa ini tidak mudah. Semoga kamu bisa menghadapi penderitaan ini dengan welas asih kepada dirimu sendiri. Kamu tidak sendiri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Depresi",
+    "keywords": "semoga semua makhluk berbahagia, sedih banget",
+    "response_template": "Semoga hatimu perlahan dipenuhi kedamaian dan welas asih, termasuk kepada dirimu sendiri. Aku di sini kalau kamu ingin berbagi cerita."
+  },
+  {
+    "intent": "Respon_Keagamaan_Buddha_Depresi",
+    "keywords": "aku kehilangan arah Buddha, ingin tenang",
+    "response_template": "Perjalanan hidup memang penuh perubahan. Semoga kamu menemukan kembali ketenangan sedikit demi sedikit. Kita bisa membicarakan apa pun yang sedang membebanimu."
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Hindu",
+    "keywords": "Om Swastiastu, Shanti, Om Shanti Shanti Shanti, Salam sejahtera, Astungkara, Svaha",
+    "response_template": "Om Swastiastu, {full_name}! Semoga cinta kasih dan ketenangan batin selalu bersamamu. Apa kabar hari ini?"
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Hindu",
+    "keywords": "Om Swastiastu, Shanti, Om Shanti Shanti Shanti, Salam sejahtera, Astungkara, Svaha",
+    "response_template": "Om Swastiastu, {full_name}! Semoga cinta kasih dan ketenangan batin selalu bersamamu. Bagaimana perasaanmu hari ini? Apakah pikiranmu sudah mencapai kedamaian (shanti)?"
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "Om Swastiastu, syukur, anugerah Ida Sang Hyang Widhi",
+    "response_template": "Om Swastiastu. Sungguh membahagiakan mendengar kabar ini. Semoga Ida Sang Hyang Widhi Wasa senantiasa melimpahkan anugerah dan kebahagiaan kepadamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "karma baik, hasil karma",
+    "response_template": "Kebaikan yang dilakukan akan menghasilkan karma yang baik. Semoga kebahagiaan ini membawa kedamaian dan kesejahteraan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "berhasil, lulus, prestasi",
+    "response_template": "Usaha, doa, dan dharma yang dijalankan akhirnya membuahkan hasil. Selamat atas pencapaianmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "keluarga, rumah tangga, anak",
+    "response_template": "Keharmonisan keluarga merupakan kebahagiaan yang sangat berharga. Semoga keluargamu selalu diberkahi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "sembuh, sehat, pulih",
+    "response_template": "Kesehatan adalah karunia yang sangat berarti. Semoga tubuh dan pikiranmu selalu berada dalam keseimbangan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "ibadah, sembahyang, pura",
+    "response_template": "Sungguh membahagiakan mendengar perjalanan spiritualmu. Semoga dharma selalu membimbing hidupmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "rezeki, usaha lancar, pekerjaan",
+    "response_template": "Semoga anugerah dan keberhasilan yang kamu terima membawa kesejahteraan bagi dirimu dan orang-orang di sekitarmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "pernikahan, pasangan",
+    "response_template": "Semoga hubunganmu dipenuhi cinta kasih dan keharmonisan sesuai nilai dharma."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "bahagia, damai, hati tenang",
+    "response_template": "Kebahagiaan sejati lahir dari keseimbangan hati dan pikiran. Semoga kedamaian selalu menyertaimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Senang",
+    "keywords": "cita-cita tercapai, impian tercapai",
+    "response_template": "Semoga keberhasilan ini menjadi jalan menuju kehidupan yang lebih baik dan penuh makna."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "sedih, kecewa, hati terluka",
+    "response_template": "Om Shanti Shanti Shanti Om. Semoga Ida Sang Hyang Widhi memberikan ketenangan dan kekuatan dalam kesedihanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "nangis, menangis",
+    "response_template": "Air mata adalah bagian dari perjalanan hidup. Semoga ketenangan dan kedamaian segera menyertaimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "gagal, kecewa, tidak berhasil",
+    "response_template": "Setiap pengalaman adalah bagian dari perjalanan karma dan pembelajaran hidup. Tetaplah kuat menjalani dharma."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "putus cinta, patah hati",
+    "response_template": "Semoga hatimu memperoleh ketenangan dan kekuatan untuk melanjutkan perjalanan hidup."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "kehilangan, berduka",
+    "response_template": "Semoga Ida Sang Hyang Widhi memberikan kedamaian dan kekuatan dalam menghadapi kehilangan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "sendiri, kesepian",
+    "response_template": "Dalam keheningan sering kali kita menemukan kekuatan batin. Semoga kedamaian menyertaimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "lelah, capek hidup",
+    "response_template": "Semoga kamu memperoleh ketenangan pikiran dan kekuatan untuk menjalani masa sulit ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "tidak berguna, tidak berharga",
+    "response_template": "Setiap jiwa memiliki makna dan tujuan dalam kehidupan. Jangan kehilangan harapan terhadap dirimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "kenapa hidup begini",
+    "response_template": "Perjalanan hidup memiliki banyak pelajaran. Semoga kamu menemukan hikmah dan kekuatan dari pengalaman ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Sedih",
+    "keywords": "hidup berat",
+    "response_template": "Om Shanti. Semoga kedamaian dan kekuatan batin selalu menyertai langkahmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "marah, kesal, emosi",
+    "response_template": "Om Shanti Shanti Shanti Om. Semoga ketenangan dan kedamaian membantu menenangkan hati yang sedang marah."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "naik darah, emosi banget",
+    "response_template": "Saat amarah muncul, semoga kamu memperoleh ketenangan pikiran dan mampu bertindak dengan bijaksana."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "dibohongi, dikhianati",
+    "response_template": "Pengkhianatan memang menyakitkan. Semoga kamu diberikan kekuatan dan kedamaian dalam menghadapinya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "tidak adil",
+    "response_template": "Setiap tindakan memiliki konsekuensi karma. Semoga kamu tetap teguh menjalankan dharma."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "bertengkar, konflik",
+    "response_template": "Semoga keharmonisan dan kebijaksanaan membantu menyelesaikan konflik yang sedang terjadi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "kesal sama orang",
+    "response_template": "Amarah adalah bagian dari kehidupan manusia. Semoga ketenangan batin membimbing langkahmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "marah sama keluarga",
+    "response_template": "Semoga keharmonisan keluarga kembali terjalin dan hati kalian dipenuhi kedamaian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "jengkel, muak",
+    "response_template": "Ketika hati dipenuhi kejengkelan, semoga kedamaian dan kesabaran kembali hadir."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "benci, dendam",
+    "response_template": "Semoga kamu memperoleh kekuatan untuk melepaskan kebencian dan menemukan kedamaian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Marah",
+    "keywords": "kenapa orang jahat",
+    "response_template": "Semoga kebijaksanaan membantu memahami keadaan dan tetap menjalani dharma dengan baik."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "bingung, buntu",
+    "response_template": "Om Shanti. Tidak apa-apa jika pikiranmu sedang penuh. Semoga ketenangan dan kebijaksanaan perlahan hadir dalam dirimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "ragu, bimbang",
+    "response_template": "Keraguan adalah bagian dari perjalanan hidup. Beri dirimu waktu untuk memahami apa yang benar-benar diinginkan hati."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "pilihan sulit",
+    "response_template": "Kadang jalan dharma tidak langsung terlihat. Pelan-pelan saja, kamu tidak harus memutuskan semuanya hari ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "takut masa depan",
+    "response_template": "Masa depan memang belum terlihat, tetapi setiap langkah kecil tetap berarti."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "takut salah",
+    "response_template": "Kesalahan dan pengalaman sering menjadi guru yang membantu kita bertumbuh."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "kehilangan arah",
+    "response_template": "Saat arah terasa hilang, beristirahat sejenak juga merupakan bagian dari perjalanan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "aku gak tahu harus apa",
+    "response_template": "Tidak apa-apa jika saat ini kamu belum menemukan jawabannya. Beri dirimu ruang untuk bertumbuh."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "bingung soal cinta",
+    "response_template": "Perasaan sering membuat hati menjadi rumit. Semoga kedamaian membantu menemukan jalan yang terbaik."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "bingung kerja",
+    "response_template": "Banyak orang mengalami hal yang sama. Semoga kebijaksanaan dan ketenangan membimbing keputusanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Bingung",
+    "keywords": "hidupku kacau",
+    "response_template": "Om Shanti. Di tengah kekacauan, semoga kedamaian perlahan hadir dalam pikiran dan hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Galau",
+    "keywords": "galau,bimbang,resah,dilema",
+    "response_template": "Om Swastiastu. Setiap perjalanan hidup membawa pelajaran yang membentuk diri kita. Walaupun hati sedang bingung, percayalah semua akan menemukan waktunya. Cerita aja ya."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Galau",
+    "keywords": "takut masa depan,bingung jalan hidup",
+    "response_template": "Kadang hasil belum bisa kita lihat sekarang, tetapi setiap karma baik akan membawa buahnya pada waktu yang tepat. Yuk cerita apa yang sedang membuatmu ragu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Galau",
+    "keywords": "patah hati,kecewa,cinta",
+    "response_template": "Rasa sedih adalah bagian dari perjalanan hidup. Jangan kehilangan keyakinan bahwa Tuhan selalu memberi kekuatan untuk bangkit kembali. Aku siap mendengarkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Galau",
+    "keywords": "aku gagal,aku kecewa,resah",
+    "response_template": "Jangan terlalu keras pada dirimu sendiri. Setiap pengalaman adalah kesempatan untuk bertumbuh. Cerita aja ya, kita hadapi pelan-pelan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Galau",
+    "keywords": "gelisah,banyak pikiran,overthinking",
+    "response_template": "Semoga Ida Sang Hyang Widhi Wasa memberikan ketenangan dalam hatimu. Apa pun yang sedang kamu hadapi, kamu tidak harus memikulnya sendirian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Depresi",
+    "keywords": "Om Swastiastu, karma, Hindu sedih, Ida Sang Hyang Widhi",
+    "response_template": "Om Swastiastu. Aku turut prihatin atas apa yang sedang kamu alami. Semoga Ida Sang Hyang Widhi Wasa memberikan kekuatan dan ketenangan dalam setiap langkahmu. Kalau ingin bercerita, aku akan mendengarkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Depresi",
+    "keywords": "karma hidup, hidup berat Hindu, dharma",
+    "response_template": "Perjalanan hidup memang tidak selalu mudah. Semoga kamu tetap diberi kekuatan untuk menjalankan dharma dengan hati yang tabah. Aku siap menemanimu berbicara kapan pun kamu ingin."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Depresi",
+    "keywords": "Tri Hita Karana, hati gelisah, capek hidup",
+    "response_template": "Saat hati terasa tidak tenang, semoga kamu perlahan menemukan kembali keseimbangan dalam diri, sesama, dan Sang Pencipta. Ceritakan saja apa yang sedang membebanimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Depresi",
+    "keywords": "Om Shanti Shanti Shanti Om, sedih banget",
+    "response_template": "Om Shanti Shanti Shanti Om. Semoga kedamaian perlahan hadir dalam pikiran dan hatimu. Kamu tidak harus memikul semuanya sendirian. Aku siap menemani."
+  },
+  {
+    "intent": "Respon_Keagamaan_Hindu_Depresi",
+    "keywords": "Ida Sang Hyang Widhi tolong aku, aku lelah",
+    "response_template": "Semoga Ida Sang Hyang Widhi Wasa senantiasa memberikan jalan dan kekuatan untuk menghadapi masa sulit ini. Kamu boleh beristirahat sejenak dan bercerita di sini."
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Konghucu",
+    "keywords": "Wei De Dong Tian, Salam kebajikan, Kebajikan Tian, Hormat kepada Tian, Tuhan Yang Maha Esa melimpahkan berkah, Salam harmoni",
+    "response_template": "Wei De Dong Tian, {full_name}! Semoga Tian selalu melimpahkan berkah kebajikan-Nya kepadamu. Apa kabar hari ini?"
+  },
+  {
+    "intent": "Sapaan_Keagamaan_Konghucu",
+    "keywords": "Wei De Dong Tian, Salam kebajikan, Kebajikan Tian, Hormat kepada Tian, Tuhan Yang Maha Esa melimpahkan berkah, Salam harmoni",
+    "response_template": "Wei De Dong Tian, {full_name}! Semoga Tian selalu melimpahkan berkah kebajikan-Nya kepadamu. Gimana perasaanmu hari ini? Apakah hatimu masih selaras dengan jalan kebajikan?"
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "syukur kepada Tian, Tian baik, bersyukur",
+    "response_template": "Syukur kepada Tian atas kebahagiaan yang kamu rasakan hari ini. Semoga kebajikan dan sukacita selalu menyertaimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "rezeki, keberhasilan, usaha berhasil",
+    "response_template": "Keberhasilan adalah buah dari ketekunan dan kebajikan. Semoga Tian terus memberkahimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "lulus, prestasi, berhasil",
+    "response_template": "Ketekunan dan pembelajaran yang baik akhirnya membuahkan hasil. Selamat atas pencapaianmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "keluarga bahagia, orang tua, keluarga",
+    "response_template": "Keharmonisan keluarga merupakan sumber kebahagiaan yang utama. Semoga keluargamu selalu diberkahi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "sembuh, sehat, pulih",
+    "response_template": "Kesehatan adalah karunia yang sangat berharga. Semoga kebahagiaan ini membawa kedamaian dalam hidupmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "berbuat baik, kebajikan",
+    "response_template": "Kebajikan yang dilakukan dengan tulus akan membawa sukacita. Teruslah menebarkan kebaikan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "damai, tenang, hati senang",
+    "response_template": "Ketenangan hati dan kebahagiaan adalah tanda keharmonisan dalam diri. Semoga Tian selalu membimbingmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "pernikahan, pasangan, keluarga baru",
+    "response_template": "Semoga hubungan yang kamu jalani dipenuhi kebajikan, keharmonisan, dan kebahagiaan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "hari bahagia, senang sekali, gembira",
+    "response_template": "Sungguh menyenangkan mendengar kebahagiaanmu. Semoga sukacita ini membawa manfaat bagi dirimu dan sesama."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Senang",
+    "keywords": "impian tercapai, cita-cita tercapai, sukses",
+    "response_template": "Keberhasilan adalah hasil dari ketekunan dan pembinaan diri. Semoga Tian terus menyertai perjalananmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "sedih, kecewa, hati sakit",
+    "response_template": "Kesedihan adalah bagian dari kehidupan manusia. Semoga Tian memberikan ketenangan dan kebijaksanaan dalam menghadapi masa sulit ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "nangis, menangis, air mata",
+    "response_template": "Air mata menunjukkan bahwa hati sedang terluka. Semoga Tian memberikan ketenangan dan kekuatan kepadamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "gagal, kecewa",
+    "response_template": "Kegagalan adalah bagian dari pembelajaran dan pembinaan diri. Tetaplah melangkah dengan kebajikan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "putus cinta, patah hati",
+    "response_template": "Semoga waktu dan kebijaksanaan membantu memulihkan hatimu dan membawa kedamaian."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "kehilangan, meninggal",
+    "response_template": "Semoga Tian memberikan ketabahan dan kekuatan kepada dirimu dan keluargamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "kesepian, sendirian",
+    "response_template": "Walau hati terasa sepi, kebajikan dan hubungan dengan sesama dapat membawa kembali kehangatan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "capek hidup, lelah",
+    "response_template": "Istirahatkan hati dan pikiranmu. Semoga Tian memberikan kekuatan untuk melanjutkan perjalanan hidup."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "aku tidak berguna",
+    "response_template": "Setiap manusia memiliki nilai dan kesempatan untuk memperbaiki diri. Jangan kehilangan harapan terhadap dirimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "hidup tidak adil",
+    "response_template": "Pengalaman sulit sering menjadi jalan menuju kebijaksanaan. Semoga kamu menemukan makna dari perjalanan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Sedih",
+    "keywords": "kenapa aku, kenapa begini",
+    "response_template": "Pertanyaan itu muncul ketika hati sedang terluka. Semoga Tian memberikan terang dan ketenangan dalam dirimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "marah, kesal, emosi",
+    "response_template": "Kemarahan adalah bagian dari sifat manusia. Semoga Tian memberikan kebijaksanaan dan ketenangan dalam menghadapi situasi ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "naik darah, emosi banget",
+    "response_template": "Ketika amarah muncul, menjaga ketenangan dapat membantu melihat masalah dengan lebih jernih."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "dibohongi, dikhianati",
+    "response_template": "Pengkhianatan memang menyakitkan. Semoga Tian memberikan kekuatan dan kebijaksanaan kepadamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "tidak adil",
+    "response_template": "Keadilan dan kebajikan tetap penting untuk dijaga meskipun menghadapi perlakuan yang tidak baik."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "bertengkar, konflik",
+    "response_template": "Semoga kebijaksanaan dan keharmonisan membantu menyelesaikan perbedaan yang terjadi."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "kesal sama orang",
+    "response_template": "Setiap hubungan memerlukan kesabaran dan pengertian. Semoga kamu menemukan jalan terbaik."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "marah sama keluarga",
+    "response_template": "Keharmonisan keluarga adalah nilai yang penting. Semoga hubungan kalian kembali membaik."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "muak, jengkel",
+    "response_template": "Beristirahat sejenak dan menenangkan hati dapat membantu menghadapi keadaan dengan lebih bijaksana."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "dendam, benci",
+    "response_template": "Melepaskan kebencian dapat membantu hati memperoleh ketenangan dan kebijaksanaan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Marah",
+    "keywords": "kenapa orang jahat",
+    "response_template": "Kebijaksanaan sering lahir dari pengalaman yang sulit. Semoga Tian membimbingmu menghadapi keadaan ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "bingung, pusing, buntu",
+    "response_template": "Tidak apa-apa jika saat ini kamu belum menemukan jawabannya. Tian memahami pergumulan yang sedang kamu rasakan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "ragu, bimbang",
+    "response_template": "Keraguan adalah bagian dari proses belajar dan pembinaan diri. Kamu tidak harus sempurna hari ini."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "keputusan sulit",
+    "response_template": "Keputusan besar memang dapat membuat hati lelah. Pelan-pelan saja, karena kebijaksanaan sering datang seiring waktu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "takut masa depan",
+    "response_template": "Masa depan yang belum jelas memang menakutkan. Semoga Tian memberikan ketenangan dalam hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "takut salah",
+    "response_template": "Setiap orang pernah melakukan kesalahan. Yang terpenting adalah terus belajar dan memperbaiki diri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "kehilangan arah",
+    "response_template": "Ketika arah hidup terasa kabur, tidak apa-apa untuk berhenti sejenak dan mengenali kembali dirimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "aku gak tahu harus gimana",
+    "response_template": "Kamu tidak harus memiliki semua jawaban sekarang. Cerita saja, mungkin kita bisa memikirkannya bersama."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "bingung soal pasangan",
+    "response_template": "Hubungan sering membawa banyak pertanyaan. Semoga kebijaksanaan dan ketulusan membimbing hatimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "bingung karier",
+    "response_template": "Perjalanan hidup setiap orang berbeda. Tidak apa-apa jika kamu masih mencari jalanmu sendiri."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Bingung",
+    "keywords": "aku gak ngerti hidup",
+    "response_template": "Kadang hidup memang menghadirkan pertanyaan yang sulit dijawab. Semoga Tian memberikan terang dan kebijaksanaan dalam perjalananmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Galau",
+    "keywords": "Wei De Dong Tian, saya sedang bingung soal masa depan.",
+    "response_template": "Galau karena hubungan, atau karena jenjang hidup (keluarga, karier)? Cerita ya… Kita cari solusi yang sesuai dengan watak sejati dan tenggang rasa, semoga Tian memberikan petunjuk."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Galau",
+    "keywords": "galau,bimbang,resah,dilema",
+    "response_template": "Dalam ajaran Konghucu, hati yang tenang membantu kita melihat jalan yang benar. Nggak apa-apa kalau hari ini masih bingung. Cerita aja, aku siap menemanimu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Galau",
+    "keywords": "bingung keputusan,ragu,pilih jalan",
+    "response_template": "Keputusan yang baik lahir dari hati yang jernih, bukan dari rasa terburu-buru. Kita ngobrol dulu yuk, siapa tahu setelah itu semuanya terasa lebih jelas."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Galau",
+    "keywords": "kecewa sama orang,patah hati,hubungan",
+    "response_template": "Hubungan antarmanusia memang tidak selalu mudah. Tetaplah menjaga kebajikan dalam hati, sambil memberi ruang untuk dirimu pulih. Aku ada buat mendengarkanmu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Galau",
+    "keywords": "merasa gagal,putus asa,hilang semangat",
+    "response_template": "Setiap kesulitan adalah kesempatan untuk membangun kebijaksanaan dan karakter. Kamu nggak sendirian. Cerita aja, kita hadapi satu demi satu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Galau",
+    "keywords": "gelisah,banyak pikiran,resah terus",
+    "response_template": "Saat hati tenang, pikiran menjadi lebih jernih. Semoga Tian memberikan kebijaksanaan dalam setiap langkahmu. Kalau ingin berbagi cerita, aku selalu siap mendengarkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Depresi",
+    "keywords": "Tian, Konghucu sedih, hidup berat Konghucu",
+    "response_template": "Aku ikut prihatin mendengar apa yang sedang kamu alami. Semoga Tian memberikan kebijaksanaan dan keteguhan hati dalam menghadapi masa sulit ini. Aku siap mendengarkan ceritamu."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Depresi",
+    "keywords": "Ren, hidup berat, kehilangan semangat",
+    "response_template": "Dalam masa sulit, menjaga kasih kepada diri sendiri juga merupakan bagian dari kebajikan. Kamu tidak harus kuat sendirian. Aku akan menemanimu berbicara."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Depresi",
+    "keywords": "Li, hati gelisah, Konghucu depresi",
+    "response_template": "Semoga ketenangan dan kebijaksanaan perlahan hadir di tengah kegelisahanmu. Tidak apa-apa merasa lelah. Cerita saja sesuai yang kamu rasakan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Depresi",
+    "keywords": "aku kecewa sama hidup Konghucu",
+    "response_template": "Setiap perjalanan hidup memiliki masa yang sulit. Semoga kamu tetap menemukan kekuatan untuk melangkah dengan kebajikan dan harapan. Aku ada disini mendengarkan."
+  },
+  {
+    "intent": "Respon_Keagamaan_Konghucu_Depresi",
+    "keywords": "Tian tolong aku, kehilangan arah",
+    "response_template": "Semoga Tian membimbing langkahmu sedikit demi sedikit menuju ketenangan. Kamu tidak perlu memikul semuanya sendirian. Aku siap menemani dan mendengarkan."
+  }
+]

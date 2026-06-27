@@ -16,18 +16,9 @@ const seedChatbotCache = async (fastify) => {
       return;
     }
 
-    const pipeline = fastify.redis.multi();
-
-    for (const template of templates) {
-      const redisKey = `chatbot_intent:${template.intent}`;
-      const redisPayload = JSON.stringify({
-        keywords: template.keywords,
-        response: template.response_template,
-      });
-      pipeline.set(redisKey, redisPayload);
-    }
-
-    await pipeline.exec();
+    const redisKey = "chatbot_all_templates";
+    const redisPayload = JSON.stringify(templates);
+    await fastify.redis.set(redisKey, redisPayload, { EX: 3600 });
 
     fastify.log.info(
       `[Cache Seeder] Seeding berhasil. Sebanyak ${templates.length} template chatbot telah dimuat ke cache Redis.`

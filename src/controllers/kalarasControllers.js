@@ -1,46 +1,7 @@
+const { getCachedResponse } = require("./chatbotController");
+
 const hitExternalLLMApi = async (message) => {
   return "Sorry, Kalaras AI can't respond to questions outside of the greeting context at this time.";
-};
-
-const getCachedResponse = async (prisma, redis, message) => {
-  const cacheKey = "chatbot_all_templates";
-  let dataStr = await redis.get(cacheKey);
-  let templates = [];
-
-  if (!dataStr) {
-    // If not in cache, pull from PostgreSQL database
-    templates = await prisma.chatbotTemplate.findMany();
-    // Set to Redis with 1-hour expiration (3600 seconds)
-    await redis.set(cacheKey, JSON.stringify(templates), { EX: 3600 });
-  } else {
-    try {
-      templates = JSON.parse(dataStr);
-    } catch (err) {
-      // In case parsing fails, pull from PostgreSQL database
-      templates = await prisma.chatbotTemplate.findMany();
-      await redis.set(cacheKey, JSON.stringify(templates), { EX: 3600 });
-    }
-  }
-
-  const lowerMessage = message.toLowerCase().trim();
-
-  for (const template of templates) {
-    if (template.keywords && template.response_template) {
-      const keywords = template.keywords.split(",").map(k => k.trim());
-      for (const kw of keywords) {
-        if (kw) {
-          // Escape regex special chars to prevent syntax issues
-          const escapedKw = kw.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-          const regex = new RegExp(`\\b${escapedKw}\\b`, 'i');
-          if (regex.test(lowerMessage)) {
-            // Return response template if a keyword matches precisely
-            return template.response_template;
-          }
-        }
-      }
-    }
-  }
-  return null;
 };
 
 const sendChatMessage = async (request, reply) => {
@@ -55,9 +16,11 @@ const sendChatMessage = async (request, reply) => {
   try {
     const { prisma, redis } = request.server;
 
-    let aiResponse = await getCachedResponse(prisma, redis, message);
+    const matchedTemplate = await getCachedResponse(prisma, redis, message);
+    let aiResponse;
 
-    if (aiResponse) {
+    if (matchedTemplate) {
+      aiResponse = matchedTemplate.response_template;
       let fullName = request.user.full_name;
       if (!fullName) {
         const profile = await prisma.pocketProfile.findUnique({

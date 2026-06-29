@@ -637,3 +637,161 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
     "message": "Template chatbot dengan intent 'cemas' berhasil dihapus dari sistem dan cache."
   }
   ```
+
+---
+
+### 9. Safety Mode — Checkpoint & Deadman Switch (`/api/v1/safety`)
+
+Fitur keselamatan perjalanan berbasis timer otomatis (Deadman Switch). Jika pengguna tidak mengkonfirmasi keselamatan dalam waktu yang ditentukan, sistem secara otomatis mengirimkan sinyal darurat ke seluruh kontak darurat melalui WhatsApp.
+
+**Konsep Inti:**
+* **Deadman Switch**: Timer berjalan di background (BullMQ). Jika user tidak menekan "Saya Aman" sebelum timer habis → sinyal darurat otomatis terkirim.
+* **Zero Geolocation di Backend**: Server TIDAK menghitung jarak/radius. Client Flutter mengirimkan flag `is_out_of_route`.
+* **Rolling Database**: Lokasi di-upsert (1 baris per user), tidak menumpuk data.
+
+**Status Sesi (`SafetySession.status`):**
+| Status | Deskripsi |
+|---|---|
+| `active` | Sesi sedang berjalan, timer aktif |
+| `confirmed` | User menekan "Saya Aman" sebelum timer habis |
+| `expired` | Timer habis, user tidak konfirmasi → AUTO_SOS terkirim |
+| `critical` | Client melaporkan OUT_OF_ROUTE → darurat langsung terkirim |
+
+#### **Mulai Sesi Safety Mode**
+* **Method & Path:** `POST /api/v1/safety/start-session`
+* **Deskripsi:** Memulai sesi Safety Mode baru dengan timer deadman switch. Jika user tidak mengkonfirmasi keselamatan sebelum timer habis, sinyal darurat otomatis dikirim ke semua kontak darurat via WhatsApp.
+* **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: application/json`
+* **Body (Request Payload):**
+  ```json
+  {
+    "duration_seconds": 1800,
+    "preset_label": "Ojol Malam"
+  }
+  ```
+  | Field | Tipe | Wajib | Keterangan |
+  |---|---|---|---|
+  | `duration_seconds` | integer | ✅ | Durasi timer (min: 60, max: 86400) dalam detik |
+  | `preset_label` | string | ❌ | Label opsional (misal: "Ojol Malam", "Jalan Sendirian") |
+
+* **Respons Berhasil (201 Created):**
+  ```json
+  {
+    "message": "Sesi Safety Mode berhasil dimulai. Timer deadman switch aktif.",
+    "data": {
+      "session_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "duration_seconds": 1800,
+      "started_at": "2026-06-26T14:00:00.000Z",
+      "expires_at": "2026-06-26T14:30:00.000Z",
+      "bullmq_job_id": "safety-a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    }
+  }
+  ```
+* **Respons Gagal:**
+  | Kode | Kondisi |
+  |---|---|
+  | `400` | `duration_seconds` tidak valid (bukan integer, < 60, atau > 86400) |
+  | `409` | User sudah memiliki sesi aktif yang belum selesai |
+  | `503` | Redis/BullMQ tidak tersedia |
+
+#### **Konfirmasi Keselamatan (Saya Aman)**
+* **Method & Path:** `POST /api/v1/safety/confirm-safe`
+* **Deskripsi:** User mengkonfirmasi bahwa dirinya dalam keadaan aman. Timer deadman switch dibatalkan dan job dihapus dari antrean Redis.
+* **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: application/json`
+* **Body (Request Payload):**
+  ```json
+  {
+    "session_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+  ```
+  | Field | Tipe | Wajib | Keterangan |
+  |---|---|---|---|
+  | `session_id` | string | ✅ | UUID sesi Safety Mode yang sedang aktif |
+
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "message": "Konfirmasi keselamatan berhasil. Timer deadman switch dibatalkan.",
+    "data": {
+      "session_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "status": "confirmed",
+      "confirmed_at": "2026-06-26T14:15:00.000Z"
+    }
+  }
+  ```
+* **Respons Gagal:**
+  | Kode | Kondisi |
+  |---|---|
+  | `400` | `session_id` tidak dikirim |
+  | `403` | Sesi bukan milik user yang login |
+  | `404` | Sesi tidak ditemukan |
+  | `409` | Status sesi sudah bukan `active` (sudah expired/confirmed/critical) |
+  | `503` | Redis/BullMQ tidak tersedia |
+
+#### **Update Lokasi & Deteksi Deviasi Rute**
+* **Method & Path:** `POST /api/v1/safety/update-location`
+* **Deskripsi:** Memperbarui lokasi terakhir user (upsert 1 baris per user). Jika `is_out_of_route = true`, sinyal darurat langsung dikirim ke semua kontak tanpa menunggu timer habis.
+* **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: application/json`
+* **Body (Request Payload):**
+  ```json
+  {
+    "latitude": -6.200000,
+    "longitude": 106.816666,
+    "is_out_of_route": false,
+    "session_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  }
+  ```
+  | Field | Tipe | Wajib | Keterangan |
+  |---|---|---|---|
+  | `latitude` | number | ✅ | Koordinat latitude (-90 s/d 90) |
+  | `longitude` | number | ✅ | Koordinat longitude (-180 s/d 180) |
+  | `is_out_of_route` | boolean | ✅ | `true` jika client Flutter mendeteksi user keluar jalur |
+  | `session_id` | string | ❌ | UUID sesi aktif (jika tidak dikirim, dicari otomatis dari DB) |
+
+* **Respons Berhasil — Lokasi Normal (200 OK):**
+  ```json
+  {
+    "message": "Lokasi berhasil diperbarui.",
+    "data": {
+      "latitude": -6.200000,
+      "longitude": 106.816666,
+      "recorded_at": "2026-06-26T14:10:00.000Z"
+    }
+  }
+  ```
+* **Respons Berhasil — Deviasi Rute Terdeteksi (200 OK):**
+  ```json
+  {
+    "message": "⚠️ Deviasi rute terdeteksi! Sinyal darurat telah dikirim ke semua kontak terdaftar.",
+    "data": {
+      "location": {
+        "latitude": -6.300000,
+        "longitude": 107.000000
+      },
+      "session_status": "critical",
+      "alert": {
+        "total_contacts": 2,
+        "delivered": 2,
+        "failed": 0,
+        "recipients": [
+          {
+            "name": "Aris",
+            "phone": "081299997777",
+            "chatId": "6281299997777@c.us",
+            "delivered": true
+          },
+          {
+            "name": "Budi",
+            "phone": "081288886666",
+            "chatId": "6281288886666@c.us",
+            "delivered": true
+          }
+        ]
+      }
+    }
+  }
+  ```
+* **Respons Gagal:**
+  | Kode | Kondisi |
+  |---|---|
+  | `400` | Koordinat tidak valid, atau deviasi terdeteksi tapi tidak ada kontak darurat terdaftar |
+  | `503` | Redis/BullMQ tidak tersedia |

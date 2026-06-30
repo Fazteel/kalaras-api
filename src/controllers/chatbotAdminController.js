@@ -1,7 +1,3 @@
-/**
- * POST /api/v1/admin/chatbot/templates
- * Membuat template chatbot baru dan menyinkronkannya ke Redis.
- */
 const createTemplate = async (request, reply) => {
   const { intent, keywords, response_template } = request.body;
 
@@ -40,7 +36,6 @@ const createTemplate = async (request, reply) => {
       },
     });
 
-    // Invalidate the overall template cache
     await request.server.redis.del("chatbot_all_templates");
 
     return reply.code(201).send({
@@ -55,10 +50,6 @@ const createTemplate = async (request, reply) => {
   }
 };
 
-/**
- * GET /api/v1/admin/chatbot/templates
- * Mengambil seluruh template chatbot dari database (terbaru lebih dahulu).
- */
 const getAllTemplates = async (request, reply) => {
   try {
     const templates = await request.server.prisma.chatbotTemplate.findMany({
@@ -78,11 +69,6 @@ const getAllTemplates = async (request, reply) => {
   }
 };
 
-/**
- * DELETE /api/v1/admin/chatbot/templates/:id
- * Menghapus template chatbot berdasarkan ID dari PostgreSQL
- * dan membersihkan cache terkait dari Redis.
- */
 const deleteTemplate = async (request, reply) => {
   const { id } = request.params;
 
@@ -99,7 +85,6 @@ const deleteTemplate = async (request, reply) => {
 
     await request.server.prisma.chatbotTemplate.delete({ where: { id } });
 
-    // Invalidate the overall template cache
     await request.server.redis.del("chatbot_all_templates");
 
     return reply.send({

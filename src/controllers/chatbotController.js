@@ -121,7 +121,6 @@ const getTemplateByBaseIntent = async (prisma, redis, intent) => {
   const baseIntent = getBaseIntent(intent.trim());
   const templates = groupedBaseIntents[baseIntent] || [];
 
-  // ponytail: first template per base intent; add ranking/random selection if repetition becomes visible.
   return templates[0] || null;
 };
 

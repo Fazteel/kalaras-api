@@ -2,10 +2,6 @@ const authenticate = require("../middlewares/auth");
 const chatbotAdminController = require("../controllers/chatbotAdminController");
 
 module.exports = async function (fastify, opts) {
-  // ----------------------------------------------------------
-  // POST /api/v1/admin/chatbot/templates
-  // Membuat template chatbot baru
-  // ----------------------------------------------------------
   fastify.post(
     "/templates",
     {
@@ -64,10 +60,6 @@ module.exports = async function (fastify, opts) {
     chatbotAdminController.createTemplate
   );
 
-  // ----------------------------------------------------------
-  // GET /api/v1/admin/chatbot/templates
-  // Mengambil seluruh daftar template chatbot
-  // ----------------------------------------------------------
   fastify.get(
     "/templates",
     {
@@ -108,10 +100,6 @@ module.exports = async function (fastify, opts) {
     chatbotAdminController.getAllTemplates
   );
 
-  // ----------------------------------------------------------
-  // DELETE /api/v1/admin/chatbot/templates/:id
-  // Menghapus template chatbot berdasarkan ID
-  // ----------------------------------------------------------
   fastify.delete(
     "/templates/:id",
     {

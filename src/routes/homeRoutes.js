@@ -2,10 +2,6 @@ const authenticate = require("../middlewares/auth");
 const homeController = require("../controllers/homeController");
 
 module.exports = async function (fastify, opts) {
-  // ----------------------------------------------------------
-  // GET /api/v1/home/summary
-  // Mengembalikan Readiness Score dan rincian kesiapan identitas
-  // ----------------------------------------------------------
   fastify.get(
     "/summary",
     {

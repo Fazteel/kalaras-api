@@ -2,11 +2,6 @@ const authenticate = require("../middlewares/auth");
 const medicalController = require("../controllers/medicalController");
 
 module.exports = async function (fastify, opts) {
-  // ----------------------------------------------------------
-  // PUT /api/v1/medical
-  // Memperbarui profil medis user yang sedang login (upsert).
-  // WAJIB autentikasi.
-  // ----------------------------------------------------------
   fastify.put(
     "/",
     {
@@ -55,11 +50,6 @@ module.exports = async function (fastify, opts) {
     medicalController.updateMedicalProfile
   );
 
-  // ----------------------------------------------------------
-  // GET /api/v1/medical/tag/:userId
-  // Endpoint PUBLIK — membaca identitas medis darurat.
-  // TIDAK ADA preValidation. Semua orang dapat mengaksesnya.
-  // ----------------------------------------------------------
   fastify.get(
     "/tag/:userId",
     {

@@ -1,16 +1,3 @@
-/**
- * GET /api/v1/home/summary
- *
- * Menghitung dan mengembalikan Readiness Score (Skor Kesiapan
- * Identitas) beserta rincian kelengkapan data pengguna.
- *
- * Kriteria penilaian (masing-masing bernilai 20 poin):
- *  1. Tempat & Tanggal Lahir (PocketProfile.birth_place_date)
- *  2. Alamat Lengkap         (PocketProfile.address)
- *  3. Minimal 1 Kontak Darurat (EmergencyContact)
- *  4. Catatan Alergi         (MedicalProfile.allergies)
- *  5. Riwayat Penyakit       (MedicalProfile.medical_history)
- */
 const getReadinessSummary = async (request, reply) => {
   const userId = request.user.id;
 

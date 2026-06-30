@@ -4,11 +4,9 @@ const path = require("path");
 
 const prisma = new PrismaClient();
 
-// Load data from draf_converted.json
 const rawData = fs.readFileSync(path.join(__dirname, "draf_converted.json"), "utf8");
 const rawTemplates = JSON.parse(rawData);
 
-// Count occurrences of each intent to identify duplicates
 const totalCounts = {};
 for (const item of rawTemplates) {
   if (item.intent) {
@@ -16,7 +14,6 @@ for (const item of rawTemplates) {
   }
 }
 
-// Map templates with unique intent names
 const currentCounts = {};
 const templates = rawTemplates.map(item => {
   const { intent, keywords, response_template } = item;

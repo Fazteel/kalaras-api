@@ -1,10 +1,3 @@
-/**
- * seedChatbotCache — Melakukan seeding seluruh template chatbot
- * dari database ke Redis pada saat server startup.
- *
- * @param {import('fastify').FastifyInstance} fastify - Instance Fastify yang
- *   telah didekorasi dengan `prisma` dan `redis`.
- */
 const seedChatbotCache = async (fastify) => {
   try {
     fastify.log.info("[Cache Seeder] Memulai proses seeding cache template chatbot...");

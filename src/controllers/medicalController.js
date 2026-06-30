@@ -1,12 +1,3 @@
-/**
- * PUT /api/v1/medical
- *
- * Membuat atau memperbarui profil medis milik user yang sedang login.
- * Menggunakan upsert agar aman dipanggil pertama kali (create)
- * maupun saat data sudah ada (update).
- *
- * @requires authenticate middleware
- */
 const updateMedicalProfile = async (request, reply) => {
   const userId = request.user.id;
   const { allergies, medical_history } = request.body;
@@ -41,22 +32,6 @@ const updateMedicalProfile = async (request, reply) => {
   }
 };
 
-/**
- * GET /api/v1/medical/tag/:userId
- *
- * Endpoint publik untuk membaca data identitas medis darurat
- * berdasarkan UUID pengguna. Tidak memerlukan autentikasi.
- *
- * Data yang dikembalikan sudah difilter ketat:
- *  - Identitas dasar   : full_name, birth_place_date
- *  - Kontak darurat    : seluruh daftar kontak
- *  - Profil medis      : allergies, medical_history
- *
- * TIDAK ADA: email, password_hash, tier, role, referral_code,
- *            referred_by, atau field sensitif lainnya.
- *
- * @public — tidak memerlukan login
- */
 const getPublicMedicalTag = async (request, reply) => {
   const { userId } = request.params;
 

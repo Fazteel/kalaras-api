@@ -87,4 +87,7 @@ jobs:
             npm ci
             npx prisma generate
             npx prisma migrate deploy
-            pm2 restart kalaras-api
+            pm2 describe kalaras-api >/dev/null 2>&1 \
+              && pm2 restart kalaras-api --update-env \
+              || pm2 start src/server.js --name kalaras-api
+            pm2 save

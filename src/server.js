@@ -7,6 +7,8 @@ const swagger = require("@fastify/swagger");
 const swaggerUi = require("@fastify/swagger-ui");
 const { PrismaClient } = require("@prisma/client");
 const { createClient } = require("redis");
+const authenticate = require("./middlewares/auth");
+const requireRole = require("./middlewares/requireRole");
 const { initializeMinIO } = require("./utils/minio");
 const { seedChatbotCache } = require("./utils/cacheSeeder");
 const { createBullBoard } = require("@bull-board/api");
@@ -74,15 +76,21 @@ const { safetyQueue } = require("./workers/safetyWorker");
 
 const serverAdapter = new FastifyAdapter();
 serverAdapter.setBasePath("/admin/queues");
+serverAdapter.setInstance(fastify);
+serverAdapter.setErrorHandler(fastify.errorHandler);
 
 createBullBoard({
   queues: [new BullMQAdapter(safetyQueue)],
   serverAdapter,
 });
 
-fastify.register(serverAdapter.registerPlugin(), {
-  basePath: "/",
-  prefix: "/admin/queues",
+fastify.register(async function (adminQueues) {
+  adminQueues.addHook("preValidation", authenticate);
+  adminQueues.addHook("preValidation", requireRole("admin"));
+  adminQueues.register(serverAdapter.registerPlugin(), {
+    basePath: "/",
+    prefix: "/admin/queues",
+  });
 });
 
 const start = async () => {

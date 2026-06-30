@@ -1,11 +1,12 @@
 const authenticate = require("../middlewares/auth");
+const requireRole = require("../middlewares/requireRole");
 const chatbotAdminController = require("../controllers/chatbotAdminController");
 
 module.exports = async function (fastify, opts) {
   fastify.post(
     "/templates",
     {
-      preValidation: [authenticate],
+      preValidation: [authenticate, requireRole("admin")],
       schema: {
         description: "Membuat template chatbot baru dan menyinkronkannya ke cache Redis.",
         tags: ["Chatbot Admin"],
@@ -63,7 +64,7 @@ module.exports = async function (fastify, opts) {
   fastify.get(
     "/templates",
     {
-      preValidation: [authenticate],
+      preValidation: [authenticate, requireRole("admin")],
       schema: {
         description: "Mengambil seluruh daftar template chatbot yang tersimpan di database.",
         tags: ["Chatbot Admin"],
@@ -103,7 +104,7 @@ module.exports = async function (fastify, opts) {
   fastify.delete(
     "/templates/:id",
     {
-      preValidation: [authenticate],
+      preValidation: [authenticate, requireRole("admin")],
       schema: {
         description: "Menghapus template chatbot dari database dan membersihkan cache Redis terkait.",
         tags: ["Chatbot Admin"],

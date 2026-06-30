@@ -1,7 +1,70 @@
-const { getCachedResponse } = require("./chatbotController");
+const {
+  getCachedResponse,
+  getIntentCatalog,
+  getTemplateByBaseIntent,
+} = require("./chatbotController");
+const { normalizeMessage } = require("../utils/chatbotHelper");
+const { routeKalarasMessage } = require("../utils/kalarasLlm");
 
-const hitExternalLLMApi = async (message) => {
-  return "Sorry, Kalaras AI can't respond to questions outside of the greeting context at this time.";
+const STATIC_FALLBACK_REPLY =
+  "Maaf, aku belum bisa memahami pesan itu sepenuhnya sekarang. Kalau berkenan, coba ceritakan lagi dengan kalimat yang lebih sederhana atau fokus ke hal yang paling mengganggu kamu.";
+
+const personalizeTemplate = async (prisma, user, template) => {
+  let aiResponse = template.response_template;
+  let fullName = user.full_name;
+
+  if (!fullName) {
+    const profile = await prisma.pocketProfile.findUnique({
+      where: { user_id: user.id },
+    });
+    fullName = profile ? profile.full_name : "User";
+  }
+
+  const latestCheckIn = await prisma.checkInLog.findFirst({
+    where: { user_id: user.id },
+    orderBy: { sent_at: "desc" },
+  });
+  const moodUser = latestCheckIn && latestCheckIn.mood ? latestCheckIn.mood : "good";
+
+  return aiResponse
+    .replace(/{full_name}/g, fullName)
+    .replace(/{mood}/g, moodUser);
+};
+
+const getFallbackReply = async (request, message) => {
+  const normalizedMessage = normalizeMessage(message);
+  const intentCatalog = await getIntentCatalog(request.server.prisma, request.server.redis);
+
+  try {
+    const routed = await routeKalarasMessage({
+      message,
+      normalizedMessage,
+      intentCatalog,
+    });
+
+    if (!routed) {
+      return STATIC_FALLBACK_REPLY;
+    }
+
+    if (routed.status === "MATCHED") {
+      const template = await getTemplateByBaseIntent(
+        request.server.prisma,
+        request.server.redis,
+        routed.matched_intent
+      );
+
+      if (!template) {
+        return STATIC_FALLBACK_REPLY;
+      }
+
+      return personalizeTemplate(request.server.prisma, request.user, template);
+    }
+
+    return routed.custom_reply || STATIC_FALLBACK_REPLY;
+  } catch (err) {
+    request.server.log.error({ err: err.message }, "Kalaras LLM routing failed");
+    return STATIC_FALLBACK_REPLY;
+  }
 };
 
 const sendChatMessage = async (request, reply) => {
@@ -17,30 +80,9 @@ const sendChatMessage = async (request, reply) => {
     const { prisma, redis } = request.server;
 
     const matchedTemplate = await getCachedResponse(prisma, redis, message);
-    let aiResponse;
-
-    if (matchedTemplate) {
-      aiResponse = matchedTemplate.response_template;
-      let fullName = request.user.full_name;
-      if (!fullName) {
-        const profile = await prisma.pocketProfile.findUnique({
-          where: { user_id: request.user.id },
-        });
-        fullName = profile ? profile.full_name : "User";
-      }
-
-      const latestCheckIn = await prisma.checkInLog.findFirst({
-        where: { user_id: request.user.id },
-        orderBy: { sent_at: "desc" },
-      });
-      const moodUser = (latestCheckIn && latestCheckIn.mood) ? latestCheckIn.mood : "good";
-
-      aiResponse = aiResponse
-        .replace(/{full_name}/g, fullName)
-        .replace(/{mood}/g, moodUser);
-    } else {
-      aiResponse = await hitExternalLLMApi(message);
-    }
+    const aiResponse = matchedTemplate
+      ? await personalizeTemplate(prisma, request.user, matchedTemplate)
+      : await getFallbackReply(request, message);
 
     await prisma.kalarasHistory.create({
       data: {

@@ -49,9 +49,17 @@ module.exports = async function (fastify, opts) {
             message: { type: "string" },
             access_token: { type: "string" },
             refresh_token: { type: "string" },
+            user: { type: "object" }
           },
         },
-      },
+        403: {
+          type: "object",
+          properties: {
+            error: { type: "string", description: "Error message" },
+            requires_otp_verification: { type: "boolean", description: "True if phone verification required" },
+            phone: { type: "string", description: "Phone number that needs verification" }
+          }
+        }
     },
   }, authController.login);
 

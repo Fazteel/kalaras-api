@@ -113,4 +113,26 @@ module.exports = async function (fastify, opts) {
       },
     },
   }, authController.verifyOtp);
+
+  fastify.post("/resend-otp", {
+    schema: {
+      description: "Resend OTP code to phone number",
+      tags: ["Auth"],
+      body: {
+        type: "object",
+        required: ["phone"],
+        properties: {
+          phone: { type: "string", description: "Phone number" }
+        }
+      },
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            message: { type: "string" }
+          }
+        }
+      }
+    }
+  }, authController.resendOtp);
 };

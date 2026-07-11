@@ -206,7 +206,7 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
       "id": "doc-uuid-9999",
       "user_id": "88ec7845-206a-4c9b-a6bd-01c64090bb8c",
       "document_type": "KTP",
-      "file_url": "http://minio-url/doc-KTP-88ec7845-123.jpg",
+      "file_url": "doc-KTP-88ec7845-206a-4c9b-a6bd-01c64090bb8c-1718888400000-foto-ktp-saya.jpg",
       "file_name": "foto-ktp-saya.jpg",
       "created_at": "2026-06-20T13:00:00.000Z"
     }
@@ -215,10 +215,10 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
 
 #### **Unggah Dokumen Formal**
 * **Method & Path:** `POST /api/v1/profile/documents`
-* **Deskripsi:** Mengunggah file dokumen formal baru (seperti KTP, BPJS, KK) ke storage.
+* **Deskripsi:** Mengunggah file dokumen formal baru (seperti KTP, BPJS, KK) ke storage. File akan dienkripsi secara otomatis menggunakan AES-256-GCM sebelum disimpan.
 * **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: multipart/form-data`
 * **Body (Multipart Form):**
-  * `file`: Berkas dokumen (pdf/image, maks 5 MB)
+  * `file`: Berkas dokumen (pdf/image, maks 5 MB, wajib)
   * `document_type`: Kategori dokumen (Contoh: `"KTP"`, `"BPJS"`, `"KK"`, `"LAINNYA"`) (Default: `"LAINNYA"`)
 * **Respons Berhasil (201 Created):**
   ```json
@@ -228,10 +228,31 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
       "id": "doc-uuid-9999",
       "user_id": "88ec7845-206a-4c9b-a6bd-01c64090bb8c",
       "document_type": "KTP",
-      "file_url": "http://minio-url/doc-KTP-88ec7845-123.jpg",
+      "file_url": "doc-KTP-88ec7845-206a-4c9b-a6bd-01c64090bb8c-1718888400000-foto-ktp-saya.jpg",
       "file_name": "foto-ktp-saya.jpg",
       "created_at": "2026-06-20T13:20:00.000Z"
     }
+  }
+  ```
+
+#### **Unduh & Dekripsi Dokumen Formal**
+* **Method & Path:** `GET /api/v1/profile/documents/:id`
+* **Deskripsi:** Mengunduh dan mendekripsi berkas dokumen formal secara real-time. Sistem mendekripsi berkas dari storage sebelum mengirimkannya kembali ke klien.
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Path Parameter:**
+  * `id`: UUID dokumen formal (wajib)
+* **Respons Berhasil (200 OK):**
+  * Mengembalikan raw stream/buffer file hasil dekripsi dengan `Content-Type` yang sesuai (seperti `application/pdf`, `image/png`, dsb.) dan header `Content-Disposition: inline; filename="<nama-file>"`.
+* **Respons Gagal (403 Forbidden):**
+  ```json
+  {
+    "error": "Akses ditolak. Anda bukan pemilik dokumen ini."
+  }
+  ```
+* **Respons Gagal (404 Not Found):**
+  ```json
+  {
+    "error": "Dokumen tidak ditemukan."
   }
   ```
 

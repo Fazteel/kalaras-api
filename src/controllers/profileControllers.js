@@ -1,4 +1,4 @@
-const { uploadToMinIO } = require('../utils/minio');
+const { uploadToMinIO, encryptBuffer, decryptBuffer, downloadFromMinIO } = require('../utils/minio');
 
 const getProfile = async (request, reply) => {
   try {
@@ -100,13 +100,15 @@ const uploadFormalDocument = async (request, reply) => {
     const fileName = `doc-${docType}-${request.user.id}-${Date.now()}-${data.filename}`;
     const fileBuffer = await data.toBuffer();
 
-    const fileUrl = await uploadToMinIO(fileName, fileBuffer, data.mimetype);
+    const encryptedBuffer = encryptBuffer(fileBuffer);
+
+    await uploadToMinIO(fileName, encryptedBuffer, data.mimetype);
 
     const newDoc = await request.server.prisma.formalDocument.create({
       data: {
         user_id: request.user.id,
         document_type: docType,
-        file_url: fileUrl,
+        file_url: fileName,
         file_name: data.filename
       }
     });
@@ -121,10 +123,64 @@ const uploadFormalDocument = async (request, reply) => {
   }
 };
 
+const getMimeType = (fileName) => {
+  const ext = fileName.split('.').pop().toLowerCase();
+  switch (ext) {
+    case 'pdf': return 'application/pdf';
+    case 'png': return 'image/png';
+    case 'jpg':
+    case 'jpeg': return 'image/jpeg';
+    case 'gif': return 'image/gif';
+    default: return 'application/octet-stream';
+  }
+};
+
+const getFormalDocumentFile = async (request, reply) => {
+  const { id } = request.params;
+  const userId = request.user.id;
+  const userRole = request.user.role;
+
+  try {
+    if (userRole === 'admin') {
+      return reply.code(403).send({ error: "Akses ditolak. Administrator tidak diperbolehkan mengakses dokumen formal." });
+    }
+    const document = await request.server.prisma.formalDocument.findUnique({
+      where: { id }
+    });
+
+    if (!document) {
+      return reply.code(404).send({ error: "Dokumen tidak ditemukan." });
+    }
+
+    if (document.user_id !== userId) {
+      return reply.code(403).send({ error: "Akses ditolak. Anda bukan pemilik dokumen ini." });
+    }
+    const objectName = document.file_url.includes('/')
+      ? document.file_url.split('/').pop()
+      : document.file_url;
+
+    const encryptedBuffer = await downloadFromMinIO(objectName);
+
+    const decryptedBuffer = decryptBuffer(encryptedBuffer);
+
+    const mimeType = getMimeType(document.file_name);
+
+    return reply
+      .header('Content-Type', mimeType)
+      .header('Content-Disposition', `inline; filename="${document.file_name}"`)
+      .send(decryptedBuffer);
+
+  } catch (err) {
+    request.server.log.error(err);
+    return reply.code(500).send({ error: "Terjadi kesalahan internal saat memproses atau mendekripsi berkas dokumen formal." });
+  }
+};
+
 module.exports = {
   getProfile,
   updateProfile,
   updateAvatar,
   getFormalDocuments,
-  uploadFormalDocument
+  uploadFormalDocument,
+  getFormalDocumentFile
 };

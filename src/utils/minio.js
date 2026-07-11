@@ -11,6 +11,48 @@ const minioClient = new Minio.Client({
 
 const bucketName = process.env.MINIO_BUCKET_NAME || 'kalaras-bucket';
 
+const crypto = require('crypto');
+
+const getEncryptionKey = () => {
+    const key = process.env.MINIO_ENCRYPTION_KEY;
+    if (!key) {
+        throw new Error("[Encryption Config ERROR]: MINIO_ENCRYPTION_KEY tidak ditemukan di environment variables!");
+    }
+    const keyBuffer = Buffer.from(key, 'utf8');
+    if (keyBuffer.length !== 32) {
+        throw new Error(`[Encryption Config ERROR]: MINIO_ENCRYPTION_KEY harus berukuran tepat 32 bytes! Ukuran saat ini: ${keyBuffer.length} bytes.`);
+    }
+    return keyBuffer;
+};
+
+const encryptBuffer = (plainBuffer) => {
+    const key = getEncryptionKey();
+    const iv = crypto.randomBytes(12);
+    const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
+
+    const encrypted = Buffer.concat([cipher.update(plainBuffer), cipher.final()]);
+    const tag = cipher.getAuthTag();
+
+    return Buffer.concat([iv, tag, encrypted]);
+};
+
+const decryptBuffer = (encryptedBuffer) => {
+    const key = getEncryptionKey();
+
+    if (encryptedBuffer.length < 28) {
+        throw new Error("Data terenkripsi tidak valid atau terlalu pendek.");
+    }
+
+    const iv = encryptedBuffer.subarray(0, 12);
+    const tag = encryptedBuffer.subarray(12, 28);
+    const encrypted = encryptedBuffer.subarray(28);
+
+    const decipher = crypto.createDecipheriv('aes-256-gcm', key, iv);
+    decipher.setAuthTag(tag);
+
+    return Buffer.concat([decipher.update(encrypted), decipher.final()]);
+};
+
 const initializeMinIO = async () => {
     try {
         const bucketExists = await minioClient.bucketExists(bucketName);
@@ -18,25 +60,25 @@ const initializeMinIO = async () => {
         if (!bucketExists) {
             await minioClient.makeBucket(bucketName, 'us-east-1');
             console.log(`[MinIO LOG]: Bucket '${bucketName}' berhasil dibuat.`);
-
-            const policy = {
-                Version: "2012-10-17",
-                Statement: [
-                    {
-                        Sid: "PublicReadGetObject",
-                        Effect: "Allow",
-                        Principal: "*",
-                        Action: ["s3:GetObject"],
-                        Resource: [`arn:aws:s3:::${bucketName}/*`]
-                    }
-                ]
-            };
-
-            await minioClient.setBucketPolicy(bucketName, JSON.stringify(policy));
-            console.log(`[MinIO LOG]: Kebijakan akses publik berhasil dikonfigurasi pada bucket '${bucketName}'.`);
         } else {
             console.log(`[MinIO LOG]: Bucket '${bucketName}' sudah tersedia.`);
         }
+
+        const policy = {
+            Version: "2012-10-17",
+            Statement: [
+                {
+                    Sid: "PublicReadGetObjectForAvatars",
+                    Effect: "Allow",
+                    Principal: "*",
+                    Action: ["s3:GetObject"],
+                    Resource: [`arn:aws:s3:::${bucketName}/avatar-*`]
+                }
+            ]
+        };
+
+        await minioClient.setBucketPolicy(bucketName, JSON.stringify(policy));
+        console.log(`[MinIO LOG]: Kebijakan akses berhasil dikonfigurasi: Hanya prefix 'avatar-*' yang bersifat publik pada bucket '${bucketName}'.`);
     } catch (err) {
         console.error("[MinIO ERROR]: Gagal melakukan inisialisasi konfigurasi storage:", err);
         process.exit(1);
@@ -59,7 +101,34 @@ const uploadToMinIO = async (fileName, fileBuffer, mimeType) => {
     }
 };
 
+const downloadFromMinIO = async (fileName) => {
+    return new Promise((resolve, reject) => {
+        minioClient.getObject(bucketName, fileName, (err, dataStream) => {
+            if (err) {
+                return reject(err);
+            }
+            const chunks = [];
+            dataStream.on('data', (chunk) => chunks.push(chunk));
+            dataStream.on('end', () => resolve(Buffer.concat(chunks)));
+            dataStream.on('error', (streamErr) => reject(streamErr));
+        });
+    });
+};
+
+const getPresignedUrl = async (fileName, expiryInSeconds = 300) => {
+    try {
+        return await minioClient.presignedGetObject(bucketName, fileName, expiryInSeconds);
+    } catch (err) {
+        console.error(`[MinIO ERROR]: Gagal mendapatkan presigned URL untuk '${fileName}':`, err);
+        throw err;
+    }
+};
+
 module.exports = {
     initializeMinIO,
-    uploadToMinIO
+    uploadToMinIO,
+    downloadFromMinIO,
+    getPresignedUrl,
+    encryptBuffer,
+    decryptBuffer
 };

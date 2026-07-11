@@ -58,6 +58,17 @@ module.exports = async function (fastify, opts) {
       tags: ["Profile"],
       security: [{ bearerAuth: [] }],
       consumes: ["multipart/form-data"],
+      body: {
+        type: "object",
+        required: ["file"],
+        properties: {
+          file: {
+            type: "string",
+            format: "binary",
+            description: "Berkas foto profil (PNG, JPG, JPEG)"
+          }
+        }
+      },
       response: {
         200: {
           type: "object",
@@ -114,6 +125,22 @@ module.exports = async function (fastify, opts) {
       tags: ["Profile"],
       security: [{ bearerAuth: [] }],
       consumes: ["multipart/form-data"],
+      body: {
+        type: "object",
+        required: ["file"],
+        properties: {
+          file: {
+            type: "string",
+            format: "binary",
+            description: "Berkas dokumen formal (PDF, PNG, JPG, JPEG)"
+          },
+          document_type: {
+            type: "string",
+            description: "Tipe dokumen formal (e.g., KTP, BPJS, KK, LAINNYA)",
+            default: "LAINNYA"
+          }
+        }
+      },
       response: {
         201: {
           type: "object",
@@ -135,4 +162,19 @@ module.exports = async function (fastify, opts) {
       },
     },
   }, profileController.uploadFormalDocument);
+
+  fastify.get("/documents/:id", {
+    schema: {
+      description: "Download and decrypt a formal document file by ID",
+      tags: ["Profile"],
+      security: [{ bearerAuth: [] }],
+      params: {
+        type: "object",
+        properties: {
+          id: { type: "string", format: "uuid" }
+        },
+        required: ["id"]
+      }
+    }
+  }, profileController.getFormalDocumentFile);
 };

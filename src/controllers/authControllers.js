@@ -88,6 +88,17 @@ const login = async (request, reply) => {
         .send({ error: "Kata sandi yang Anda masukkan salah." });
     }
 
+    // Block login if user has phone but not verified
+    if (user.phone && !user.phone_verified) {
+      return reply
+        .code(403)
+        .send({ 
+          error: "Nomor telepon Anda belum diverifikasi. Silakan verifikasi terlebih dahulu.",
+          requires_otp_verification: true,
+          phone: user.phone
+        });
+    }
+
     const accessToken = request.server.jwt.sign(
       { id: user.id, email: user.email, role: user.role, tier: user.tier },
       { expiresIn: "15m" },
@@ -241,6 +252,12 @@ const verifyOtp = async (request, reply) => {
         .send({ error: "Kode OTP yang Anda masukkan salah." });
     }
 
+    // Mark user's phone as verified
+    await request.server.prisma.user.updateMany({
+      where: { phone },
+      data: { phone_verified: true }
+    });
+
     await request.server.redis.del(redisKey);
     return reply.send({
       message: "Verifikasi kode OTP berhasil diselesaikan.",
@@ -253,10 +270,58 @@ const verifyOtp = async (request, reply) => {
   }
 };
 
+const resendOtp = async (request, reply) => {
+  const { phone } = request.body;
+
+  if (!phone) {
+    return reply
+      .code(400)
+      .send({ error: "Nomor telepon wajib diisi." });
+  }
+
+  try {
+    // Verify user exists with this phone
+    const user = await request.server.prisma.user.findFirst({
+      where: { phone }
+    });
+
+    if (!user) {
+      return reply
+        .code(404)
+        .send({ error: "Nomor telepon tidak terdaftar." });
+    }
+
+    if (user.phone_verified) {
+      return reply
+        .code(400)
+        .send({ error: "Nomor telepon sudah terverifikasi." });
+    }
+
+    const otpCode = generateOTP();
+    const redisKey = `otp:${phone}`;
+
+    await request.server.redis.set(redisKey, otpCode, { EX: 300 });
+
+    request.server.log.info(
+      `[OTP MOCK] Mengirim ulang kode OTP ${otpCode} ke nomor ${phone}`,
+    );
+
+    return reply.send({
+      message: "Kode OTP berhasil dikirim ulang ke nomor telepon Anda.",
+    });
+  } catch (err) {
+    request.server.log.error(err);
+    return reply
+      .code(500)
+      .send({ error: "Terjadi kesalahan internal saat mengirim ulang OTP." });
+  }
+};
+
 module.exports = {
   register,
   login,
   logout,
   refresh,
   verifyOtp,
+  resendOtp,
 };

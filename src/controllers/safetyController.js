@@ -220,12 +220,16 @@ const updateLocation = async (request, reply) => {
 
     let activeSession = null;
     if (session_id) {
-      activeSession = await request.server.prisma.safetySession.findUnique({
-        where: { id: session_id },
+      activeSession = await request.server.prisma.safetySession.findFirst({
+        where: {
+          id: session_id,
+          user_id: userId,
+          status: "active",
+        },
       });
     }
 
-    if (!activeSession || activeSession.status !== "active") {
+    if (!activeSession) {
       activeSession = await request.server.prisma.safetySession.findFirst({
         where: { user_id: userId, status: "active" },
         orderBy: { started_at: "desc" },

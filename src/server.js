@@ -76,7 +76,6 @@ const { safetyQueue } = require("./workers/safetyWorker");
 
 const serverAdapter = new FastifyAdapter();
 serverAdapter.setBasePath("/admin/queues");
-serverAdapter.setInstance(fastify);
 serverAdapter.setErrorHandler(fastify.errorHandler);
 
 createBullBoard({

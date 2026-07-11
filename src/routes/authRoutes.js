@@ -60,6 +60,7 @@ module.exports = async function (fastify, opts) {
             phone: { type: "string", description: "Phone number that needs verification" }
           }
         }
+      },
     },
   }, authController.login);
 

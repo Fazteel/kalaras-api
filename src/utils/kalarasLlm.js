@@ -209,6 +209,24 @@ const requestChatCompletion = async ({ prompt, config }) => {
       throw new Error(`LLM request failed with status ${response.status}: ${responseText.slice(0, 200)}`);
     }
 
+    // Handle SSE streaming responses (server may ignore stream:false)
+    if (responseText.trimStart().startsWith("data:")) {
+      let fullContent = "";
+      for (const line of responseText.split("\n")) {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith("data:")) continue;
+        const data = trimmed.slice(5).trim();
+        if (data === "[DONE]") break;
+        try {
+          const chunk = JSON.parse(data);
+          const delta = chunk?.choices?.[0]?.delta?.content;
+          if (delta) fullContent += delta;
+        } catch {}
+      }
+      if (fullContent.trim()) return fullContent;
+      throw new Error("LLM streaming response had no content");
+    }
+
     const payload = tryParseJson(responseText);
     return getChatCompletionText(payload);
   } catch (err) {

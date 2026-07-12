@@ -100,7 +100,7 @@ fastify.register(async function (adminQueues) {
 const start = async () => {
   try {
     await initializeMinIO();
-    await fastify.listen({ port: 3000 });
+    await fastify.listen({ port: 3000, host: '0.0.0.0' });
 
     await seedChatbotCache(fastify);
   } catch (err) {

@@ -16,6 +16,11 @@ const { BullMQAdapter } = require("@bull-board/api/bullMQAdapter");
 const { FastifyAdapter } = require("@bull-board/fastify");
 
 const fastify = Fastify({ logger: true });
+fastify.register(require("@fastify/cors"), {
+  origin: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  credentials: true,
+});
 const prisma = new PrismaClient();
 const redis = createClient({ url: "redis://127.0.0.1:6379" });
 

@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const { sendWhatsAppMessage } = require("../utils/whatsapp");
 
 const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -41,8 +42,11 @@ const register = async (request, reply) => {
       await request.server.redis.set(redisKey, otpCode, { EX: 300 });
 
       request.server.log.info(
-        `[OTP MOCK] Mengirim kode OTP ${otpCode} ke nomor ${phone}`,
+        `Mengirim kode OTP ${otpCode} ke nomor ${phone}`,
       );
+
+      const otpMessage = `Kode OTP Anda untuk registrasi Kalaras adalah ${otpCode}. Jangan berikan kode ini kepada siapa pun.`;
+      await sendWhatsAppMessage(phone, otpMessage);
     }
 
     return reply.code(201).send({
@@ -303,8 +307,11 @@ const resendOtp = async (request, reply) => {
     await request.server.redis.set(redisKey, otpCode, { EX: 300 });
 
     request.server.log.info(
-      `[OTP MOCK] Mengirim ulang kode OTP ${otpCode} ke nomor ${phone}`,
+      `Mengirim ulang kode OTP ${otpCode} ke nomor ${phone}`,
     );
+
+    const otpMessage = `Kode OTP baru Anda untuk Kalaras adalah ${otpCode}. Jangan berikan kode ini kepada siapa pun.`;
+    await sendWhatsAppMessage(phone, otpMessage);
 
     return reply.send({
       message: "Kode OTP berhasil dikirim ulang ke nomor telepon Anda.",

@@ -270,7 +270,7 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
     {
       "id": "contact-uuid-5555",
       "user_id": "88ec7845-206a-4c9b-a6bd-01c64090bb8c",
-      "name": "Aris",
+      "name": "Ares",
       "relation": "Sahabat",
       "phone": "081299997777",
       "priority_order": 5,
@@ -286,7 +286,7 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
 * **Body (Request Payload):**
   ```json
   {
-    "name": "Aris",
+    "name": "Ares",
     "relation": "Sahabat",
     "phone": "081299997777",
     "priority_order": 5
@@ -299,7 +299,7 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
     "data": {
       "id": "contact-uuid-5555",
       "user_id": "88ec7845-206a-4c9b-a6bd-01c64090bb8c",
-      "name": "Aris",
+      "name": "Ares",
       "relation": "Sahabat",
       "phone": "081299997777",
       "priority_order": 5,
@@ -316,7 +316,7 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
 * **Body (Request Payload):**
   ```json
   {
-    "name": "Aris Pratama",
+    "name": "Ares Pratama",
     "relation": "Keluarga",
     "phone": "081299990000",
     "priority_order": 1
@@ -329,7 +329,7 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
     "data": {
       "id": "contact-uuid-5555",
       "user_id": "88ec7845-206a-4c9b-a6bd-01c64090bb8c",
-      "name": "Aris Pratama",
+      "name": "Ares Pratama",
       "relation": "Keluarga",
       "phone": "081299990000",
       "priority_order": 1,
@@ -507,7 +507,7 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
       "kontak_darurat": [
         {
           "id": "contact-uuid-5555",
-          "name": "Aris",
+          "name": "Ares",
           "relation": "Sahabat",
           "phone": "081299997777",
           "priority_order": 5
@@ -668,7 +668,7 @@ Fitur keselamatan perjalanan berbasis timer otomatis (Deadman Switch). Jika peng
 **Konsep Inti:**
 * **Deadman Switch**: Timer berjalan di background (BullMQ). Jika user tidak menekan "Saya Aman" sebelum timer habis → sinyal darurat otomatis terkirim.
 * **Zero Geolocation di Backend**: Server TIDAK menghitung jarak/radius. Client Flutter mengirimkan flag `is_out_of_route`.
-* **Rolling Database**: Lokasi di-upsert (1 baris per user), tidak menumpuk data.
+* **Rolling Database**: Lokasi di-upsert (1 bares per user), tidak menumpuk data.
 
 **Status Sesi (`SafetySession.status`):**
 | Status | Deskripsi |
@@ -750,7 +750,7 @@ Fitur keselamatan perjalanan berbasis timer otomatis (Deadman Switch). Jika peng
 
 #### **Update Lokasi & Deteksi Deviasi Rute**
 * **Method & Path:** `POST /api/v1/safety/update-location`
-* **Deskripsi:** Memperbarui lokasi terakhir user (upsert 1 baris per user). Jika `is_out_of_route = true`, sinyal darurat langsung dikirim ke semua kontak tanpa menunggu timer habis.
+* **Deskripsi:** Memperbarui lokasi terakhir user (upsert 1 bares per user). Jika `is_out_of_route = true`, sinyal darurat langsung dikirim ke semua kontak tanpa menunggu timer habis.
 * **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: application/json`
 * **Body (Request Payload):**
   ```json
@@ -795,7 +795,7 @@ Fitur keselamatan perjalanan berbasis timer otomatis (Deadman Switch). Jika peng
         "failed": 0,
         "recipients": [
           {
-            "name": "Aris",
+            "name": "Ares",
             "phone": "081299997777",
             "chatId": "6281299997777@c.us",
             "delivered": true

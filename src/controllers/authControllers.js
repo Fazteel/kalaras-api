@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { sendWhatsAppMessage } = require("../utils/whatsapp");
+const { sendPasswordResetEmail } = require("../utils/mailer");
 
 const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -92,7 +93,6 @@ const login = async (request, reply) => {
         .send({ error: "Kata sandi yang Anda masukkan salah." });
     }
 
-    // Block login if user has phone but not verified
     if (user.phone && !user.phone_verified) {
       return reply
         .code(403)
@@ -256,7 +256,6 @@ const verifyOtp = async (request, reply) => {
         .send({ error: "Kode OTP yang Anda masukkan salah." });
     }
 
-    // Mark user's phone as verified
     await request.server.prisma.user.updateMany({
       where: { phone },
       data: { phone_verified: true }
@@ -284,7 +283,6 @@ const resendOtp = async (request, reply) => {
   }
 
   try {
-    // Verify user exists with this phone
     const user = await request.server.prisma.user.findFirst({
       where: { phone }
     });
@@ -324,6 +322,43 @@ const resendOtp = async (request, reply) => {
   }
 };
 
+const forgotPassword = async (request, reply) => {
+  const { email } = request.body;
+
+  try {
+    const user = await request.server.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      return reply.code(404).send({
+        status: "error",
+        message: "Email tidak terdaftar dalam sistem.",
+      });
+    }
+
+    const resetToken = request.server.jwt.sign(
+      { id: user.id, type: "reset-password" },
+      { expiresIn: "1h" }
+    );
+
+    const resetLink = `http://localhost:3000/api/v1/auth/reset-password?token=${resetToken}`;
+
+    await sendPasswordResetEmail(email, resetLink);
+
+    return reply.code(200).send({
+      status: "success",
+      message: "Instruksi pemulihan password telah dikirimkan ke email Anda.",
+    });
+  } catch (err) {
+    request.server.log.error(err);
+    return reply.code(500).send({
+      status: "error",
+      message: "Terjadi kesalahan internal saat memproses permintaan reset password.",
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -331,4 +366,5 @@ module.exports = {
   refresh,
   verifyOtp,
   resendOtp,
+  forgotPassword,
 };

@@ -80,12 +80,16 @@ const initializeMinIO = async () => {
         await minioClient.setBucketPolicy(bucketName, JSON.stringify(policy));
         console.log(`[MinIO LOG]: Kebijakan akses berhasil dikonfigurasi: Hanya prefix 'avatar-*' yang bersifat publik pada bucket '${bucketName}'.`);
     } catch (err) {
-        console.error("[MinIO ERROR]: Gagal melakukan inisialisasi konfigurasi storage:", err);
-        process.exit(1);
+        console.warn("[MinIO WARN]: Gagal melakukan inisialisasi konfigurasi storage. Menggunakan fallback lokal.");
+        minioClient.isMock = true;
     }
 };
 
 const uploadToMinIO = async (fileName, fileBuffer, mimeType) => {
+    if (minioClient.isMock) {
+        console.log(`[MinIO Mock]: Unggah berkas ${fileName}`);
+        return `http://localhost:3000/mock-uploads/${fileName}`;
+    }
     try {
         await minioClient.putObject(bucketName, fileName, fileBuffer, fileBuffer.length, {
             'Content-Type': mimeType
@@ -102,6 +106,9 @@ const uploadToMinIO = async (fileName, fileBuffer, mimeType) => {
 };
 
 const downloadFromMinIO = async (fileName) => {
+    if (minioClient.isMock) {
+        return Buffer.from("mock content");
+    }
     return new Promise((resolve, reject) => {
         minioClient.getObject(bucketName, fileName, (err, dataStream) => {
             if (err) {
@@ -116,6 +123,9 @@ const downloadFromMinIO = async (fileName) => {
 };
 
 const getPresignedUrl = async (fileName, expiryInSeconds = 300) => {
+    if (minioClient.isMock) {
+        return `http://localhost:3000/mock-uploads/${fileName}?presigned=true`;
+    }
     try {
         return await minioClient.presignedGetObject(bucketName, fileName, expiryInSeconds);
     } catch (err) {

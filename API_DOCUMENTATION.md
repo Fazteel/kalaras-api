@@ -112,6 +112,31 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
   }
   ```
 
+#### **Forgot Password (Pemulihan Kata Sandi)**
+* **Method & Path:** `POST /api/v1/auth/forgot-password`
+* **Deskripsi:** Memicu pengiriman instruksi pemulihan kata sandi (link reset password) ke alamat email pengguna.
+* **Headers:** `Content-Type: application/json`
+* **Body (Request Payload):**
+  ```json
+  {
+    "email": "user@example.com"
+  }
+  ```
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "message": "Instruksi pemulihan password telah dikirimkan ke email Anda."
+  }
+  ```
+* **Respons Gagal (404 Not Found):**
+  ```json
+  {
+    "status": "error",
+    "message": "Email tidak terdaftar dalam sistem."
+  }
+  ```
+
 ---
 
 ### 2. Profil & Identitas (`/api/v1/profile`)
@@ -816,3 +841,283 @@ Fitur keselamatan perjalanan berbasis timer otomatis (Deadman Switch). Jika peng
   |---|---|
   | `400` | Koordinat tidak valid, atau deviasi terdeteksi tapi tidak ada kontak darurat terdaftar |
   | `503` | Redis/BullMQ tidak tersedia |
+
+---
+
+### 10. Daily Check-In & History Module (`/api/v1/check-ins`)
+
+#### **Submit Daily Check-In Mood**
+* **Method & Path:** `POST /api/v1/check-ins/mood`
+* **Deskripsi:** Menyimpan mood harian ringkas dari DailyCheckInCard di halaman Home.
+* **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: application/json`
+* **Body (Request Payload):**
+  ```json
+  {
+    "mood": "aman",
+    "check_in_date": "2026-08-12"
+  }
+  ```
+  * **Enum Mood:** `["aman", "lelah", "dukungan"]`
+* **Respons Berhasil (201 Created):**
+  ```json
+  {
+    "status": "success",
+    "message": "Mood check-in recorded successfully",
+    "data": {
+      "id": "chk_85798",
+      "mood": "aman",
+      "color_code": "green",
+      "feedback_message": "Kondisi Anda aman hari ini.",
+      "created_at": "2026-08-12T00:00:00.000Z"
+    }
+  }
+  ```
+
+#### **Submit Detailed Check-In**
+* **Method & Path:** `POST /api/v1/check-ins`
+* **Deskripsi:** Menyimpan check-in harian mendalam dengan catatan tambahan dan tingkat stres dari halaman Check-in.
+* **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: application/json`
+* **Body (Request Payload):**
+  ```json
+  {
+    "mood": "lelah",
+    "notes": "Merasa sedikit pusing setelah bekerja",
+    "stress_level": 3
+  }
+  ```
+* **Respons Berhasil (201 Created):**
+  ```json
+  {
+    "status": "success",
+    "message": "Full check-in recorded successfully",
+    "data": {
+      "id": "chk_15686",
+      "mood": "lelah",
+      "notes": "Merasa sedikit pusing setelah bekerja",
+      "stress_level": 3,
+      "created_at": "2026-08-12T05:22:31.046Z"
+    }
+  }
+  ```
+
+#### **Ambil Riwayat Check-In & Ringkasan Kestabilan**
+* **Method & Path:** `GET /api/v1/check-ins/history`
+* **Deskripsi:** Mengambil daftar riwayat check-in pengguna lengkap dengan paginasi, filter tanggal, skor stabilitas mood, dan label kestabilan.
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Query Parameters:**
+  * `page`: Nomor halaman (integer, default: `1`)
+  * `limit`: Jumlah data per halaman (integer, default: `10`)
+  * `start_date`: Tanggal awal filter (YYYY-MM-DD, opsional)
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "summary": {
+      "stability_score": 68,
+      "stability_label": "Cukup Stabil",
+      "dominant_mood": "aman"
+    },
+    "data": [
+      {
+        "id": "chk_15686",
+        "date": "2026-08-12",
+        "mood": "lelah",
+        "notes": "Merasa sedikit pusing setelah bekerja",
+        "created_at": "2026-08-12T05:22:31.046Z"
+      }
+    ],
+    "pagination": {
+      "total": 1,
+      "current_page": 1,
+      "total_pages": 1
+    }
+  }
+  ```
+
+---
+
+### 11. Private Nurse Management Module (`/api/v1/private-nurse`)
+
+#### **Ambil Konfigurasi Perawat Pribadi**
+* **Method & Path:** `GET /api/v1/private-nurse`
+* **Deskripsi:** Mengambil detail konfigurasi asisten pengingat obat, pantangan makan, dan instruksi dokter.
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "data": {
+      "is_active": true,
+      "condition_target": "Pemulihan Pasca Tipes",
+      "medications": [
+        {
+          "name": "Paracetamol 500mg",
+          "schedule": "3x1 Setelah makan"
+        }
+      ],
+      "dietary_restrictions": "Pantang pedas & asam",
+      "doctor_instructions": "Bedrest 3 hari"
+    }
+  }
+  ```
+
+#### **Simpan Konfigurasi Perawat Pribadi**
+* **Method & Path:** `PUT /api/v1/private-nurse`
+* **Deskripsi:** Menyimpan atau memperbarui data instruksi medis dan jadwal pengingat obat (otomatis mengaktifkan status asisten).
+* **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: application/json`
+* **Body (Request Payload):**
+  ```json
+  {
+    "condition_target": "Pemulihan Pasca Tipes",
+    "medication_name": "Paracetamol 500mg",
+    "medication_schedule": "3x1 Setelah makan",
+    "dietary_restrictions": "Pantang pedas & asam",
+    "doctor_instructions": "Bedrest 3 hari"
+  }
+  ```
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "message": "Pengaturan Perawat Pribadi berhasil disimpan."
+  }
+  ```
+
+---
+
+### 12. Notification Module (`/api/v1/notifications`)
+
+#### **Ambil Daftar Notifikasi**
+* **Method & Path:** `GET /api/v1/notifications`
+* **Deskripsi:** Mengambil daftar seluruh notifikasi sistem milik pengguna (seperti notifikasi SOS, alert, atau chatbot) beserta jumlah notifikasi yang belum dibaca.
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "unread_count": 1,
+    "data": [
+      {
+        "id": "c4b3fdbd-d94f-47c7-a466-8cefcfc3c432",
+        "title": "Kalaras Bertanya",
+        "body": "Bagaimana perasaanmu siang ini?",
+        "is_read": false,
+        "created_at": "2026-08-12T05:22:31.169Z"
+      }
+    ]
+  }
+  ```
+
+#### **Tandai Notifikasi Telah Dibaca**
+* **Method & Path:** `PATCH /api/v1/notifications/:id/read`
+* **Deskripsi:** Menandai satu notifikasi tertentu sebagai telah dibaca (`is_read = true`).
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Path Parameter:** `id` (UUID notifikasi)
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "message": "Notification marked as read"
+  }
+  ```
+
+---
+
+### 13. User Settings & Security Preferences (`/api/v1/user/settings`)
+
+#### **Ambil Pengaturan Privasi & Keamanan**
+* **Method & Path:** `GET /api/v1/user/settings/privacy`
+* **Deskripsi:** Mengambil status preferensi keamanan pengguna (seperti enkripsi data medis lokal, biometric login, dan tracking lokasi).
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "data": {
+      "medical_encryption": true,
+      "biometric_login": false,
+      "location_tracking": true
+    }
+  }
+  ```
+
+#### **Perbarui Pengaturan Privasi & Keamanan**
+* **Method & Path:** `PUT /api/v1/user/settings/privacy`
+* **Deskripsi:** Mengubah preferensi keamanan pengguna untuk enkripsi medis, login biometrik, atau tracking lokasi.
+* **Headers:** `Authorization: Bearer <access_token>`, `Content-Type: application/json`
+* **Body (Request Payload):**
+  ```json
+  {
+    "medical_encryption": true,
+    "biometric_login": true,
+    "location_tracking": false
+  }
+  ```
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "data": {
+      "medical_encryption": true,
+      "biometric_login": true,
+      "location_tracking": false
+    }
+  }
+  ```
+
+---
+
+### 14. Help, FAQ & Support Module (`/api/v1/support`)
+
+#### **Ambil Daftar FAQ Dinamis**
+* **Method & Path:** `GET /api/v1/support/faqs`
+* **Deskripsi:** Mengambil semua daftar pertanyaan umum (FAQ) dan jawaban bantuan teknis langsung dari database.
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "data": [
+      {
+        "id": 1,
+        "question": "Bagaimana cara kerja Perawat Pribadi?",
+        "answer": "Fitur ini akan mengingatkan jadwal minum obat dan pantangan medis Anda secara berkala."
+      }
+    ]
+  }
+  ```
+
+#### **Ambil Konfigurasi Kontak WhatsApp Bantuan**
+* **Method & Path:** `GET /api/v1/support/config`
+* **Deskripsi:** Mengambil nomor admin WhatsApp dan template teks pembuka (default message) untuk dihubungkan langsung ke admin bantuan eksternal.
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "whatsapp_number": "6281234567890",
+    "default_message": "Halo Admin Kala Esok, saya butuh bantuan terkait aplikasi."
+  }
+  ```
+
+---
+
+### 15. App Info & System Config (`/api/v1/app/info`)
+
+#### **Ambil Metadata Aplikasi & Deteksi Force Update**
+* **Method & Path:** `GET /api/v1/app/info`
+* **Deskripsi:** Mengambil informasi versi aplikasi terbaru (`latest_version`), tanggal rilis, status pembaruan wajib (`force_update`), dan teks hak cipta. Digunakan oleh klien seluler untuk mendeteksi kesesuaian versi sebelum meluncurkan aplikasi.
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "status": "success",
+    "data": {
+      "app_name": "Kala Esok",
+      "latest_version": "1.0.0",
+      "release_date": "2026-06-16",
+      "force_update": false,
+      "copyright": "© 2026 Kala Esok. All rights reserved."
+    }
+  }
+  ```

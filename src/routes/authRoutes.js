@@ -144,4 +144,34 @@ module.exports = async function (fastify, opts) {
       }
     }
   }, authController.resendOtp);
+
+  fastify.post("/forgot-password", {
+    schema: {
+      description: "Request password reset link",
+      tags: ["Auth"],
+      body: {
+        type: "object",
+        required: ["email"],
+        properties: {
+          email: { type: "string", format: "email" }
+        }
+      },
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            status: { type: "string" },
+            message: { type: "string" }
+          }
+        },
+        404: {
+          type: "object",
+          properties: {
+            status: { type: "string" },
+            message: { type: "string" }
+          }
+        }
+      }
+    }
+  }, authController.forgotPassword);
 };

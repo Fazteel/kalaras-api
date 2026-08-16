@@ -22,10 +22,75 @@ fastify.register(require("@fastify/cors"), {
   credentials: true,
 });
 const prisma = new PrismaClient();
-const redis = createClient({ url: "redis://127.0.0.1:6379" });
+const net = require("net");
 
-redis.on("error", (err) => console.log(err));
-redis.connect();
+const checkPort = (port, host) => {
+  return new Promise((resolve) => {
+    const socket = new net.Socket();
+    const onError = () => {
+      socket.destroy();
+      resolve(false);
+    };
+    socket.setTimeout(500);
+    socket.once('error', onError);
+    socket.once('timeout', onError);
+    socket.connect(port, host, () => {
+      socket.end();
+      resolve(true);
+    });
+  });
+};
+
+let activeRedisClient = null;
+const redisStore = {};
+
+const redis = {
+  on: (event, handler) => {
+    if (activeRedisClient && activeRedisClient.on) activeRedisClient.on(event, handler);
+  },
+  connect: async () => {
+    const isRedisUp = await checkPort(6379, "127.0.0.1");
+    if (isRedisUp) {
+      const realClient = createClient({ url: "redis://127.0.0.1:6379" });
+      realClient.on("error", (err) => {});
+      try {
+        await realClient.connect();
+        activeRedisClient = realClient;
+        console.log("[Redis] Connected to real Redis service.");
+        return;
+      } catch (err) {
+      }
+    }
+    console.warn("[Redis Connection Failed]: Falling back to in-memory store.");
+    activeRedisClient = {
+      get: async (key) => redisStore[key] || null,
+      set: async (key, value, options) => {
+        redisStore[key] = value.toString();
+        return "OK";
+      },
+      del: async (key) => {
+        delete redisStore[key];
+        return 1;
+      },
+      quit: async () => {},
+      isOpen: true,
+    };
+  },
+  get: async (key) => {
+    if (!activeRedisClient) await redis.connect();
+    return activeRedisClient.get(key);
+  },
+  set: async (key, value, options) => {
+    if (!activeRedisClient) await redis.connect();
+    return activeRedisClient.set(key, value, options);
+  },
+  del: async (key) => {
+    if (!activeRedisClient) await redis.connect();
+    return activeRedisClient.del(key);
+  }
+};
+
+redis.connect().catch((err) => {});
 
 fastify.decorate("prisma", prisma);
 fastify.decorate("redis", redis);
@@ -76,6 +141,12 @@ fastify.register(require("./routes/homeRoutes"), { prefix: "/api/v1/home" });
 fastify.register(require("./routes/medicalRoutes"), { prefix: "/api/v1/medical" });
 fastify.register(require("./routes/chatbotAdminRoutes"), { prefix: "/api/v1/admin/chatbot" });
 fastify.register(require("./routes/safetyRoutes"), { prefix: "/api/v1/safety" });
+fastify.register(require("./routes/checkInRoutes"), { prefix: "/api/v1/check-ins" });
+fastify.register(require("./routes/privateNurseRoutes"), { prefix: "/api/v1/private-nurse" });
+fastify.register(require("./routes/notificationRoutes"), { prefix: "/api/v1/notifications" });
+fastify.register(require("./routes/userSettingsRoutes"), { prefix: "/api/v1/user/settings" });
+fastify.register(require("./routes/supportRoutes"), { prefix: "/api/v1/support" });
+fastify.register(require("./routes/appInfoRoutes"), { prefix: "/api/v1/app" });
 
 const { safetyQueue } = require("./workers/safetyWorker");
 

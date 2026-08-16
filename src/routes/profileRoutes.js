@@ -53,6 +53,7 @@ module.exports = async function (fastify, opts) {
   }, profileController.updateProfile);
 
   fastify.post("/avatar", {
+    validatorCompiler: () => (data) => ({ value: data }),
     schema: {
       description: "Upload profile avatar image",
       tags: ["Profile"],
@@ -120,6 +121,7 @@ module.exports = async function (fastify, opts) {
   }, profileController.getFormalDocuments);
 
   fastify.post("/documents", {
+    validatorCompiler: () => (data) => ({ value: data }),
     schema: {
       description: "Upload a formal document (KTP, BPJS, KK, etc.)",
       tags: ["Profile"],

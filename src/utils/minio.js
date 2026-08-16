@@ -134,10 +134,24 @@ const getPresignedUrl = async (fileName, expiryInSeconds = 300) => {
     }
 };
 
+const deleteFromMinIO = async (fileName) => {
+    if (minioClient.isMock) {
+        console.log(`[MinIO Mock]: Hapus berkas ${fileName}`);
+        return;
+    }
+    try {
+        await minioClient.removeObject(bucketName, fileName);
+    } catch (err) {
+        console.error(`[MinIO ERROR]: Gagal menghapus berkas '${fileName}' dari storage server:`, err);
+        throw err;
+    }
+};
+
 module.exports = {
     initializeMinIO,
     uploadToMinIO,
     downloadFromMinIO,
+    deleteFromMinIO,
     getPresignedUrl,
     encryptBuffer,
     decryptBuffer

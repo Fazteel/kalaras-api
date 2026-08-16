@@ -179,4 +179,27 @@ module.exports = async function (fastify, opts) {
       }
     }
   }, profileController.getFormalDocumentFile);
+
+  fastify.delete("/documents/:id", {
+    schema: {
+      description: "Delete a formal document and its physical file from storage",
+      tags: ["Profile"],
+      security: [{ bearerAuth: [] }],
+      params: {
+        type: "object",
+        properties: {
+          id: { type: "string", format: "uuid" }
+        },
+        required: ["id"]
+      },
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            message: { type: "string" }
+          }
+        }
+      }
+    }
+  }, profileController.deleteFormalDocument);
 };

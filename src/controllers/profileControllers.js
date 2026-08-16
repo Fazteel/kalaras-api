@@ -1,4 +1,4 @@
-const { uploadToMinIO, encryptBuffer, decryptBuffer, downloadFromMinIO } = require('../utils/minio');
+const { uploadToMinIO, encryptBuffer, decryptBuffer, downloadFromMinIO, deleteFromMinIO } = require('../utils/minio');
 
 const getProfile = async (request, reply) => {
   try {
@@ -176,11 +176,52 @@ const getFormalDocumentFile = async (request, reply) => {
   }
 };
 
+const deleteFormalDocument = async (request, reply) => {
+  const { id } = request.params;
+  const userId = request.user.id;
+  const userRole = request.user.role;
+
+  try {
+    if (userRole === 'admin') {
+      return reply.code(403).send({ error: "Akses ditolak. Administrator tidak diperbolehkan menghapus dokumen formal." });
+    }
+
+    const document = await request.server.prisma.formalDocument.findUnique({
+      where: { id }
+    });
+
+    if (!document) {
+      return reply.code(404).send({ error: "Dokumen tidak ditemukan." });
+    }
+
+    if (document.user_id !== userId) {
+      return reply.code(403).send({ error: "Akses ditolak. Anda bukan pemilik dokumen ini." });
+    }
+
+    const objectName = document.file_url.includes('/')
+      ? document.file_url.split('/').pop()
+      : document.file_url;
+
+    await deleteFromMinIO(objectName);
+
+    await request.server.prisma.formalDocument.delete({
+      where: { id }
+    });
+
+    return reply.send({ message: "Dokumen formal berhasil dihapus." });
+
+  } catch (err) {
+    request.server.log.error(err);
+    return reply.code(500).send({ error: "Terjadi kesalahan internal saat menghapus dokumen formal." });
+  }
+};
+
 module.exports = {
   getProfile,
   updateProfile,
   updateAvatar,
   getFormalDocuments,
   uploadFormalDocument,
-  getFormalDocumentFile
+  getFormalDocumentFile,
+  deleteFormalDocument
 };

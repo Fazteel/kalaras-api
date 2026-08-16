@@ -281,6 +281,31 @@ Sebagian besar endpoint memerlukan autentikasi menggunakan JSON Web Token (JWT).
   }
   ```
 
+#### **Hapus Dokumen Formal**
+* **Method & Path:** `DELETE /api/v1/profile/documents/:id`
+* **Deskripsi:** Menghapus dokumen formal dari database beserta berkas fisik yang tersimpan secara terenkripsi di storage MinIO.
+* **Headers:** `Authorization: Bearer <access_token>`
+* **Path Parameter:**
+  * `id`: UUID dokumen formal (wajib)
+* **Respons Berhasil (200 OK):**
+  ```json
+  {
+    "message": "Dokumen formal berhasil dihapus."
+  }
+  ```
+* **Respons Gagal (403 Forbidden):**
+  ```json
+  {
+    "error": "Akses ditolak. Anda bukan pemilik dokumen ini."
+  }
+  ```
+* **Respons Gagal (404 Not Found):**
+  ```json
+  {
+    "error": "Dokumen tidak ditemukan."
+  }
+  ```
+
 ---
 
 ### 3. Pocket & Jurnal (`/api/v1/pocket`)

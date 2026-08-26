@@ -65,4 +65,32 @@ module.exports = async function (fastify, opts) {
       },
     },
   }, privateNurseController.upsertPrivateNurseSetup);
+
+  // Alias POST for Flutter compatibility (frontend sends POST, backend expects PUT)
+  fastify.post("/", {
+    schema: {
+      description: "Upsert Private Nurse configuration (POST alias for Flutter)",
+      tags: ["Private Nurse"],
+      security: [{ bearerAuth: [] }],
+      body: {
+        type: "object",
+        properties: {
+          condition_target: { type: "string" },
+          medication_name: { type: "string" },
+          medication_schedule: { type: "string" },
+          dietary_restrictions: { type: "string" },
+          doctor_instructions: { type: "string" },
+        },
+      },
+      response: {
+        200: {
+          type: "object",
+          properties: {
+            status: { type: "string" },
+            message: { type: "string" },
+          },
+        },
+      },
+    },
+  }, privateNurseController.upsertPrivateNurseSetup);
 };

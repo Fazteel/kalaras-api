@@ -54,6 +54,7 @@ model User {
   private_nurse    PrivateNurse?
   privacy_settings PrivacySettings?
   notifications    Notification[]
+  medical_records  MedicalRecord[]
 }
 
 model PocketProfile {
@@ -248,4 +249,21 @@ model AppInfo {
   copyright      String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+
+model MedicalRecord {
+  id          String   @id @default(uuid())
+  user_id     String
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  clinic_name String?
+  date        DateTime?
+  metrics     Json     // [{name, value, unit, status}]
+  raw_data    Json?    // original verified payload for audit
+  file_name   String?
+  file_url    String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@index([user_id])
+  @@index([created_at])
 }

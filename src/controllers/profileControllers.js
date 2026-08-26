@@ -2,7 +2,7 @@ const { uploadToMinIO, encryptBuffer, decryptBuffer, downloadFromMinIO, deleteFr
 
 const getProfile = async (request, reply) => {
   try {
-    const profile = await request.server.prisma.pocketProfile.findUnique({
+    let profile = await request.server.prisma.pocketProfile.findUnique({
       where: { user_id: request.user.id },
       include: {
         user: {
@@ -12,7 +12,36 @@ const getProfile = async (request, reply) => {
     });
 
     if (!profile) {
-      return reply.code(404).send({ error: "Profil pengguna tidak ditemukan." });
+      // Auto-create pocket profile for legacy users missing profile
+      const user = await request.server.prisma.user.findUnique({
+        where: { id: request.user.id },
+        select: { email: true, phone: true, role: true, tier: true }
+      });
+      if (!user) {
+        return reply.code(404).send({ error: "Pengguna tidak ditemukan." });
+      }
+      try {
+        profile = await request.server.prisma.pocketProfile.create({
+          data: {
+            user_id: request.user.id,
+            full_name: user.email.split("@")[0] || "User",
+            religion: "Islam",
+            marital_status: "Belum Kawin",
+          },
+          include: {
+            user: {
+              select: { email: true, phone: true, role: true, tier: true }
+            }
+          }
+        });
+      } catch (createErr) {
+        // Race condition: profile created by another request
+        profile = await request.server.prisma.pocketProfile.findUnique({
+          where: { user_id: request.user.id },
+          include: { user: { select: { email: true, phone: true, role: true, tier: true } } }
+        });
+        if (!profile) throw createErr;
+      }
     }
 
     return reply.send(profile);
@@ -26,9 +55,15 @@ const updateProfile = async (request, reply) => {
   const { full_name, religion, marital_status, phone } = request.body;
 
   try {
-    const updatedProfile = await request.server.prisma.pocketProfile.update({
+    const updatedProfile = await request.server.prisma.pocketProfile.upsert({
       where: { user_id: request.user.id },
-      data: { full_name, religion, marital_status }
+      update: { full_name, religion, marital_status },
+      create: {
+        user_id: request.user.id,
+        full_name: full_name || request.user.email?.split("@")[0] || "User",
+        religion: religion || "Islam",
+        marital_status: marital_status || "Belum Kawin",
+      }
     });
 
     if (phone) {

@@ -53,23 +53,11 @@ module.exports = async function (fastify, opts) {
   }, profileController.updateProfile);
 
   fastify.post("/avatar", {
-    validatorCompiler: () => (data) => ({ value: data }),
     schema: {
       description: "Upload profile avatar image",
       tags: ["Profile"],
       security: [{ bearerAuth: [] }],
       consumes: ["multipart/form-data"],
-      body: {
-        type: "object",
-        required: ["file"],
-        properties: {
-          file: {
-            type: "string",
-            format: "binary",
-            description: "Berkas foto profil (PNG, JPG, JPEG)"
-          }
-        }
-      },
       response: {
         200: {
           type: "object",
@@ -121,28 +109,11 @@ module.exports = async function (fastify, opts) {
   }, profileController.getFormalDocuments);
 
   fastify.post("/documents", {
-    validatorCompiler: () => (data) => ({ value: data }),
     schema: {
       description: "Upload a formal document (KTP, BPJS, KK, etc.)",
       tags: ["Profile"],
       security: [{ bearerAuth: [] }],
       consumes: ["multipart/form-data"],
-      body: {
-        type: "object",
-        required: ["file"],
-        properties: {
-          file: {
-            type: "string",
-            format: "binary",
-            description: "Berkas dokumen formal (PDF, PNG, JPG, JPEG)"
-          },
-          document_type: {
-            type: "string",
-            description: "Tipe dokumen formal (e.g., KTP, BPJS, KK, LAINNYA)",
-            default: "LAINNYA"
-          }
-        }
-      },
       response: {
         201: {
           type: "object",

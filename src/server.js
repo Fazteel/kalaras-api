@@ -87,6 +87,13 @@ const redis = {
   del: async (key) => {
     if (!activeRedisClient) await redis.connect();
     return activeRedisClient.del(key);
+  },
+  expire: async (key, seconds) => {
+    if (!activeRedisClient) await redis.connect();
+    if (activeRedisClient.expire) {
+      return activeRedisClient.expire(key, seconds);
+    }
+    return 1;
   }
 };
 

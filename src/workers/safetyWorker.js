@@ -17,11 +17,52 @@ const formatWIB = (date) => {
   }) + " WIB";
 };
 
-const REDIS_CONNECTION = {
-  host: process.env.REDIS_HOST || "127.0.0.1",
-  port: parseInt(process.env.REDIS_PORT, 10) || 6379,
-  maxRetriesPerRequest: null,
+const withQueueTimeout = (
+  promise,
+  ms = 3000,
+  errorMsg = "Layanan antrean tidak merespons atau sedang offline. Silakan coba lagi nanti."
+) => {
+  let timer;
+  const timeoutPromise = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      const err = new Error(errorMsg);
+      err.code = "QUEUE_TIMEOUT";
+      reject(err);
+    }, ms);
+  });
+
+  return Promise.race([promise, timeoutPromise]).finally(() => {
+    clearTimeout(timer);
+  });
 };
+
+const getRedisConnection = () => {
+  if (process.env.REDIS_URL) {
+    return {
+      url: process.env.REDIS_URL,
+      maxRetriesPerRequest: null,
+      connectTimeout: 5000,
+    };
+  }
+
+  const config = {
+    host: process.env.REDIS_HOST || "127.0.0.1",
+    port: parseInt(process.env.REDIS_PORT, 10) || 6379,
+    maxRetriesPerRequest: null,
+    connectTimeout: 5000,
+  };
+
+  if (process.env.REDIS_PASSWORD) {
+    config.password = process.env.REDIS_PASSWORD;
+  }
+  if (process.env.REDIS_USERNAME) {
+    config.username = process.env.REDIS_USERNAME;
+  }
+
+  return config;
+};
+
+const REDIS_CONNECTION = getRedisConnection();
 
 const safetyQueue = new Queue("safety-timer", {
   connection: REDIS_CONNECTION,
@@ -30,6 +71,12 @@ const safetyQueue = new Queue("safety-timer", {
     removeOnFail: 50,
     attempts: 1,
   },
+});
+
+safetyQueue.on("error", (err) => {
+  if (err.code !== "ECONNREFUSED") {
+    console.error(`[SafetyQueue] Error: ${err.message}`);
+  }
 });
 
 const safetyWorker = new Worker(
@@ -140,7 +187,9 @@ safetyWorker.on("failed", (job, err) => {
 });
 
 safetyWorker.on("error", (err) => {
-  console.error(`[SafetyWorker] Worker error: ${err.message}`);
+  if (err.code !== "ECONNREFUSED") {
+    console.error(`[SafetyWorker] Worker error: ${err.message}`);
+  }
 });
 
-module.exports = { safetyQueue, safetyWorker, prisma };
+module.exports = { safetyQueue, safetyWorker, prisma, withQueueTimeout };

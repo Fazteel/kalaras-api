@@ -1,4 +1,4 @@
-const { safetyQueue } = require("../workers/safetyWorker");
+const { safetyQueue, withQueueTimeout } = require("../workers/safetyWorker");
 const { sendWhatsAppMessage } = require("../utils/whatsapp");
 
 // Pure JS Google Polyline decoder function
@@ -38,10 +38,11 @@ function decodePolyline(str, precision = 5) {
 }
 
 const startSession = async (request, reply) => {
+  let createdSessionId = null;
   try {
     const userId = request.user.id;
-    const { 
-      duration_seconds, 
+    const {
+      duration_seconds,
       preset_label,
       transportMode,
       origin,
@@ -91,8 +92,9 @@ const startSession = async (request, reply) => {
         expires_at: expiresAtUtc,
       },
     });
+    createdSessionId = session.id;
 
-    // 1. Simpan detailed session state ke Redis
+    // 1. Simpan detailed session state ke Redis (dengan safe timeout)
     const sessionData = {
       sessionId: session.id,
       userId,
@@ -105,24 +107,40 @@ const startSession = async (request, reply) => {
       estimatedDurationSeconds: estimatedDurationSeconds || null,
       emergencyContacts: emergencyContacts || null,
     };
-    await request.server.redis.set(`safety_session:${session.id}`, JSON.stringify(sessionData));
-    await request.server.redis.expire(`safety_session:${session.id}`, duration_seconds * 2);
+
+    await withQueueTimeout(
+      request.server.redis.set(`safety_session:${session.id}`, JSON.stringify(sessionData)),
+      3000
+    );
+    await withQueueTimeout(
+      request.server.redis.expire(`safety_session:${session.id}`, duration_seconds * 2),
+      3000
+    );
 
     // 2. Set heartbeat key di Redis dengan TTL 180 detik (3 menit)
-    await request.server.redis.set(`heartbeat:session:${session.id}`, "alive");
-    await request.server.redis.expire(`heartbeat:session:${session.id}`, 180);
+    await withQueueTimeout(
+      request.server.redis.set(`heartbeat:session:${session.id}`, "alive"),
+      3000
+    );
+    await withQueueTimeout(
+      request.server.redis.expire(`heartbeat:session:${session.id}`, 180),
+      3000
+    );
 
-    // 3. Daftarkan delayed job ke BullMQ (Dead Man's Switch)
-    const job = await safetyQueue.add(
-      "deadman-check",
-      {
-        sessionId: session.id,
-        userId,
-      },
-      {
-        delay: duration_seconds * 1000,
-        jobId: `safety-${session.id}`,
-      }
+    // 3. Daftarkan delayed job ke BullMQ (Dead Man's Switch) dengan safe timeout 3 detik
+    const job = await withQueueTimeout(
+      safetyQueue.add(
+        "deadman-check",
+        {
+          sessionId: session.id,
+          userId,
+        },
+        {
+          delay: duration_seconds * 1000,
+          jobId: `safety-${session.id}`,
+        }
+      ),
+      3000
     );
 
     request.server.log.info(
@@ -145,10 +163,32 @@ const startSession = async (request, reply) => {
   } catch (err) {
     request.server.log.error(err);
 
-    if (err.code === "ECONNREFUSED" || err.message?.includes("ECONNREFUSED")) {
+    // Rollback session di DB jika inisialisasi antrean gagal agar user tidak stuck 409
+    if (createdSessionId) {
+      try {
+        await request.server.prisma.safetySession.delete({
+          where: { id: createdSessionId },
+        });
+        request.server.log.info(
+          `[Safety] Rollback sesi ${createdSessionId} berhasil setelah kegagalan queue.`
+        );
+      } catch (rollbackErr) {
+        request.server.log.warn(
+          `[Safety] Gagal rollback sesi ${createdSessionId}: ${rollbackErr.message}`
+        );
+      }
+    }
+
+    if (
+      err.code === "QUEUE_TIMEOUT" ||
+      err.code === "ECONNREFUSED" ||
+      err.message?.includes("ECONNREFUSED") ||
+      err.message?.includes("timeout") ||
+      err.message?.includes("QUEUE_TIMEOUT")
+    ) {
       return reply.code(503).send({
         error:
-          "Layanan antrean (Redis) tidak tersedia. Silakan coba lagi nanti.",
+          "Layanan antrean tidak merespons atau sedang offline. Silakan coba lagi nanti.",
       });
     }
 
@@ -199,12 +239,12 @@ const confirmSafe = async (request, reply) => {
       },
     });
 
-    // 1. Hapus job dari antrean BullMQ
+    // 1. Hapus job dari antrean BullMQ (dengan timeout aman)
     const bullmqJobId = `safety-${session_id}`;
     try {
-      const job = await safetyQueue.getJob(bullmqJobId);
+      const job = await withQueueTimeout(safetyQueue.getJob(bullmqJobId), 2000);
       if (job) {
-        await job.remove();
+        await withQueueTimeout(job.remove(), 2000);
         request.server.log.info(
           `[Safety] Job ${bullmqJobId} berhasil dihapus dari antrean Redis.`
         );
@@ -215,10 +255,16 @@ const confirmSafe = async (request, reply) => {
       );
     }
 
-    // 2. Hapus Redis State Keys
-    await request.server.redis.del(`safety_session:${session_id}`);
-    await request.server.redis.del(`heartbeat:session:${session_id}`);
-    await request.server.redis.del(`deviation_count:session:${session_id}`);
+    // 2. Hapus Redis State Keys (dengan timeout aman)
+    try {
+      await withQueueTimeout(request.server.redis.del(`safety_session:${session_id}`), 2000);
+      await withQueueTimeout(request.server.redis.del(`heartbeat:session:${session_id}`), 2000);
+      await withQueueTimeout(request.server.redis.del(`deviation_count:session:${session_id}`), 2000);
+    } catch (redisDelErr) {
+      request.server.log.warn(
+        `[Safety] Gagal membersihkan Redis state keys: ${redisDelErr.message}`
+      );
+    }
 
     return reply.send({
       message:
@@ -232,10 +278,16 @@ const confirmSafe = async (request, reply) => {
   } catch (err) {
     request.server.log.error(err);
 
-    if (err.code === "ECONNREFUSED" || err.message?.includes("ECONNREFUSED")) {
+    if (
+      err.code === "QUEUE_TIMEOUT" ||
+      err.code === "ECONNREFUSED" ||
+      err.message?.includes("ECONNREFUSED") ||
+      err.message?.includes("timeout") ||
+      err.message?.includes("QUEUE_TIMEOUT")
+    ) {
       return reply.code(503).send({
         error:
-          "Layanan antrean (Redis) tidak tersedia. Silakan coba lagi nanti.",
+          "Layanan antrean tidak merespons atau sedang offline. Silakan coba lagi nanti.",
       });
     }
 
@@ -300,8 +352,18 @@ const updateLocation = async (request, reply) => {
 
     // Refresh TTL Heartbeat Key jika ada sesi aktif
     if (activeSession) {
-      await request.server.redis.set(`heartbeat:session:${activeSession.id}`, "alive");
-      await request.server.redis.expire(`heartbeat:session:${activeSession.id}`, 180);
+      try {
+        await withQueueTimeout(
+          request.server.redis.set(`heartbeat:session:${activeSession.id}`, "alive"),
+          2000
+        );
+        await withQueueTimeout(
+          request.server.redis.expire(`heartbeat:session:${activeSession.id}`, 180),
+          2000
+        );
+      } catch (hbErr) {
+        request.server.log.warn(`[Safety Heartbeat Refresh Error]: ${hbErr.message}`);
+      }
     }
 
     // Kalkulasi Deviasi Jarak dengan Turf
@@ -309,11 +371,20 @@ const updateLocation = async (request, reply) => {
     let computedOutOfRoute = false;
 
     if (activeSession) {
-      const sessionDataStr = await request.server.redis.get(`safety_session:${activeSession.id}`);
+      let sessionDataStr = null;
+      try {
+        sessionDataStr = await withQueueTimeout(
+          request.server.redis.get(`safety_session:${activeSession.id}`),
+          2000
+        );
+      } catch (redisErr) {
+        request.server.log.warn(`[Safety Redis Get Error]: ${redisErr.message}`);
+      }
+
       if (sessionDataStr) {
-        const sessionData = JSON.parse(sessionDataStr);
-        if (sessionData.routePolyline) {
-          try {
+        try {
+          const sessionData = JSON.parse(sessionDataStr);
+          if (sessionData.routePolyline) {
             const turfHelpers = require("@turf/helpers");
             const pointToLineDistance = require("@turf/point-to-line-distance").default;
 
@@ -328,22 +399,28 @@ const updateLocation = async (request, reply) => {
               if (deviationDistanceMeters > 300) {
                 // Deviasi kritis: Increment consecutive counter di Redis
                 const countKey = `deviation_count:session:${activeSession.id}`;
-                const countStr = await request.server.redis.get(countKey) || "0";
-                const count = parseInt(countStr, 10) + 1;
-                await request.server.redis.set(countKey, count.toString());
-                await request.server.redis.expire(countKey, 600); // Expiry 10 mnt
-
-                if (count >= 2) {
-                  computedOutOfRoute = true;
+                let countStr = "0";
+                try {
+                  countStr = (await withQueueTimeout(request.server.redis.get(countKey), 2000)) || "0";
+                  const count = parseInt(countStr, 10) + 1;
+                  await withQueueTimeout(request.server.redis.set(countKey, count.toString()), 2000);
+                  await withQueueTimeout(request.server.redis.expire(countKey, 600), 2000); // Expiry 10 mnt
+                  if (count >= 2) {
+                    computedOutOfRoute = true;
+                  }
+                } catch (devCountErr) {
+                  request.server.log.warn(`[Safety DevCount Error]: ${devCountErr.message}`);
                 }
               } else {
                 // Aman / Warning: Reset consecutive deviation counter
-                await request.server.redis.del(`deviation_count:session:${activeSession.id}`);
+                try {
+                  await withQueueTimeout(request.server.redis.del(`deviation_count:session:${activeSession.id}`), 2000);
+                } catch (_) { }
               }
             }
-          } catch (turfErr) {
-            request.server.log.error(`[Safety Turf Error]: ${turfErr.message}`);
           }
+        } catch (turfErr) {
+          request.server.log.error(`[Safety Turf Error]: ${turfErr.message}`);
         }
       }
     }
@@ -376,8 +453,8 @@ const updateLocation = async (request, reply) => {
 
       const bullmqJobId = `safety-${activeSession.id}`;
       try {
-        const job = await safetyQueue.getJob(bullmqJobId);
-        if (job) await job.remove();
+        const job = await withQueueTimeout(safetyQueue.getJob(bullmqJobId), 2000);
+        if (job) await withQueueTimeout(job.remove(), 2000);
       } catch (removeErr) {
         request.server.log.warn(
           `[Safety] Gagal cleanup job ${bullmqJobId}: ${removeErr.message}`
@@ -471,10 +548,16 @@ const updateLocation = async (request, reply) => {
   } catch (err) {
     request.server.log.error(err);
 
-    if (err.code === "ECONNREFUSED" || err.message?.includes("ECONNREFUSED")) {
+    if (
+      err.code === "QUEUE_TIMEOUT" ||
+      err.code === "ECONNREFUSED" ||
+      err.message?.includes("ECONNREFUSED") ||
+      err.message?.includes("timeout") ||
+      err.message?.includes("QUEUE_TIMEOUT")
+    ) {
       return reply.code(503).send({
         error:
-          "Layanan antrean (Redis) tidak tersedia. Silakan coba lagi nanti.",
+          "Layanan antrean tidak merespons atau sedang offline. Silakan coba lagi nanti.",
       });
     }
 
@@ -503,18 +586,34 @@ const heartbeat = async (request, reply) => {
       });
     }
 
-    // Reset TTL heartbeat key di Redis ke 180 detik (3 menit)
-    await request.server.redis.set(`heartbeat:session:${session_id}`, "alive");
-    await request.server.redis.expire(`heartbeat:session:${session_id}`, 180);
+    // Reset TTL heartbeat key di Redis ke 180 detik (3 menit) dengan safe timeout
+    try {
+      await withQueueTimeout(
+        request.server.redis.set(`heartbeat:session:${session_id}`, "alive"),
+        2000
+      );
+      await withQueueTimeout(
+        request.server.redis.expire(`heartbeat:session:${session_id}`, 180),
+        2000
+      );
+    } catch (hbErr) {
+      request.server.log.warn(`[Safety Heartbeat Error]: ${hbErr.message}`);
+    }
 
     return reply.send({ acknowledged: true });
   } catch (err) {
     request.server.log.error(err);
 
-    if (err.code === "ECONNREFUSED" || err.message?.includes("ECONNREFUSED")) {
+    if (
+      err.code === "QUEUE_TIMEOUT" ||
+      err.code === "ECONNREFUSED" ||
+      err.message?.includes("ECONNREFUSED") ||
+      err.message?.includes("timeout") ||
+      err.message?.includes("QUEUE_TIMEOUT")
+    ) {
       return reply.code(503).send({
         error:
-          "Layanan antrean (Redis) tidak tersedia. Silakan coba lagi nanti.",
+          "Layanan antrean tidak merespons atau sedang offline. Silakan coba lagi nanti.",
       });
     }
 

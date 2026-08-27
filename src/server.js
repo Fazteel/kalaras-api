@@ -30,6 +30,22 @@ fastify.register(require("@fastify/cors"), {
 const prisma = new PrismaClient();
 const net = require("net");
 
+const parseRedisHostAndPort = () => {
+  if (process.env.REDIS_URL) {
+    try {
+      const parsed = new URL(process.env.REDIS_URL);
+      return {
+        host: parsed.hostname || "127.0.0.1",
+        port: parseInt(parsed.port, 10) || 6379,
+      };
+    } catch (_) {}
+  }
+  return {
+    host: process.env.REDIS_HOST || "127.0.0.1",
+    port: parseInt(process.env.REDIS_PORT, 10) || 6379,
+  };
+};
+
 const checkPort = (port, host) => {
   return new Promise((resolve) => {
     const socket = new net.Socket();
@@ -37,7 +53,7 @@ const checkPort = (port, host) => {
       socket.destroy();
       resolve(false);
     };
-    socket.setTimeout(500);
+    socket.setTimeout(2000);
     socket.once('error', onError);
     socket.once('timeout', onError);
     socket.connect(port, host, () => {
@@ -55,16 +71,29 @@ const redis = {
     if (activeRedisClient && activeRedisClient.on) activeRedisClient.on(event, handler);
   },
   connect: async () => {
-    const isRedisUp = await checkPort(6379, "127.0.0.1");
+    const { host, port } = parseRedisHostAndPort();
+    const isRedisUp = await checkPort(port, host);
     if (isRedisUp) {
-      const realClient = createClient({ url: "redis://127.0.0.1:6379" });
-      realClient.on("error", (err) => {});
+      const clientConfig = process.env.REDIS_URL
+        ? { url: process.env.REDIS_URL }
+        : {
+            socket: { host, port, connectTimeout: 3000 },
+            password: process.env.REDIS_PASSWORD || undefined,
+            username: process.env.REDIS_USERNAME || undefined,
+          };
+      const realClient = createClient(clientConfig);
+      realClient.on("error", (err) => {
+        if (err.code !== "ECONNREFUSED") {
+          console.warn("[Redis Error]:", err.message);
+        }
+      });
       try {
         await realClient.connect();
         activeRedisClient = realClient;
-        console.log("[Redis] Connected to real Redis service.");
+        console.log(`[Redis] Connected to real Redis service at ${host}:${port}.`);
         return;
       } catch (err) {
+        console.warn(`[Redis Connection Error]: ${err.message}`);
       }
     }
     console.warn("[Redis Connection Failed]: Falling back to in-memory store.");
@@ -77,6 +106,13 @@ const redis = {
       del: async (key) => {
         delete redisStore[key];
         return 1;
+      },
+      expire: async (key, seconds) => 1,
+      incr: async (key) => {
+        const current = parseInt(redisStore[key] || "0", 10);
+        const next = current + 1;
+        redisStore[key] = next.toString();
+        return next;
       },
       quit: async () => {},
       isOpen: true,
@@ -98,6 +134,13 @@ const redis = {
     if (!activeRedisClient) await redis.connect();
     if (activeRedisClient.expire) {
       return activeRedisClient.expire(key, seconds);
+    }
+    return 1;
+  },
+  incr: async (key) => {
+    if (!activeRedisClient) await redis.connect();
+    if (activeRedisClient.incr) {
+      return activeRedisClient.incr(key);
     }
     return 1;
   }

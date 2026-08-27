@@ -190,4 +190,42 @@ module.exports = async function (fastify, opts) {
     },
     safetyController.updateLocation
   );
+
+  fastify.post(
+    "/heartbeat",
+    {
+      schema: {
+        description: "Mengirimkan detak jantung berkala (heartbeat ping) dari foreground service untuk mereset TTL deadman switch.",
+        tags: ["Safety Mode"],
+        security: [{ bearerAuth: [] }],
+        body: {
+          type: "object",
+          required: ["session_id"],
+          properties: {
+            session_id: {
+              type: "string",
+              description: "ID sesi Safety Mode yang sedang aktif",
+            },
+          },
+        },
+        response: {
+          200: {
+            type: "object",
+            properties: {
+              acknowledged: { type: "boolean" },
+            },
+          },
+          400: {
+            type: "object",
+            properties: { error: { type: "string" } },
+          },
+          503: {
+            type: "object",
+            properties: { error: { type: "string" } },
+          },
+        },
+      },
+    },
+    safetyController.heartbeat
+  );
 };

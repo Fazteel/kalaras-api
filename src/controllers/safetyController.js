@@ -1,56 +1,10 @@
 const { safetyQueue } = require("../workers/safetyWorker");
 const { sendWhatsAppMessage } = require("../utils/whatsapp");
 
-// Pure JS Google Polyline decoder function
-// Decodes polyline string to array of [longitude, latitude] coordinates (for Turf/GeoJSON compatibility)
-function decodePolyline(str, precision = 5) {
-  const factor = Math.pow(10, precision);
-  let index = 0,
-    lat = 0,
-    lng = 0;
-  const coordinates = [];
-
-  while (index < str.length) {
-    let byte,
-      shift = 0,
-      result = 0;
-    do {
-      byte = str.charCodeAt(index++) - 63;
-      result |= (byte & 0x1f) << shift;
-      shift += 5;
-    } while (byte >= 0x20);
-    const deltaLat = (result & 1) ? ~(result >> 1) : (result >> 1);
-    lat += deltaLat;
-
-    shift = 0;
-    result = 0;
-    do {
-      byte = str.charCodeAt(index++) - 63;
-      result |= (byte & 0x1f) << shift;
-      shift += 5;
-    } while (byte >= 0x20);
-    const deltaLng = (result & 1) ? ~(result >> 1) : (result >> 1);
-    lng += deltaLng;
-
-    coordinates.push([lng / factor, lat / factor]);
-  }
-  return coordinates;
-}
-
 const startSession = async (request, reply) => {
   try {
     const userId = request.user.id;
-    const { 
-      duration_seconds, 
-      preset_label,
-      transportMode,
-      origin,
-      destination,
-      routePolyline,
-      estimatedDurationSeconds,
-      totalDistanceMeters,
-      emergencyContacts
-    } = request.body;
+    const { duration_seconds, preset_label } = request.body;
 
     if (
       !duration_seconds ||
@@ -92,27 +46,6 @@ const startSession = async (request, reply) => {
       },
     });
 
-    // 1. Simpan detailed session state ke Redis
-    const sessionData = {
-      sessionId: session.id,
-      userId,
-      status: "ACTIVE",
-      transportMode: transportMode || null,
-      origin: origin || null,
-      destination: destination || null,
-      routePolyline: routePolyline || null,
-      totalDistanceMeters: totalDistanceMeters || null,
-      estimatedDurationSeconds: estimatedDurationSeconds || null,
-      emergencyContacts: emergencyContacts || null,
-    };
-    await request.server.redis.set(`safety_session:${session.id}`, JSON.stringify(sessionData));
-    await request.server.redis.expire(`safety_session:${session.id}`, duration_seconds * 2);
-
-    // 2. Set heartbeat key di Redis dengan TTL 180 detik (3 menit)
-    await request.server.redis.set(`heartbeat:session:${session.id}`, "alive");
-    await request.server.redis.expire(`heartbeat:session:${session.id}`, 180);
-
-    // 3. Daftarkan delayed job ke BullMQ (Dead Man's Switch)
     const job = await safetyQueue.add(
       "deadman-check",
       {
@@ -137,9 +70,6 @@ const startSession = async (request, reply) => {
         started_at: session.started_at.toISOString(),
         expires_at: session.expires_at.toISOString(),
         bullmq_job_id: job.id,
-        status: "active",
-        heartbeatIntervalSeconds: 60,
-        maxDisplacementMeters: 30
       },
     });
   } catch (err) {
@@ -185,7 +115,7 @@ const confirmSafe = async (request, reply) => {
       });
     }
 
-    if (session.status !== "active" && session.status !== "critical") {
+    if (session.status !== "active") {
       return reply.code(409).send({
         error: `Sesi tidak dapat dikonfirmasi. Status saat ini: "${session.status}".`,
       });
@@ -199,7 +129,6 @@ const confirmSafe = async (request, reply) => {
       },
     });
 
-    // 1. Hapus job dari antrean BullMQ
     const bullmqJobId = `safety-${session_id}`;
     try {
       const job = await safetyQueue.getJob(bullmqJobId);
@@ -214,11 +143,6 @@ const confirmSafe = async (request, reply) => {
         `[Safety] Gagal menghapus job ${bullmqJobId}: ${removeErr.message}.`
       );
     }
-
-    // 2. Hapus Redis State Keys
-    await request.server.redis.del(`safety_session:${session_id}`);
-    await request.server.redis.del(`heartbeat:session:${session_id}`);
-    await request.server.redis.del(`deviation_count:session:${session_id}`);
 
     return reply.send({
       message:
@@ -279,7 +203,21 @@ const updateLocation = async (request, reply) => {
       },
     });
 
-    // Cari sesi aktif
+    if (!is_out_of_route) {
+      return reply.send({
+        message: "Lokasi berhasil diperbarui.",
+        data: {
+          latitude: locationLog.latitude,
+          longitude: locationLog.longitude,
+          recorded_at: locationLog.recorded_at.toISOString(),
+        },
+      });
+    }
+
+    request.server.log.warn(
+      `[Safety] 🚨 OUT_OF_ROUTE terdeteksi untuk user ${userId}!`
+    );
+
     let activeSession = null;
     if (session_id) {
       activeSession = await request.server.prisma.safetySession.findFirst({
@@ -298,77 +236,7 @@ const updateLocation = async (request, reply) => {
       });
     }
 
-    // Refresh TTL Heartbeat Key jika ada sesi aktif
-    if (activeSession) {
-      await request.server.redis.set(`heartbeat:session:${activeSession.id}`, "alive");
-      await request.server.redis.expire(`heartbeat:session:${activeSession.id}`, 180);
-    }
-
-    // Kalkulasi Deviasi Jarak dengan Turf
-    let deviationDistanceMeters = 0.0;
-    let computedOutOfRoute = false;
-
-    if (activeSession) {
-      const sessionDataStr = await request.server.redis.get(`safety_session:${activeSession.id}`);
-      if (sessionDataStr) {
-        const sessionData = JSON.parse(sessionDataStr);
-        if (sessionData.routePolyline) {
-          try {
-            const turfHelpers = require("@turf/helpers");
-            const pointToLineDistance = require("@turf/point-to-line-distance").default;
-
-            const routeCoords = decodePolyline(sessionData.routePolyline);
-            if (routeCoords.length >= 2) {
-              const routeLine = turfHelpers.lineString(routeCoords);
-              const userPoint = turfHelpers.point([longitude, latitude]);
-
-              deviationDistanceMeters = pointToLineDistance(userPoint, routeLine, { units: 'meters' });
-
-              // Evaluasi Threshold
-              if (deviationDistanceMeters > 300) {
-                // Deviasi kritis: Increment consecutive counter di Redis
-                const countKey = `deviation_count:session:${activeSession.id}`;
-                const countStr = await request.server.redis.get(countKey) || "0";
-                const count = parseInt(countStr, 10) + 1;
-                await request.server.redis.set(countKey, count.toString());
-                await request.server.redis.expire(countKey, 600); // Expiry 10 mnt
-
-                if (count >= 2) {
-                  computedOutOfRoute = true;
-                }
-              } else {
-                // Aman / Warning: Reset consecutive deviation counter
-                await request.server.redis.del(`deviation_count:session:${activeSession.id}`);
-              }
-            }
-          } catch (turfErr) {
-            request.server.log.error(`[Safety Turf Error]: ${turfErr.message}`);
-          }
-        }
-      }
-    }
-
-    const triggerEmergency = is_out_of_route || computedOutOfRoute;
-
-    if (!triggerEmergency) {
-      const isWarning = deviationDistanceMeters > 150 && deviationDistanceMeters <= 300;
-
-      return reply.send({
-        message: isWarning ? "Peringatan: Anda menjauh dari rute aman." : "Lokasi berhasil diperbarui.",
-        data: {
-          isSafe: true,
-          deviationDistanceMeters: parseFloat(deviationDistanceMeters.toFixed(1)),
-          isOutOfRoute: false,
-          warning: isWarning ? "Anda menjauh dari rute aman" : null,
-        },
-      });
-    }
-
-    request.server.log.warn(
-      `[Safety] 🚨 OUT_OF_ROUTE terdeteksi untuk user ${userId}! (Turf: ${computedOutOfRoute}, Client: ${is_out_of_route})`
-    );
-
-    if (activeSession) {
+    if (activeSession && activeSession.status === "active") {
       await request.server.prisma.safetySession.update({
         where: { id: activeSession.id },
         data: { status: "critical" },
@@ -457,9 +325,8 @@ const updateLocation = async (request, reply) => {
       message:
         "⚠️ Deviasi rute terdeteksi! Sinyal darurat telah dikirim ke semua kontak terdaftar.",
       data: {
-        isSafe: false,
-        deviationDistanceMeters: parseFloat(deviationDistanceMeters.toFixed(1)),
-        isOutOfRoute: true,
+        location: { latitude, longitude },
+        session_status: "critical",
         alert: {
           total_contacts: contacts.length,
           delivered: sendResults.filter((r) => r.success).length,
@@ -484,49 +351,8 @@ const updateLocation = async (request, reply) => {
   }
 };
 
-const heartbeat = async (request, reply) => {
-  try {
-    const { session_id } = request.body;
-    if (!session_id) {
-      return reply.code(400).send({
-        error: "session_id wajib diisi.",
-      });
-    }
-
-    const session = await request.server.prisma.safetySession.findUnique({
-      where: { id: session_id },
-    });
-
-    if (!session || (session.status !== "active" && session.status !== "critical")) {
-      return reply.code(400).send({
-        error: "Sesi tidak aktif atau tidak ditemukan.",
-      });
-    }
-
-    // Reset TTL heartbeat key di Redis ke 180 detik (3 menit)
-    await request.server.redis.set(`heartbeat:session:${session_id}`, "alive");
-    await request.server.redis.expire(`heartbeat:session:${session_id}`, 180);
-
-    return reply.send({ acknowledged: true });
-  } catch (err) {
-    request.server.log.error(err);
-
-    if (err.code === "ECONNREFUSED" || err.message?.includes("ECONNREFUSED")) {
-      return reply.code(503).send({
-        error:
-          "Layanan antrean (Redis) tidak tersedia. Silakan coba lagi nanti.",
-      });
-    }
-
-    return reply.code(500).send({
-      error: "Terjadi kesalahan internal saat memproses heartbeat.",
-    });
-  }
-};
-
 module.exports = {
   startSession,
   confirmSafe,
   updateLocation,
-  heartbeat,
 };
